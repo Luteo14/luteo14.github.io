@@ -1,0 +1,4 @@
+activities.csv
+*.fit
+*.fit.gz
+.DS_Store
