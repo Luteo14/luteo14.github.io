@@ -1,0 +1,11 @@
+name = "luteo-strava-api"
+main = "src/index.js"
+compatibility_date = "2026-09-29"
+
+[[kv_namespaces]]
+binding = "TOKENS"
+id = "REMPLACE_PAR_TON_KV_NAMESPACE_ID"
+
+[vars]
+FRONTEND_URL = "https://luteo14.github.io"
+STRAVA_CLIENT_ID = "REMPLACE_PAR_TON_CLIENT_ID"

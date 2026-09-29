@@ -1,0 +1,29 @@
+const STRAVA_AUTH='https://www.strava.com/oauth/authorize';
+const STRAVA_TOKEN='https://www.strava.com/oauth/token';
+const STRAVA_API='https://www.strava.com/api/v3';
+const TOKEN_KEY='single-athlete-token';
+const CACHE_KEY='single-athlete-cache';
+const MAX_CACHE_MS=7*24*60*60*1000;
+
+function cors(env,extra={}){return {'Access-Control-Allow-Origin':env.FRONTEND_URL,'Access-Control-Allow-Credentials':'true','Access-Control-Allow-Headers':'Content-Type','Access-Control-Allow-Methods':'GET,POST,OPTIONS','Cache-Control':'no-store',...extra}}
+function json(env,data,status=200,extra={}){return new Response(JSON.stringify(data),{status,headers:{'Content-Type':'application/json; charset=utf-8',...cors(env,extra)}})}
+function redirect(url,headers={}){return new Response(null,{status:302,headers:{Location:url,...headers}})}
+function randomState(){const a=new Uint8Array(24);crypto.getRandomValues(a);return btoa(String.fromCharCode(...a)).replace(/[+/=]/g,'')}
+function cookie(name,value,age=600){return `${name}=${value}; Max-Age=${age}; Path=/; HttpOnly; Secure; SameSite=Lax`}
+function readCookie(req,name){const c=req.headers.get('Cookie')||'';return c.split(';').map(x=>x.trim()).find(x=>x.startsWith(name+'='))?.slice(name.length+1)||null}
+async function getToken(env){const raw=await env.TOKENS.get(TOKEN_KEY);return raw?JSON.parse(raw):null}
+async function putToken(env,t){await env.TOKENS.put(TOKEN_KEY,JSON.stringify(t))}
+async function refreshToken(env,t){if(t.expires_at>Date.now()/1000+3600)return t;const body=new URLSearchParams({client_id:env.STRAVA_CLIENT_ID,client_secret:env.STRAVA_CLIENT_SECRET,grant_type:'refresh_token',refresh_token:t.refresh_token});const r=await fetch(STRAVA_TOKEN,{method:'POST',body});if(!r.ok)throw new Error('Impossible de renouveler le jeton Strava');const n=await r.json();const merged={...t,...n,refresh_token:n.refresh_token||t.refresh_token};await putToken(env,merged);return merged}
+async function authFetch(env,path,init={}){let t=await getToken(env);if(!t)throw new Error('Compte Strava non connecté');t=await refreshToken(env,t);return fetch(STRAVA_API+path,{...init,headers:{...(init.headers||{}),Authorization:`Bearer ${t.access_token}`}})}
+function normalize(a){const type=a.sport_type||a.type||'Autre';let sport=/run/i.test(type)?'Course à pied':/ride|bike|cycling/i.test(type)?'Vélo':/swim/i.test(type)?'Natation':/walk|hike/i.test(type)?'Marche / randonnée':'Autre';return {id:a.id,date:a.start_date_local||a.start_date,sport,distance_km:(a.distance||0)/1000,duration_s:a.moving_time||a.elapsed_time||0,elevation_m:a.total_elevation_gain||0,avg_hr:a.average_heartrate||null}}
+async function fetchActivities(env){let all=[];for(let page=1;page<=20;page++){const r=await authFetch(env,`/athlete/activities?per_page=100&page=${page}`);if(!r.ok)throw new Error(`Strava API ${r.status}`);const batch=await r.json();all.push(...batch.map(normalize));if(batch.length<100)break}const cache={saved_at:new Date().toISOString(),activities:all};await env.TOKENS.put(CACHE_KEY,JSON.stringify(cache),{expirationTtl:7*24*60*60});return cache}
+async function revoke(env,t){if(!t)return;const basic=btoa(`${env.STRAVA_CLIENT_ID}:${env.STRAVA_CLIENT_SECRET}`);await fetch('https://www.strava.com/oauth/revoke',{method:'POST',headers:{Authorization:`Basic ${basic}`,'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({token:t.refresh_token,token_type_hint:'refresh_token'})})}
+
+export default {async fetch(req,env){const u=new URL(req.url);if(req.method==='OPTIONS')return new Response(null,{status:204,headers:cors(env)});try{
+if(u.pathname==='/auth/login'){const state=randomState(),callback=`${u.origin}/auth/callback`;const q=new URLSearchParams({client_id:env.STRAVA_CLIENT_ID,response_type:'code',redirect_uri:callback,approval_prompt:'auto',scope:'read,activity:read_all',state});return redirect(`${STRAVA_AUTH}?${q}`,{'Set-Cookie':cookie('oauth_state',state)})}
+if(u.pathname==='/auth/callback'){const expected=readCookie(req,'oauth_state'),state=u.searchParams.get('state'),code=u.searchParams.get('code');if(!code||!state||state!==expected)return json(env,{error:'État OAuth invalide'},400);const body=new URLSearchParams({client_id:env.STRAVA_CLIENT_ID,client_secret:env.STRAVA_CLIENT_SECRET,code,grant_type:'authorization_code'});const r=await fetch(STRAVA_TOKEN,{method:'POST',body});if(!r.ok)return json(env,{error:'Échange OAuth Strava refusé'},400);const t=await r.json();await putToken(env,t);await env.TOKENS.delete(CACHE_KEY);return redirect(`${env.FRONTEND_URL}/?strava=connected`,{'Set-Cookie':cookie('oauth_state','',0)})}
+if(u.pathname==='/api/status'){const t=await getToken(env),raw=await env.TOKENS.get(CACHE_KEY);const c=raw?JSON.parse(raw):null;return json(env,{connected:!!t,athlete_name:t?.athlete?[t.athlete.firstname,t.athlete.lastname].filter(Boolean).join(' '):null,last_sync:c?.saved_at||null,cached_activities:c?.activities?.length||0})}
+if(u.pathname==='/api/activities'){if(!await getToken(env))return json(env,{error:'Compte Strava non connecté'},401);let cache=null,raw=await env.TOKENS.get(CACHE_KEY);if(raw)cache=JSON.parse(raw);const stale=!cache||(Date.now()-new Date(cache.saved_at).getTime()>MAX_CACHE_MS);if(u.searchParams.get('sync')==='1'||stale)cache=await fetchActivities(env);return json(env,{activities:cache.activities,last_sync:cache.saved_at})}
+if(u.pathname==='/api/disconnect'&&req.method==='POST'){const t=await getToken(env);await revoke(env,t);await env.TOKENS.delete(TOKEN_KEY);await env.TOKENS.delete(CACHE_KEY);return json(env,{ok:true})}
+if(u.pathname==='/health')return json(env,{ok:true});return json(env,{error:'Route inconnue'},404)
+}catch(e){return json(env,{error:e.message||'Erreur interne'},500)}}};
