@@ -1,8 +1,24 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Dashboard personnel de statistiques de course à pied issues de Strava"><title>RUN // DATA</title><link rel="stylesheet" href="css/style.css"><script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script></head><body>
-<header><div><p class="eyebrow">STRAVA RUNNING DASHBOARD</p><h1>RUN <span>//</span> DATA</h1><p class="subtitle">Mon historique d'endurance, transformé en données.</p></div><div class="controls"><label for="yearFilter">Période</label><select id="yearFilter"></select></div></header>
-<main><section id="kpis" class="kpis"></section>
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Dashboard personnel de statistiques de course à pied issues de Strava"><title>RUN // DATA</title><link rel="stylesheet" href="css/style.css"><script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script></head><body>
+<header><div><p class="eyebrow">STRAVA RUNNING DASHBOARD</p><h1>RUN <span>//</span> DATA</h1><p class="subtitle">Mon historique d'endurance, transformé en données.</p></div><div class="controls dashboard-control"><label for="yearFilter">Période</label><select id="yearFilter"></select></div></header>
+<nav class="tabs" aria-label="Navigation principale"><button class="tab active" data-tab="dashboard">Dashboard</button><button class="tab" data-tab="training">Plan d'entraînement</button></nav>
+<main>
+<section id="dashboardView" class="view active"><section id="kpis" class="kpis"></section>
 <section class="grid"><article class="card wide"><div class="cardhead"><h2>Volume mensuel</h2><span>km</span></div><canvas id="monthlyChart"></canvas></article><article class="card"><div class="cardhead"><h2>Répartition</h2><span>sports</span></div><canvas id="sportChart"></canvas></article></section>
 <section class="grid"><article class="card"><div class="cardhead"><h2>Distance annuelle</h2><span>km</span></div><canvas id="annualChart"></canvas></article><article class="card"><div class="cardhead"><h2>Dénivelé annuel</h2><span>D+ m</span></div><canvas id="elevChart"></canvas></article></section>
 <section class="grid"><article class="card"><div class="cardhead"><h2>Séances annuelles</h2><span>activités</span></div><canvas id="sessionsChart"></canvas></article><article class="card"><div class="cardhead"><h2>Régularité</h2><span>12 dernières semaines</span></div><canvas id="weeklyChart"></canvas></article></section>
-<section class="card"><div class="cardhead"><h2>Activités récentes</h2><span id="activityCount"></span></div><div class="tablewrap"><table><thead><tr><th>Date</th><th>Sport</th><th>Distance</th><th>Durée</th><th>D+</th><th>Allure</th></tr></thead><tbody id="activitiesTable"></tbody></table></div></section>
+<section class="card"><div class="cardhead"><h2>Activités récentes</h2><span id="activityCount"></span></div><div class="tablewrap"><table><thead><tr><th>Date</th><th>Sport</th><th>Distance</th><th>Durée</th><th>D+</th><th>Allure</th></tr></thead><tbody id="activitiesTable"></tbody></table></div></section></section>
+
+<section id="trainingView" class="view"><div class="training-hero"><div><p class="eyebrow">COACHING // PLAN</p><h2>Construire mon plan</h2><p>Le plan utilise tes 4 dernières semaines de course présentes dans Strava pour définir un point de départ progressif.</p></div><div id="trainingSnapshot" class="snapshot"></div></div>
+<section class="planner-grid"><article class="card"><div class="cardhead"><h2>Mon objectif</h2><span>paramètres</span></div><form id="planForm" class="plan-form">
+<label>Objectif<select id="goalType"><option value="10k">10 km</option><option value="half">Semi-marathon</option><option value="marathon" selected>Marathon</option><option value="trail">Trail</option><option value="backyard">Backyard / Ultra</option></select></label>
+<label>Date de l'objectif<input id="raceDate" type="date" required></label>
+<label>Objectif chrono<input id="targetTime" type="text" placeholder="ex. 03:30:00"></label>
+<label>Séances / semaine<select id="sessionsWeek"><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label>
+<label>Jour de sortie longue<select id="longDay"><option value="0" selected>Dimanche</option><option value="6">Samedi</option></select></label>
+<label>Volume de départ<input id="startKm" type="number" min="10" max="150" step="1"></label>
+<button class="primary" type="submit">Générer le plan</button></form><p class="form-note">Plan indicatif d'entraînement, pas un avis médical. En cas de douleur persistante ou de problème de santé, adapte la charge et consulte un professionnel.</p></article>
+<article class="card"><div class="cardhead"><h2>Repères actuels</h2><span>Strava</span></div><div id="profileMetrics" class="profile-metrics"></div><div class="coach-note" id="coachNote"></div></article></section>
+<section id="planResults" class="plan-results hidden"><div class="plan-summary" id="planSummary"></div><div class="card"><div class="cardhead"><h2>Programme semaine par semaine</h2><span id="planWeeksLabel"></span></div><div id="weeksContainer" class="weeks"></div></div></section>
+</section>
 </main><footer>Données issues d'un export Strava · Dashboard statique GitHub Pages · aucune donnée GPS publiée</footer><script src="js/app.js"></script></body></html>

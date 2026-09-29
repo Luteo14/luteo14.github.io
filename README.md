@@ -60,3 +60,17 @@ Ne publiez pas votre export Strava brut dans un dépôt public : il peut conteni
 ## Stack
 
 HTML5 · CSS3 · JavaScript · Chart.js (CDN) · GitHub Pages
+
+## Module Plan d'entraînement
+
+Le site inclut désormais un onglet **Plan d'entraînement**. Il exploite les 4 dernières semaines de course disponibles dans `data/activities.json` pour proposer un volume de départ, puis génère un programme progressif selon :
+
+- l'objectif (10 km, semi, marathon, trail, backyard/ultra) ;
+- la date de course ;
+- un objectif chrono optionnel ;
+- 3 à 6 séances par semaine ;
+- le jour de sortie longue.
+
+Le plan est calculé entièrement dans le navigateur et sauvegardé localement (`localStorage`). Aucune donnée supplémentaire n'est envoyée vers un serveur.
+
+> Le générateur est un outil indicatif de planification sportive. Il ne remplace pas un avis médical ni un suivi individualisé par un entraîneur.
