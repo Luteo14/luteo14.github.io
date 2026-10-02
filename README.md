@@ -1,76 +1,39 @@
-# RUN // DATA — Dashboard Strava
+# RUN // DATA — V1.2
 
-Dashboard statique et responsive pour visualiser un historique Strava. Il est prêt pour **GitHub Pages** et ne nécessite ni serveur, ni base de données.
+Dashboard personnel GitHub Pages avec statistiques de course, plan d'entraînement et connexion Strava optionnelle.
 
-## Ce que contient le projet
+## Architecture
 
-- KPI : distance, séances, temps, D+, moyenne par sortie et par semaine
-- filtres par année
-- volume mensuel
-- évolution annuelle
-- dénivelé annuel
-- nombre de séances
-- régularité sur 12 semaines
-- répartition des sports
-- tableau des activités récentes
+- Frontend statique : GitHub Pages (`https://luteo14.github.io`)
+- Données de secours : `data/activities.json`
+- Backend Strava : Cloudflare Worker dans `worker/`
+- Secrets : uniquement dans Cloudflare (`STRAVA_CLIENT_SECRET`), jamais dans le dépôt
 
-Le fichier `data/activities-public.csv` est une version **sanitisée** de l'export Strava : noms d'activités, coordonnées, fichiers FIT, notes privées et matériel ne sont pas publiés. Le site lit `data/activities.json`.
+## Mise en ligne du frontend
 
-## Publication sur GitHub Pages
+Copier cette version dans le dépôt `luteo14.github.io`, commit puis Push via GitHub Desktop.
 
-1. Créez un nouveau dépôt GitHub, par exemple `running-dashboard`.
-2. Décompressez ce projet et placez son contenu à la racine du dépôt.
-3. Exécutez :
+## Activer Strava
 
-```bash
-git init
-git add .
-git commit -m "Initial Strava dashboard"
-git branch -M main
-git remote add origin https://github.com/VOTRE-COMPTE/running-dashboard.git
-git push -u origin main
-```
+Suivre `worker/README.md`. Après déploiement du Worker, modifier `js/config.js` avec son URL publique puis pousser cette modification.
 
-4. Dans GitHub : **Settings → Pages**.
-5. Dans **Build and deployment**, choisissez **Deploy from a branch**.
-6. Branche : `main`, dossier : `/ (root)`, puis **Save**.
-7. Après quelques minutes, le site sera disponible à `https://VOTRE-COMPTE.github.io/running-dashboard/`.
+## Fonctionnement
 
-## Test local
+1. Onglet **Connexion Strava** → Connecter mon compte.
+2. OAuth Strava autorise `read,activity:read_all`.
+3. Le Worker échange le code et conserve les jetons dans Cloudflare KV.
+4. **Synchroniser maintenant** récupère les activités et les affiche dans le dashboard.
+5. **Déconnecter et supprimer** révoque l'accès et supprime jetons + cache.
+6. Sans connexion, le dashboard continue d'utiliser `data/activities.json`.
 
-Le navigateur bloque parfois `fetch()` quand `index.html` est ouvert directement. Utilisez un petit serveur local :
+## Confidentialité
+
+Cette V1.2 n'envoie pas les données récupérées via l'API Strava à un modèle d'IA. Le cache backend est limité à 7 jours. Les données API ne sont pas commitées dans GitHub.
+
+## Développement local
 
 ```bash
 python -m http.server 8000
 ```
 
-Puis ouvrez `http://localhost:8000`.
-
-## Mettre les données à jour
-
-1. Placez le nouvel export Strava à la racine sous le nom `activities.csv` (il est ignoré par Git).
-2. Installez la dépendance une fois : `pip install -r requirements.txt`.
-3. Lancez : `python prepare_data.py`.
-4. Commit/push uniquement les fichiers générés dans `data/`.
-
-## Confidentialité
-
-Ne publiez pas votre export Strava brut dans un dépôt public : il peut contenir noms, traces/fichiers d'activités, habitudes horaires, matériel et autres informations personnelles.
-
-## Stack
-
-HTML5 · CSS3 · JavaScript · Chart.js (CDN) · GitHub Pages
-
-## Module Plan d'entraînement
-
-Le site inclut désormais un onglet **Plan d'entraînement**. Il exploite les 4 dernières semaines de course disponibles dans `data/activities.json` pour proposer un volume de départ, puis génère un programme progressif selon :
-
-- l'objectif (10 km, semi, marathon, trail, backyard/ultra) ;
-- la date de course ;
-- un objectif chrono optionnel ;
-- 3 à 6 séances par semaine ;
-- le jour de sortie longue.
-
-Le plan est calculé entièrement dans le navigateur et sauvegardé localement (`localStorage`). Aucune donnée supplémentaire n'est envoyée vers un serveur.
-
-> Le générateur est un outil indicatif de planification sportive. Il ne remplace pas un avis médical ni un suivi individualisé par un entraîneur.
+Puis ouvrir `http://localhost:8000`. Pour tester OAuth en production, utiliser le frontend GitHub Pages configuré dans `FRONTEND_URL`.
