@@ -1,364 +1,364 @@
-date,sport,distance_km,duration_s,elevation_m,avg_hr
-2026-09-28,Course à pied,8.16,2523,40,147.0
-2026-09-26,Course à pied,27.0,8714,183,155.0
-2026-09-25,Course à pied,10.37,3480,44,141.0
-2026-09-23,Natation,28.0,37,0,108.0
-2026-09-23,Course à pied,17.0,5584,163,151.0
-2026-09-23,Natation,42.0,326,0,97.0
-2026-09-21,Course à pied,8.65,2705,35,146.0
-2026-09-19,Course à pied,8.5,2787,133,142.0
-2026-09-18,Course à pied,21.6,6601,164,156.0
-2026-09-16,Course à pied,10.23,3000,45,157.0
-2026-09-16,Natation,28.0,419,0,115.0
-2026-09-14,Course à pied,8.31,2710,54,143.0
-2026-09-13,Course à pied,21.13,7816,184,134.0
-2026-09-12,Natation,112.0,275,0,86.0
-2026-09-11,Course à pied,11.33,3361,38,158.0
-2026-09-09,Course à pied,11.13,3310,42,153.0
-2026-09-07,Course à pied,7.01,2221,47,140.0
-2026-09-07,Natation,84.0,274,0,107.0
-2026-09-06,Natation,70.0,205,0,101.0
-2026-09-05,Course à pied,18.35,6000,186,152.0
-2026-09-04,Natation,84.0,319,0,136.0
-2026-09-04,Course à pied,8.39,2761,36,142.0
-2026-09-03,Natation,112.0,268,0,104.0
-2026-09-02,Natation,56.0,204,0,103.0
-2026-09-02,Course à pied,8.32,2580,40,156.0
-2026-08-31,Course à pied,8.6,3010,45,140.0
-2026-08-31,Natation,84.0,354,0,101.0
-2026-08-29,Course à pied,31.26,10200,120,154.0
-2026-08-28,Natation,168.0,385,0,106.0
-2026-08-27,Course à pied,11.13,3721,75,150.0
-2026-08-24,Natation,112.0,201,0,109.0
-2026-08-24,Course à pied,15.65,5234,154,160.0
-2026-08-21,Autres,1.96,2285,0,125.0
-2026-08-21,Course à pied,7.67,2437,35,152.0
-2026-08-19,Natation,280.0,456,0,114.0
-2026-08-18,Autres,3.6,5286,0,108.0
-2026-08-18,Natation,322.0,509,0,116.0
-2026-08-17,Autres,4.14,5867,0,105.0
-2026-08-17,Course à pied,12.54,4357,59,147.0
-2026-08-17,Natation,182.0,381,0,113.0
-2026-08-16,Autres,3.57,4961,0,113.0
-2026-08-16,Autres,2.33,2804,0,120.0
-2026-08-16,Natation,280.0,501,0,110.0
-2026-08-15,Autres,1.84,2164,0,116.0
-2026-08-14,Natation,140.0,425,0,115.0
-2026-08-14,Course à pied,12.0,3881,57,146.0
-2026-08-11,Course à pied,4.85,1503,22,152.0
-2026-08-10,Course à pied,18.0,5824,112,156.0
-2026-08-08,Autres,0.79,1093,0,95.0
-2026-08-07,Natation,112.0,424,0,110.0
-2026-08-07,Course à pied,14.0,4806,62,145.0
-2026-08-05,Natation,56.0,254,0,104.0
-2026-08-05,Course à pied,14.15,4800,62,140.0
-2026-08-03,Course à pied,5.02,1920,34,133.0
-2026-08-01,Natation,103.0,183,0,135.0
-2026-08-01,Course à pied,12.0,4639,135,143.0
-2026-07-31,Course à pied,25.01,8110,305,157.0
-2026-07-31,Natation,42.0,304,0,109.0
-2026-07-30,Natation,56.0,406,0,122.0
-2026-07-30,Course à pied,6.38,2040,37,143.0
-2026-07-28,Course à pied,10.0,3189,33,153.0
-2026-07-27,Natation,112.0,454,0,112.0
-2026-07-26,Course à pied,11.55,3780,64,149.0
-2026-07-25,Natation,112.0,268,0,108.0
-2026-07-25,Course à pied,17.01,5609,125,147.0
-2026-07-22,Natation,126.0,248,0,115.0
-2026-07-22,Course à pied,15.72,5584,139,149.0
-2026-07-19,Natation,126.0,350,0,119.0
-2026-07-19,Course à pied,21.11,5773,41,166.0
-2026-07-17,Natation,126.0,240,0,115.0
-2026-07-17,Course à pied,7.16,2220,37,147.0
-2026-07-16,Natation,168.0,652,0,123.0
-2026-07-15,Natation,98.0,335,0,127.0
-2026-07-15,Course à pied,8.16,2520,39,148.0
-2026-07-13,Natation,126.0,475,0,103.0
-2026-07-13,Course à pied,15.01,4980,110,145.0
-2026-07-08,Course à pied,12.02,3639,55,160.0
-2026-07-08,Natation,126.0,456,0,106.0
-2026-07-06,Course à pied,10.01,2910,67,161.0
-2026-07-04,Course à pied,19.01,6077,126,149.0
-2026-07-03,Natation,224.0,450,0,108.0
-2026-07-03,Course à pied,8.0,2691,43,148.0
-2026-07-01,Natation,168.0,376,0,98.0
-2026-07-01,Course à pied,8.0,2047,18,169.0
-2026-06-28,Natation,112.0,275,0,108.0
-2026-06-28,Course à pied,14.11,4800,107,148.0
-2026-06-26,Natation,98.0,188,0,110.0
-2026-06-26,Course à pied,9.12,2843,41,150.0
-2026-06-24,Natation,154.0,606,0,127.0
-2026-06-20,Course à pied,21.21,6782,205,164.0
-2026-06-18,Natation,252.0,505,0,103.0
-2026-06-18,Autres,0.4,3980,0,130.0
-2026-06-16,Natation,112.0,372,0,118.0
-2026-06-16,Course à pied,7.6,2400,48,145.0
-2026-06-14,Natation,66.0,108,0,147.0
-2026-06-14,Course à pied,10.2,3227,64,156.0
-2026-06-12,Natation,182.0,541,0,93.0
-2026-06-10,Course à pied,11.89,3877,153,148.0
-2026-06-10,Natation,154.0,575,0,121.0
-2026-06-08,Natation,112.0,524,0,123.0
-2026-06-06,Course à pied,67.39,26685,605,147.0
-2026-06-06,Autres,0.0,301,0,82.0
-2026-06-05,Natation,210.0,613,0,103.0
-2026-06-04,Natation,168.0,488,0,113.0
-2026-06-03,Natation,126.0,426,0,121.0
-2026-06-03,Course à pied,6.7,2388,11,137.0
-2026-06-01,Natation,98.0,565,0,142.0
-2026-06-01,Course à pied,7.63,2700,54,143.0
-2026-06-01,Natation,140.0,579,0,129.0
-2026-05-30,Course à pied,10.0,3188,53,155.0
-2026-05-27,Course à pied,8.02,2700,85,159.0
-2026-05-27,Natation,112.0,485,0,107.0
-2026-05-23,Course à pied,22.01,7669,418,159.0
-2026-05-22,Natation,210.0,568,0,126.0
-2026-05-21,Course à pied,6.37,2040,56,150.0
-2026-05-21,Natation,224.0,620,0,125.0
-2026-05-20,Autres,2.06,3494,38,157.0
-2026-05-20,Natation,154.0,589,0,131.0
-2026-05-18,Natation,56.0,154,0,101.0
-2026-05-18,Course à pied,8.43,2644,34,154.0
-2026-05-17,Course à pied,10.01,3081,93,
-2026-05-15,Natation,154.0,372,0,113.0
-2026-05-15,Course à pied,24.03,7801,181,167.0
-2026-05-07,Natation,84.0,303,0,125.0
-2026-05-07,Course à pied,10.01,2796,23,166.0
-2026-05-01,Marche / randonnée,3.7,3681,27,91.0
-2026-04-30,Course à pied,12.02,3588,100,166.0
-2026-04-30,Natation,252.0,733,0,100.0
-2026-04-20,Marche / randonnée,4.97,5570,38,81.0
-2026-04-18,Natation,196.0,599,0,121.0
-2026-04-17,Autres,0.47,6175,0,120.0
-2026-04-17,Natation,168.0,644,0,103.0
-2026-04-16,Natation,168.0,650,0,110.0
-2026-04-16,Course à pied,10.02,3234,41,149.0
-2026-04-16,Natation,98.0,618,0,139.0
-2026-04-15,Autres,2.84,3270,14,142.0
-2026-04-13,Natation,140.0,547,0,113.0
-2026-04-11,Course à pied,14.01,3882,50,167.0
-2026-04-11,Natation,140.0,611,0,133.0
-2026-04-10,Natation,224.0,511,0,137.0
-2026-04-09,Natation,154.0,494,0,157.0
-2026-04-09,Course à pied,7.0,2067,39,161.0
-2026-04-08,Autres,2.13,3197,4,151.0
-2026-04-07,Autres,0.0,5400,0,
-2026-04-04,Course à pied,21.27,6197,161,167.0
-2026-04-01,Course à pied,10.0,3304,83,154.0
-2026-04-01,Autres,0.0,4200,0,
-2026-03-28,Course à pied,40.18,17277,1451,162.0
-2026-03-25,Course à pied,6.27,2286,50,133.0
-2026-03-24,Course à pied,6.18,2287,40,128.0
-2026-03-22,Course à pied,12.32,3444,26,170.0
-2026-03-22,Course à pied,2.01,713,8,143.0
-2026-03-21,Course à pied,5.2,1807,29,144.0
-2026-03-20,Course à pied,9.0,3088,41,150.0
-2026-03-16,Course à pied,9.14,3001,44,146.0
-2026-03-15,Course à pied,5.08,1926,38,136.0
-2026-03-14,Course à pied,21.36,7041,181,152.0
-2026-03-13,Course à pied,12.21,4208,107,148.0
-2026-03-11,Course à pied,7.62,2626,60,147.0
-2026-03-09,Course à pied,7.5,2538,53,143.0
-2026-03-08,Course à pied,10.0,3126,36,155.0
-2026-03-07,Course à pied,4.26,1805,32,134.0
-2026-03-06,Course à pied,10.0,3139,37,158.0
-2026-03-04,Course à pied,8.28,2641,38,156.0
-2026-03-02,Course à pied,5.22,1866,26,142.0
-2026-02-28,Course à pied,22.04,7530,181,161.0
-2026-02-27,Autres,0.31,5184,0,113.0
-2026-02-25,Course à pied,14.06,4801,123,160.0
-2026-02-23,Course à pied,7.16,2529,43,152.0
-2026-02-22,Course à pied,6.01,2082,8,146.0
-2026-02-20,Course à pied,19.31,6401,96,158.0
-2026-02-19,Course à pied,5.86,2105,45,145.0
-2026-02-16,Autres,0.29,5912,0,118.0
-2026-02-16,Course à pied,6.04,2043,15,148.0
-2026-02-14,Course à pied,21.26,7202,212,159.0
-2026-02-13,Course à pied,9.04,3206,22,148.0
-2026-02-11,Course à pied,3.51,1218,5,143.0
-2026-02-09,Course à pied,6.01,2034,41,150.0
-2026-02-07,Course à pied,16.08,5222,74,158.0
-2026-02-06,Course à pied,7.73,2574,69,154.0
-2026-02-05,Autres,0.52,7189,0,116.0
-2026-02-04,Course à pied,6.05,2163,68,148.0
-2026-01-31,Course à pied,7.02,2409,35,148.0
-2026-01-30,Course à pied,9.04,2404,12,176.0
-2026-01-28,Autres,3.57,4245,33,132.0
-2026-01-26,Course à pied,7.62,2705,32,156.0
-2026-01-25,Course à pied,8.75,3130,41,154.0
-2026-01-24,Autres,0.0,7200,0,
-2026-01-23,Autres,0.16,5017,0,89.0
-2026-01-22,Course à pied,4.01,1592,46,155.0
-2026-01-22,Course à pied,8.25,2823,36,156.0
-2026-01-19,Course à pied,7.52,2493,121,151.0
-2026-01-17,Course à pied,19.06,6369,88,158.0
-2026-01-14,Autres,1.9,3323,6,138.0
-2026-01-12,Course à pied,8.59,2727,62,162.0
-2026-01-10,Course à pied,15.01,4664,20,170.0
-2026-01-10,Course à pied,1.61,495,1,152.0
-2026-01-06,Course à pied,8.5,2498,36,
-2026-01-04,Course à pied,13.01,4207,22,
-2025-12-30,Course à pied,10.01,2850,9,
-2025-12-24,Course à pied,10.51,3031,10,
-2025-11-01,Course à pied,10.13,3755,247,
-2025-10-12,Course à pied,10.01,3085,32,
-2025-08-07,Course à pied,18.38,6602,323,
-2025-08-05,Course à pied,5.98,2102,139,
-2025-08-01,Vélo,11.35,3068,44,
-2025-07-29,Vélo,9.95,3620,7,
-2025-07-10,Course à pied,8.8,2399,4,
-2025-06-18,Autres,0.0,3600,0,
-2025-06-07,Course à pied,12.33,4596,76,
-2025-05-20,Course à pied,5.89,1928,24,
-2025-05-18,Autres,3.49,2987,3,
-2025-05-17,Marche / randonnée,7.91,7232,201,
-2025-05-06,Vélo,26.72,3676,58,
-2025-04-29,Vélo,24.81,3648,51,
-2025-04-28,Vélo,23.23,3547,52,
-2025-03-29,Course à pied,27.3,11037,759,
-2025-03-27,Course à pied,5.55,1823,20,
-2025-03-25,Vélo,10.01,2384,5,
-2025-03-16,Course à pied,4.53,1572,3,
-2025-03-11,Course à pied,9.03,2544,5,
-2025-03-07,Course à pied,10.0,3210,38,
-2025-03-06,Course à pied,9.0,2411,5,
-2025-03-04,Course à pied,9.03,2512,5,
-2025-02-27,Course à pied,7.04,2335,67,
-2025-02-25,Course à pied,5.1,1502,25,
-2025-02-01,Course à pied,16.51,4947,62,
-2025-01-26,Course à pied,12.01,3647,104,
-2024-10-27,Course à pied,1.98,635,4,
-2024-09-21,Course à pied,9.76,2953,37,
-2024-08-31,Course à pied,6.6,2366,30,
-2024-08-20,Course à pied,5.86,2228,147,
-2024-08-12,Course à pied,4.73,1610,55,
-2024-06-22,Course à pied,10.06,3257,38,
-2024-06-20,Vélo,11.3,2250,78,
-2024-06-20,Vélo,14.91,2289,52,
-2023-09-28,Course à pied,5.23,1794,49,
-2023-09-06,Course à pied,7.0,2127,155,
-2023-07-21,Course à pied,8.72,2934,5,
-2023-07-07,Course à pied,4.69,1636,70,
-2023-07-06,Course à pied,8.52,2621,171,
-2023-06-03,Course à pied,7.1,2398,54,
-2023-06-02,Course à pied,8.12,3067,174,
-2023-05-31,Course à pied,8.3,3415,176,
-2023-04-12,Autres,0.0,5415,0,94.0
-2023-04-12,Marche / randonnée,2.38,2664,0,
-2023-04-11,Vélo,10.92,1904,104,
-2023-04-11,Vélo,11.2,1751,62,
-2023-04-08,Course à pied,9.45,3237,7,
-2023-04-07,Marche / randonnée,3.11,1936,17,
-2023-04-03,Course à pied,8.79,3015,69,
-2023-03-30,Course à pied,6.13,1637,3,
-2023-03-29,Autres,0.2,61,2,
-2023-03-13,Course à pied,8.7,2498,5,
-2022-11-19,Course à pied,10.36,3493,34,
-2022-11-16,Marche / randonnée,0.86,483,22,
-2022-11-16,Course à pied,10.02,2887,9,
-2022-10-01,Course à pied,9.05,2863,15,
-2022-09-14,Course à pied,9.01,2616,4,
-2022-07-08,Course à pied,9.01,2658,4,
-2022-06-26,Course à pied,5.86,1637,3,
-2022-05-30,Vélo,18.06,2758,38,
-2022-05-22,Course à pied,0.24,136,0,
-2022-05-15,Course à pied,7.32,2384,21,
-2022-05-10,Course à pied,9.0,2443,4,
-2022-05-07,Vélo,10.36,2383,88,
-2022-05-02,Course à pied,10.01,2811,8,
-2022-04-09,Course à pied,6.06,1710,26,
-2022-03-31,Marche / randonnée,2.4,1234,14,
-2022-03-29,Vélo,12.37,2005,16,
-2022-03-29,Vélo,11.09,1692,59,
-2022-03-29,Course à pied,2.34,710,20,
-2022-03-29,Course à pied,5.01,1250,4,
-2022-03-29,Course à pied,1.55,421,0,
-2022-03-27,Natation,0.0,1440,0,
-2022-03-26,Vélo,7.0,1440,0,
-2022-03-26,Vélo,4.78,751,43,
-2022-03-26,Marche / randonnée,1.75,1701,23,
-2022-03-26,Vélo,4.31,864,36,
-2022-03-26,Vélo,8.27,1408,43,
-2022-03-26,Vélo,5.43,843,14,
-2022-03-26,Vélo,12.2,1892,39,
-2022-03-24,Vélo,3.58,642,33,
-2022-03-24,Vélo,15.12,2056,12,
-2022-03-22,Course à pied,9.0,2567,4,
-2022-03-12,Course à pied,12.57,3608,11,
-2022-03-09,Course à pied,9.0,2640,11,
-2022-02-23,Course à pied,6.18,1719,31,
-2022-02-16,Course à pied,10.0,2784,27,
-2022-02-11,Course à pied,10.03,2956,32,
-2022-02-08,Course à pied,10.01,2974,35,
-2022-01-07,Course à pied,10.25,2939,34,
-2022-01-02,Course à pied,9.38,3323,4,
-2021-11-26,Marche / randonnée,25.42,3997,86,
-2021-11-24,Course à pied,9.01,2410,4,
-2021-11-19,Course à pied,9.02,2442,5,
-2021-11-09,Course à pied,9.01,2489,4,
-2021-11-05,Course à pied,9.34,2753,10,
-2021-11-03,Course à pied,10.01,2779,14,
-2021-09-08,Course à pied,9.0,2503,7,
-2021-09-03,Course à pied,10.0,2784,34,
-2021-09-01,Course à pied,10.0,2947,34,
-2021-08-18,Course à pied,2.11,693,46,
-2021-08-16,Course à pied,3.92,1393,61,
-2021-08-15,Course à pied,4.32,1678,131,
-2021-08-06,Course à pied,8.53,2249,4,
-2021-08-06,Course à pied,1.2,315,0,
-2021-08-05,Vélo,4.06,744,30,
-2021-08-04,Vélo,4.49,602,30,
-2021-08-03,Course à pied,9.01,2477,4,
-2021-07-27,Course à pied,14.01,3770,7,
-2021-07-15,Course à pied,10.01,2794,23,
-2021-07-13,Vélo,11.21,1916,77,
-2021-07-13,Vélo,10.93,1648,34,
-2021-07-09,Course à pied,8.85,2728,4,
-2021-07-07,Course à pied,6.38,1738,30,
-2021-07-03,Course à pied,8.87,2800,22,
-2021-06-30,Course à pied,8.88,2315,4,
-2021-06-27,Vélo,14.44,2428,52,
-2021-06-26,Vélo,37.07,6733,334,
-2021-06-26,Vélo,25.63,4717,254,
-2021-06-26,Vélo,14.38,2874,10,
-2021-06-25,Vélo,69.15,12390,126,
-2021-06-23,Course à pied,10.1,2834,33,
-2021-06-19,Vélo,4.68,885,64,
-2021-06-19,Vélo,7.91,1375,14,
-2021-06-18,Vélo,10.63,1650,104,
-2021-06-18,Vélo,10.6,1587,72,
-2021-06-17,Course à pied,8.71,2270,4,
-2021-06-11,Course à pied,9.18,2831,7,
-2021-06-09,Vélo,20.9,2723,13,
-2021-06-08,Course à pied,9.22,2633,4,
-2021-06-05,Course à pied,9.05,2290,4,
-2021-06-02,Vélo,27.31,3644,19,
-2021-05-31,Course à pied,0.31,150,0,
-2021-05-31,Course à pied,9.7,3010,36,
-2021-05-28,Course à pied,9.2,2394,6,
-2021-05-25,Course à pied,9.0,2535,6,
-2021-05-22,Course à pied,10.56,2678,7,
-2021-05-19,Course à pied,10.37,3028,15,
-2021-05-17,Course à pied,9.31,2849,6,
-2021-05-12,Course à pied,8.5,2280,8,
-2021-05-09,Course à pied,7.94,2595,45,
-2021-05-08,Course à pied,21.13,6008,13,
-2021-05-04,Course à pied,12.81,3595,45,
-2021-05-01,Course à pied,6.07,1555,4,
-2021-04-30,Course à pied,10.01,2960,5,
-2021-04-27,Course à pied,10.18,3130,5,
-2021-04-25,Vélo,14.13,3498,53,
-2021-04-25,Course à pied,8.31,2673,30,
-2021-04-24,Vélo,14.32,3283,19,
-2021-04-23,Course à pied,8.93,2826,5,
-2021-04-22,Course à pied,9.01,2420,4,
-2021-04-20,Vélo,7.95,1464,46,
-2021-04-20,Vélo,7.85,1213,16,
-2021-04-20,Course à pied,9.0,2417,4,
-2021-04-17,Course à pied,10.22,2590,5,
-2021-04-13,Course à pied,10.18,2751,7,
-2021-04-09,Course à pied,9.84,3196,34,
-2021-04-07,Course à pied,21.06,6035,12,
-2021-04-02,Course à pied,10.14,2825,4,
-2021-03-31,Course à pied,9.94,3106,12,
-2021-03-29,Course à pied,5.43,1472,37,
+id,strava_url,date,sport,distance_km,duration_s,elevation_m,avg_hr
+20362279357,https://www.strava.com/activities/20362279357,2026-09-28,Course à pied,8.16,2523,40,147.0
+20339512900,https://www.strava.com/activities/20339512900,2026-09-26,Course à pied,27.0,8714,183,155.0
+20319858803,https://www.strava.com/activities/20319858803,2026-09-25,Course à pied,10.37,3480,44,141.0
+20295313740,https://www.strava.com/activities/20295313740,2026-09-23,Natation,28.0,37,0,108.0
+20295210707,https://www.strava.com/activities/20295210707,2026-09-23,Course à pied,17.0,5584,163,151.0
+20291996557,https://www.strava.com/activities/20291996557,2026-09-23,Natation,42.0,326,0,97.0
+20270004133,https://www.strava.com/activities/20270004133,2026-09-21,Course à pied,8.65,2705,35,146.0
+20242132375,https://www.strava.com/activities/20242132375,2026-09-19,Course à pied,8.5,2787,133,142.0
+20229037870,https://www.strava.com/activities/20229037870,2026-09-18,Course à pied,21.6,6601,164,156.0
+20197939119,https://www.strava.com/activities/20197939119,2026-09-16,Course à pied,10.23,3000,45,157.0
+20195512780,https://www.strava.com/activities/20195512780,2026-09-16,Natation,28.0,419,0,115.0
+20173253202,https://www.strava.com/activities/20173253202,2026-09-14,Course à pied,8.31,2710,54,143.0
+20153861110,https://www.strava.com/activities/20153861110,2026-09-13,Course à pied,21.13,7816,184,134.0
+20143454129,https://www.strava.com/activities/20143454129,2026-09-12,Natation,112.0,275,0,86.0
+20132439392,https://www.strava.com/activities/20132439392,2026-09-11,Course à pied,11.33,3361,38,158.0
+20101022968,https://www.strava.com/activities/20101022968,2026-09-09,Course à pied,11.13,3310,42,153.0
+20076762872,https://www.strava.com/activities/20076762872,2026-09-07,Course à pied,7.01,2221,47,140.0
+20069403670,https://www.strava.com/activities/20069403670,2026-09-07,Natation,84.0,274,0,107.0
+20058791552,https://www.strava.com/activities/20058791552,2026-09-06,Natation,70.0,205,0,101.0
+20044341693,https://www.strava.com/activities/20044341693,2026-09-05,Course à pied,18.35,6000,186,152.0
+20029534482,https://www.strava.com/activities/20029534482,2026-09-04,Natation,84.0,319,0,136.0
+20029534590,https://www.strava.com/activities/20029534590,2026-09-04,Course à pied,8.39,2761,36,142.0
+20015239008,https://www.strava.com/activities/20015239008,2026-09-03,Natation,112.0,268,0,104.0
+20003455633,https://www.strava.com/activities/20003455633,2026-09-02,Natation,56.0,204,0,103.0
+20003203116,https://www.strava.com/activities/20003203116,2026-09-02,Course à pied,8.32,2580,40,156.0
+19974349801,https://www.strava.com/activities/19974349801,2026-08-31,Course à pied,8.6,3010,45,140.0
+19971647441,https://www.strava.com/activities/19971647441,2026-08-31,Natation,84.0,354,0,101.0
+19946036330,https://www.strava.com/activities/19946036330,2026-08-29,Course à pied,31.26,10200,120,154.0
+19935436577,https://www.strava.com/activities/19935436577,2026-08-28,Natation,168.0,385,0,106.0
+19925416592,https://www.strava.com/activities/19925416592,2026-08-27,Course à pied,11.13,3721,75,150.0
+19875859559,https://www.strava.com/activities/19875859559,2026-08-24,Natation,112.0,201,0,109.0
+19875566361,https://www.strava.com/activities/19875566361,2026-08-24,Course à pied,15.65,5234,154,160.0
+19839434752,https://www.strava.com/activities/19839434752,2026-08-21,Autres,1.96,2285,0,125.0
+19834493190,https://www.strava.com/activities/19834493190,2026-08-21,Course à pied,7.67,2437,35,152.0
+19805474836,https://www.strava.com/activities/19805474836,2026-08-19,Natation,280.0,456,0,114.0
+19797405299,https://www.strava.com/activities/19797405299,2026-08-18,Autres,3.6,5286,0,108.0
+19790088911,https://www.strava.com/activities/19790088911,2026-08-18,Natation,322.0,509,0,116.0
+19782533859,https://www.strava.com/activities/19782533859,2026-08-17,Autres,4.14,5867,0,105.0
+19777027761,https://www.strava.com/activities/19777027761,2026-08-17,Course à pied,12.54,4357,59,147.0
+19775703673,https://www.strava.com/activities/19775703673,2026-08-17,Natation,182.0,381,0,113.0
+19772284186,https://www.strava.com/activities/19772284186,2026-08-16,Autres,3.57,4961,0,113.0
+19764006956,https://www.strava.com/activities/19764006956,2026-08-16,Autres,2.33,2804,0,120.0
+19761037422,https://www.strava.com/activities/19761037422,2026-08-16,Natation,280.0,501,0,110.0
+19755245392,https://www.strava.com/activities/19755245392,2026-08-15,Autres,1.84,2164,0,116.0
+19735605683,https://www.strava.com/activities/19735605683,2026-08-14,Natation,140.0,425,0,115.0
+19735446478,https://www.strava.com/activities/19735446478,2026-08-14,Course à pied,12.0,3881,57,146.0
+19692957529,https://www.strava.com/activities/19692957529,2026-08-11,Course à pied,4.85,1503,22,152.0
+19679174975,https://www.strava.com/activities/19679174975,2026-08-10,Course à pied,18.0,5824,112,156.0
+19653472565,https://www.strava.com/activities/19653472565,2026-08-08,Autres,0.79,1093,0,95.0
+19642990362,https://www.strava.com/activities/19642990362,2026-08-07,Natation,112.0,424,0,110.0
+19642058552,https://www.strava.com/activities/19642058552,2026-08-07,Course à pied,14.0,4806,62,145.0
+19608243033,https://www.strava.com/activities/19608243033,2026-08-05,Natation,56.0,254,0,104.0
+19607996053,https://www.strava.com/activities/19607996053,2026-08-05,Course à pied,14.15,4800,62,140.0
+19585166403,https://www.strava.com/activities/19585166403,2026-08-03,Course à pied,5.02,1920,34,133.0
+19553669635,https://www.strava.com/activities/19553669635,2026-08-01,Natation,103.0,183,0,135.0
+19553410869,https://www.strava.com/activities/19553410869,2026-08-01,Course à pied,12.0,4639,135,143.0
+19544726421,https://www.strava.com/activities/19544726421,2026-07-31,Course à pied,25.01,8110,305,157.0
+19538120158,https://www.strava.com/activities/19538120158,2026-07-31,Natation,42.0,304,0,109.0
+19524700789,https://www.strava.com/activities/19524700789,2026-07-30,Natation,56.0,406,0,122.0
+19524562895,https://www.strava.com/activities/19524562895,2026-07-30,Course à pied,6.38,2040,37,143.0
+19498459451,https://www.strava.com/activities/19498459451,2026-07-28,Course à pied,10.0,3189,33,153.0
+19481143369,https://www.strava.com/activities/19481143369,2026-07-27,Natation,112.0,454,0,112.0
+19470064165,https://www.strava.com/activities/19470064165,2026-07-26,Course à pied,11.55,3780,64,149.0
+19454683045,https://www.strava.com/activities/19454683045,2026-07-25,Natation,112.0,268,0,108.0
+19454353877,https://www.strava.com/activities/19454353877,2026-07-25,Course à pied,17.01,5609,125,147.0
+19416531486,https://www.strava.com/activities/19416531486,2026-07-22,Natation,126.0,248,0,115.0
+19416531440,https://www.strava.com/activities/19416531440,2026-07-22,Course à pied,15.72,5584,139,149.0
+19374622242,https://www.strava.com/activities/19374622242,2026-07-19,Natation,126.0,350,0,119.0
+19373722290,https://www.strava.com/activities/19373722290,2026-07-19,Course à pied,21.11,5773,41,166.0
+19345708809,https://www.strava.com/activities/19345708809,2026-07-17,Natation,126.0,240,0,115.0
+19345604295,https://www.strava.com/activities/19345604295,2026-07-17,Course à pied,7.16,2220,37,147.0
+19332218178,https://www.strava.com/activities/19332218178,2026-07-16,Natation,168.0,652,0,123.0
+19319199425,https://www.strava.com/activities/19319199425,2026-07-15,Natation,98.0,335,0,127.0
+19319076068,https://www.strava.com/activities/19319076068,2026-07-15,Course à pied,8.16,2520,39,148.0
+19291209007,https://www.strava.com/activities/19291209007,2026-07-13,Natation,126.0,475,0,103.0
+19290863973,https://www.strava.com/activities/19290863973,2026-07-13,Course à pied,15.01,4980,110,145.0
+19231252588,https://www.strava.com/activities/19231252588,2026-07-08,Course à pied,12.02,3639,55,160.0
+19224177484,https://www.strava.com/activities/19224177484,2026-07-08,Natation,126.0,456,0,106.0
+19203544721,https://www.strava.com/activities/19203544721,2026-07-06,Course à pied,10.01,2910,67,161.0
+19171859413,https://www.strava.com/activities/19171859413,2026-07-04,Course à pied,19.01,6077,126,149.0
+19165756700,https://www.strava.com/activities/19165756700,2026-07-03,Natation,224.0,450,0,108.0
+19165384195,https://www.strava.com/activities/19165384195,2026-07-03,Course à pied,8.0,2691,43,148.0
+19140589347,https://www.strava.com/activities/19140589347,2026-07-01,Natation,168.0,376,0,98.0
+19139769137,https://www.strava.com/activities/19139769137,2026-07-01,Course à pied,8.0,2047,18,169.0
+19095905727,https://www.strava.com/activities/19095905727,2026-06-28,Natation,112.0,275,0,108.0
+19095257355,https://www.strava.com/activities/19095257355,2026-06-28,Course à pied,14.11,4800,107,148.0
+19070401291,https://www.strava.com/activities/19070401291,2026-06-26,Natation,98.0,188,0,110.0
+19070266330,https://www.strava.com/activities/19070266330,2026-06-26,Course à pied,9.12,2843,41,150.0
+19045102131,https://www.strava.com/activities/19045102131,2026-06-24,Natation,154.0,606,0,127.0
+18997388882,https://www.strava.com/activities/18997388882,2026-06-20,Course à pied,21.21,6782,205,164.0
+18976469054,https://www.strava.com/activities/18976469054,2026-06-18,Natation,252.0,505,0,103.0
+18970347797,https://www.strava.com/activities/18970347797,2026-06-18,Autres,0.4,3980,0,130.0
+18941700829,https://www.strava.com/activities/18941700829,2026-06-16,Natation,112.0,372,0,118.0
+18941490380,https://www.strava.com/activities/18941490380,2026-06-16,Course à pied,7.6,2400,48,145.0
+18915014720,https://www.strava.com/activities/18915014720,2026-06-14,Natation,66.0,108,0,147.0
+18915014827,https://www.strava.com/activities/18915014827,2026-06-14,Course à pied,10.2,3227,64,156.0
+18886566554,https://www.strava.com/activities/18886566554,2026-06-12,Natation,182.0,541,0,93.0
+18866558096,https://www.strava.com/activities/18866558096,2026-06-10,Course à pied,11.89,3877,153,148.0
+18860516492,https://www.strava.com/activities/18860516492,2026-06-10,Natation,154.0,575,0,121.0
+18832714641,https://www.strava.com/activities/18832714641,2026-06-08,Natation,112.0,524,0,123.0
+18812967450,https://www.strava.com/activities/18812967450,2026-06-06,Course à pied,67.39,26685,605,147.0
+18804737420,https://www.strava.com/activities/18804737420,2026-06-06,Autres,0.0,301,0,82.0
+18792614393,https://www.strava.com/activities/18792614393,2026-06-05,Natation,210.0,613,0,103.0
+18779187967,https://www.strava.com/activities/18779187967,2026-06-04,Natation,168.0,488,0,113.0
+18765615358,https://www.strava.com/activities/18765615358,2026-06-03,Natation,126.0,426,0,121.0
+18765432598,https://www.strava.com/activities/18765432598,2026-06-03,Course à pied,6.7,2388,11,137.0
+18740582415,https://www.strava.com/activities/18740582415,2026-06-01,Natation,98.0,565,0,142.0
+18740110910,https://www.strava.com/activities/18740110910,2026-06-01,Course à pied,7.63,2700,54,143.0
+18737653190,https://www.strava.com/activities/18737653190,2026-06-01,Natation,140.0,579,0,129.0
+18716732191,https://www.strava.com/activities/18716732191,2026-05-30,Course à pied,10.0,3188,53,155.0
+18676412543,https://www.strava.com/activities/18676412543,2026-05-27,Course à pied,8.02,2700,85,159.0
+18670932710,https://www.strava.com/activities/18670932710,2026-05-27,Natation,112.0,485,0,107.0
+18618553439,https://www.strava.com/activities/18618553439,2026-05-23,Course à pied,22.01,7669,418,159.0
+18604166095,https://www.strava.com/activities/18604166095,2026-05-22,Natation,210.0,568,0,126.0
+18593604786,https://www.strava.com/activities/18593604786,2026-05-21,Course à pied,6.37,2040,56,150.0
+18591044709,https://www.strava.com/activities/18591044709,2026-05-21,Natation,224.0,620,0,125.0
+18580606455,https://www.strava.com/activities/18580606455,2026-05-20,Autres,2.06,3494,38,157.0
+18577559937,https://www.strava.com/activities/18577559937,2026-05-20,Natation,154.0,589,0,131.0
+18553447313,https://www.strava.com/activities/18553447313,2026-05-18,Natation,56.0,154,0,101.0
+18553092143,https://www.strava.com/activities/18553092143,2026-05-18,Course à pied,8.43,2644,34,154.0
+18540269627,https://www.strava.com/activities/18540269627,2026-05-17,Course à pied,10.01,3081,93,
+18518274013,https://www.strava.com/activities/18518274013,2026-05-15,Natation,154.0,372,0,113.0
+18517440751,https://www.strava.com/activities/18517440751,2026-05-15,Course à pied,24.03,7801,181,167.0
+18411273129,https://www.strava.com/activities/18411273129,2026-05-07,Natation,84.0,303,0,125.0
+18410738845,https://www.strava.com/activities/18410738845,2026-05-07,Course à pied,10.01,2796,23,166.0
+18337481835,https://www.strava.com/activities/18337481835,2026-05-01,Marche / randonnée,3.7,3681,27,91.0
+18317800105,https://www.strava.com/activities/18317800105,2026-04-30,Course à pied,12.02,3588,100,166.0
+18315126392,https://www.strava.com/activities/18315126392,2026-04-30,Natation,252.0,733,0,100.0
+18185192966,https://www.strava.com/activities/18185192966,2026-04-20,Marche / randonnée,4.97,5570,38,81.0
+18153702866,https://www.strava.com/activities/18153702866,2026-04-18,Natation,196.0,599,0,121.0
+18148830967,https://www.strava.com/activities/18148830967,2026-04-17,Autres,0.47,6175,0,120.0
+18140817018,https://www.strava.com/activities/18140817018,2026-04-17,Natation,168.0,644,0,103.0
+18134130364,https://www.strava.com/activities/18134130364,2026-04-16,Natation,168.0,650,0,110.0
+18133806058,https://www.strava.com/activities/18133806058,2026-04-16,Course à pied,10.02,3234,41,149.0
+18127588669,https://www.strava.com/activities/18127588669,2026-04-16,Natation,98.0,618,0,139.0
+18117132273,https://www.strava.com/activities/18117132273,2026-04-15,Autres,2.84,3270,14,142.0
+18087401677,https://www.strava.com/activities/18087401677,2026-04-13,Natation,140.0,547,0,113.0
+18063880741,https://www.strava.com/activities/18063880741,2026-04-11,Course à pied,14.01,3882,50,167.0
+18062548818,https://www.strava.com/activities/18062548818,2026-04-11,Natation,140.0,611,0,133.0
+18049684751,https://www.strava.com/activities/18049684751,2026-04-10,Natation,224.0,511,0,137.0
+18039356197,https://www.strava.com/activities/18039356197,2026-04-09,Natation,154.0,494,0,157.0
+18038963383,https://www.strava.com/activities/18038963383,2026-04-09,Course à pied,7.0,2067,39,161.0
+18025703224,https://www.strava.com/activities/18025703224,2026-04-08,Autres,2.13,3197,4,151.0
+18018176570,https://www.strava.com/activities/18018176570,2026-04-07,Autres,0.0,5400,0,
+17970480942,https://www.strava.com/activities/17970480942,2026-04-04,Course à pied,21.27,6197,161,167.0
+17939019402,https://www.strava.com/activities/17939019402,2026-04-01,Course à pied,10.0,3304,83,154.0
+17936865563,https://www.strava.com/activities/17936865563,2026-04-01,Autres,0.0,4200,0,
+17888453794,https://www.strava.com/activities/17888453794,2026-03-28,Course à pied,40.18,17277,1451,162.0
+17852727009,https://www.strava.com/activities/17852727009,2026-03-25,Course à pied,6.27,2286,50,133.0
+17843972263,https://www.strava.com/activities/17843972263,2026-03-24,Course à pied,6.18,2287,40,128.0
+17813797275,https://www.strava.com/activities/17813797275,2026-03-22,Course à pied,12.32,3444,26,170.0
+17812341615,https://www.strava.com/activities/17812341615,2026-03-22,Course à pied,2.01,713,8,143.0
+17806767634,https://www.strava.com/activities/17806767634,2026-03-21,Course à pied,5.2,1807,29,144.0
+17789971702,https://www.strava.com/activities/17789971702,2026-03-20,Course à pied,9.0,3088,41,150.0
+17741357209,https://www.strava.com/activities/17741357209,2026-03-16,Course à pied,9.14,3001,44,146.0
+17728887383,https://www.strava.com/activities/17728887383,2026-03-15,Course à pied,5.08,1926,38,136.0
+17716012590,https://www.strava.com/activities/17716012590,2026-03-14,Course à pied,21.36,7041,181,152.0
+17707278380,https://www.strava.com/activities/17707278380,2026-03-13,Course à pied,12.21,4208,107,148.0
+17684504490,https://www.strava.com/activities/17684504490,2026-03-11,Course à pied,7.62,2626,60,147.0
+17658991757,https://www.strava.com/activities/17658991757,2026-03-09,Course à pied,7.5,2538,53,143.0
+17644489964,https://www.strava.com/activities/17644489964,2026-03-08,Course à pied,10.0,3126,36,155.0
+17635134843,https://www.strava.com/activities/17635134843,2026-03-07,Course à pied,4.26,1805,32,134.0
+17623716539,https://www.strava.com/activities/17623716539,2026-03-06,Course à pied,10.0,3139,37,158.0
+17597345401,https://www.strava.com/activities/17597345401,2026-03-04,Course à pied,8.28,2641,38,156.0
+17579291750,https://www.strava.com/activities/17579291750,2026-03-02,Course à pied,5.22,1866,26,142.0
+17554408641,https://www.strava.com/activities/17554408641,2026-02-28,Course à pied,22.04,7530,181,161.0
+17545160160,https://www.strava.com/activities/17545160160,2026-02-27,Autres,0.31,5184,0,113.0
+17517238655,https://www.strava.com/activities/17517238655,2026-02-25,Course à pied,14.06,4801,123,160.0
+17492870949,https://www.strava.com/activities/17492870949,2026-02-23,Course à pied,7.16,2529,43,152.0
+17482122979,https://www.strava.com/activities/17482122979,2026-02-22,Course à pied,6.01,2082,8,146.0
+17460366101,https://www.strava.com/activities/17460366101,2026-02-20,Course à pied,19.31,6401,96,158.0
+17447744281,https://www.strava.com/activities/17447744281,2026-02-19,Course à pied,5.86,2105,45,145.0
+17420605317,https://www.strava.com/activities/17420605317,2026-02-16,Autres,0.29,5912,0,118.0
+17415008828,https://www.strava.com/activities/17415008828,2026-02-16,Course à pied,6.04,2043,15,148.0
+17391517729,https://www.strava.com/activities/17391517729,2026-02-14,Course à pied,21.26,7202,212,159.0
+17383731488,https://www.strava.com/activities/17383731488,2026-02-13,Course à pied,9.04,3206,22,148.0
+17359700770,https://www.strava.com/activities/17359700770,2026-02-11,Course à pied,3.51,1218,5,143.0
+17338123091,https://www.strava.com/activities/17338123091,2026-02-09,Course à pied,6.01,2034,41,150.0
+17319866854,https://www.strava.com/activities/17319866854,2026-02-07,Course à pied,16.08,5222,74,158.0
+17308023107,https://www.strava.com/activities/17308023107,2026-02-06,Course à pied,7.73,2574,69,154.0
+17300166637,https://www.strava.com/activities/17300166637,2026-02-05,Autres,0.52,7189,0,116.0
+17282692354,https://www.strava.com/activities/17282692354,2026-02-04,Course à pied,6.05,2163,68,148.0
+17236454087,https://www.strava.com/activities/17236454087,2026-01-31,Course à pied,7.02,2409,35,148.0
+17228961117,https://www.strava.com/activities/17228961117,2026-01-30,Course à pied,9.04,2404,12,176.0
+17204922526,https://www.strava.com/activities/17204922526,2026-01-28,Autres,3.57,4245,33,132.0
+17181544402,https://www.strava.com/activities/17181544402,2026-01-26,Course à pied,7.62,2705,32,156.0
+17170545123,https://www.strava.com/activities/17170545123,2026-01-25,Course à pied,8.75,3130,41,154.0
+17163859147,https://www.strava.com/activities/17163859147,2026-01-24,Autres,0.0,7200,0,
+17153021251,https://www.strava.com/activities/17153021251,2026-01-23,Autres,0.16,5017,0,89.0
+17138331405,https://www.strava.com/activities/17138331405,2026-01-22,Course à pied,4.01,1592,46,155.0
+17138331535,https://www.strava.com/activities/17138331535,2026-01-22,Course à pied,8.25,2823,36,156.0
+17102462412,https://www.strava.com/activities/17102462412,2026-01-19,Course à pied,7.52,2493,121,151.0
+17083242191,https://www.strava.com/activities/17083242191,2026-01-17,Course à pied,19.06,6369,88,158.0
+17046189290,https://www.strava.com/activities/17046189290,2026-01-14,Autres,1.9,3323,6,138.0
+17021776778,https://www.strava.com/activities/17021776778,2026-01-12,Course à pied,8.59,2727,62,162.0
+16997139035,https://www.strava.com/activities/16997139035,2026-01-10,Course à pied,15.01,4664,20,170.0
+16996757958,https://www.strava.com/activities/16996757958,2026-01-10,Course à pied,1.61,495,1,152.0
+16955298287,https://www.strava.com/activities/16955298287,2026-01-06,Course à pied,8.5,2498,36,
+16933514614,https://www.strava.com/activities/16933514614,2026-01-04,Course à pied,13.01,4207,22,
+16881855167,https://www.strava.com/activities/16881855167,2025-12-30,Course à pied,10.01,2850,9,
+16830819528,https://www.strava.com/activities/16830819528,2025-12-24,Course à pied,10.51,3031,10,
+16320195070,https://www.strava.com/activities/16320195070,2025-11-01,Course à pied,10.13,3755,247,
+16115558835,https://www.strava.com/activities/16115558835,2025-10-12,Course à pied,10.01,3085,32,
+15373975877,https://www.strava.com/activities/15373975877,2025-08-07,Course à pied,18.38,6602,323,
+15353081712,https://www.strava.com/activities/15353081712,2025-08-05,Course à pied,5.98,2102,139,
+15309745189,https://www.strava.com/activities/15309745189,2025-08-01,Vélo,11.35,3068,44,
+15274932276,https://www.strava.com/activities/15274932276,2025-07-29,Vélo,9.95,3620,7,
+15067117111,https://www.strava.com/activities/15067117111,2025-07-10,Course à pied,8.8,2399,4,
+14839329423,https://www.strava.com/activities/14839329423,2025-06-18,Autres,0.0,3600,0,
+14722252714,https://www.strava.com/activities/14722252714,2025-06-07,Course à pied,12.33,4596,76,
+14537936517,https://www.strava.com/activities/14537936517,2025-05-20,Course à pied,5.89,1928,24,
+14518668260,https://www.strava.com/activities/14518668260,2025-05-18,Autres,3.49,2987,3,
+14507374339,https://www.strava.com/activities/14507374339,2025-05-17,Marche / randonnée,7.91,7232,201,
+14393357780,https://www.strava.com/activities/14393357780,2025-05-06,Vélo,26.72,3676,58,
+14320771517,https://www.strava.com/activities/14320771517,2025-04-29,Vélo,24.81,3648,51,
+14310486302,https://www.strava.com/activities/14310486302,2025-04-28,Vélo,23.23,3547,52,
+14019179049,https://www.strava.com/activities/14019179049,2025-03-29,Course à pied,27.3,11037,759,
+14001126662,https://www.strava.com/activities/14001126662,2025-03-27,Course à pied,5.55,1823,20,
+13981648855,https://www.strava.com/activities/13981648855,2025-03-25,Vélo,10.01,2384,5,
+13896803589,https://www.strava.com/activities/13896803589,2025-03-16,Course à pied,4.53,1572,3,
+13851271602,https://www.strava.com/activities/13851271602,2025-03-11,Course à pied,9.03,2544,5,
+13815953336,https://www.strava.com/activities/13815953336,2025-03-07,Course à pied,10.0,3210,38,
+13804187488,https://www.strava.com/activities/13804187488,2025-03-06,Course à pied,9.0,2411,5,
+13785368819,https://www.strava.com/activities/13785368819,2025-03-04,Course à pied,9.03,2512,5,
+13740584613,https://www.strava.com/activities/13740584613,2025-02-27,Course à pied,7.04,2335,67,
+13722111521,https://www.strava.com/activities/13722111521,2025-02-25,Course à pied,5.1,1502,25,
+13506839508,https://www.strava.com/activities/13506839508,2025-02-01,Course à pied,16.51,4947,62,
+13458324186,https://www.strava.com/activities/13458324186,2025-01-26,Course à pied,12.01,3647,104,
+12754796720,https://www.strava.com/activities/12754796720,2024-10-27,Course à pied,1.98,635,4,
+12464294688,https://www.strava.com/activities/12464294688,2024-09-21,Course à pied,9.76,2953,37,
+12288821784,https://www.strava.com/activities/12288821784,2024-08-31,Course à pied,6.6,2366,30,
+12197371257,https://www.strava.com/activities/12197371257,2024-08-20,Course à pied,5.86,2228,147,
+12126342827,https://www.strava.com/activities/12126342827,2024-08-12,Course à pied,4.73,1610,55,
+11710165615,https://www.strava.com/activities/11710165615,2024-06-22,Course à pied,10.06,3257,38,
+11701384668,https://www.strava.com/activities/11701384668,2024-06-20,Vélo,11.3,2250,78,
+11698339048,https://www.strava.com/activities/11698339048,2024-06-20,Vélo,14.91,2289,52,
+9938785550,https://www.strava.com/activities/9938785550,2023-09-28,Course à pied,5.23,1794,49,
+9793129373,https://www.strava.com/activities/9793129373,2023-09-06,Course à pied,7.0,2127,155,
+9506851669,https://www.strava.com/activities/9506851669,2023-07-21,Course à pied,8.72,2934,5,
+9403639074,https://www.strava.com/activities/9403639074,2023-07-07,Course à pied,4.69,1636,70,
+9397347079,https://www.strava.com/activities/9397347079,2023-07-06,Course à pied,8.52,2621,171,
+9192892902,https://www.strava.com/activities/9192892902,2023-06-03,Course à pied,7.1,2398,54,
+9186215365,https://www.strava.com/activities/9186215365,2023-06-02,Course à pied,8.12,3067,174,
+9173631234,https://www.strava.com/activities/9173631234,2023-05-31,Course à pied,8.3,3415,176,
+8879667616,https://www.strava.com/activities/8879667616,2023-04-12,Autres,0.0,5415,0,94.0
+8877214726,https://www.strava.com/activities/8877214726,2023-04-12,Marche / randonnée,2.38,2664,0,
+8874429583,https://www.strava.com/activities/8874429583,2023-04-11,Vélo,10.92,1904,104,
+8872852677,https://www.strava.com/activities/8872852677,2023-04-11,Vélo,11.2,1751,62,
+8852523302,https://www.strava.com/activities/8852523302,2023-04-08,Course à pied,9.45,3237,7,
+8847101678,https://www.strava.com/activities/8847101678,2023-04-07,Marche / randonnée,3.11,1936,17,
+8824076164,https://www.strava.com/activities/8824076164,2023-04-03,Course à pied,8.79,3015,69,
+8802139734,https://www.strava.com/activities/8802139734,2023-03-30,Course à pied,6.13,1637,3,
+8796940255,https://www.strava.com/activities/8796940255,2023-03-29,Autres,0.2,61,2,
+8707016336,https://www.strava.com/activities/8707016336,2023-03-13,Course à pied,8.7,2498,5,
+8139443183,https://www.strava.com/activities/8139443183,2022-11-19,Course à pied,10.36,3493,34,
+8125825545,https://www.strava.com/activities/8125825545,2022-11-16,Marche / randonnée,0.86,483,22,
+8125789427,https://www.strava.com/activities/8125789427,2022-11-16,Course à pied,10.02,2887,9,
+7895500751,https://www.strava.com/activities/7895500751,2022-10-01,Course à pied,9.05,2863,15,
+7806266839,https://www.strava.com/activities/7806266839,2022-09-14,Course à pied,9.01,2616,4,
+7434593668,https://www.strava.com/activities/7434593668,2022-07-08,Course à pied,9.01,2658,4,
+7369580013,https://www.strava.com/activities/7369580013,2022-06-26,Course à pied,5.86,1637,3,
+7225867529,https://www.strava.com/activities/7225867529,2022-05-30,Vélo,18.06,2758,38,
+8053310501,https://www.strava.com/activities/8053310501,2022-05-22,Course à pied,0.24,136,0,
+7159504801,https://www.strava.com/activities/7159504801,2022-05-15,Course à pied,7.32,2384,21,
+7118048302,https://www.strava.com/activities/7118048302,2022-05-10,Course à pied,9.0,2443,4,
+7105682853,https://www.strava.com/activities/7105682853,2022-05-07,Vélo,10.36,2383,88,
+7075048384,https://www.strava.com/activities/7075048384,2022-05-02,Course à pied,10.01,2811,8,
+6953795605,https://www.strava.com/activities/6953795605,2022-04-09,Course à pied,6.06,1710,26,
+6909958503,https://www.strava.com/activities/6909958503,2022-03-31,Marche / randonnée,2.4,1234,14,
+6903699941,https://www.strava.com/activities/6903699941,2022-03-29,Vélo,12.37,2005,16,
+6902224582,https://www.strava.com/activities/6902224582,2022-03-29,Vélo,11.09,1692,59,
+6900590603,https://www.strava.com/activities/6900590603,2022-03-29,Course à pied,2.34,710,20,
+6900509501,https://www.strava.com/activities/6900509501,2022-03-29,Course à pied,5.01,1250,4,
+6900421899,https://www.strava.com/activities/6900421899,2022-03-29,Course à pied,1.55,421,0,
+6890232040,https://www.strava.com/activities/6890232040,2022-03-27,Natation,0.0,1440,0,
+6887944193,https://www.strava.com/activities/6887944193,2022-03-26,Vélo,7.0,1440,0,
+6886766184,https://www.strava.com/activities/6886766184,2022-03-26,Vélo,4.78,751,43,
+6886681503,https://www.strava.com/activities/6886681503,2022-03-26,Marche / randonnée,1.75,1701,23,
+6885973786,https://www.strava.com/activities/6885973786,2022-03-26,Vélo,4.31,864,36,
+6885137661,https://www.strava.com/activities/6885137661,2022-03-26,Vélo,8.27,1408,43,
+6884745633,https://www.strava.com/activities/6884745633,2022-03-26,Vélo,5.43,843,14,
+6883884910,https://www.strava.com/activities/6883884910,2022-03-26,Vélo,12.2,1892,39,
+6874526890,https://www.strava.com/activities/6874526890,2022-03-24,Vélo,3.58,642,33,
+6874472744,https://www.strava.com/activities/6874472744,2022-03-24,Vélo,15.12,2056,12,
+6863613087,https://www.strava.com/activities/6863613087,2022-03-22,Course à pied,9.0,2567,4,
+6811104814,https://www.strava.com/activities/6811104814,2022-03-12,Course à pied,12.57,3608,11,
+6796750074,https://www.strava.com/activities/6796750074,2022-03-09,Course à pied,9.0,2640,11,
+6725828259,https://www.strava.com/activities/6725828259,2022-02-23,Course à pied,6.18,1719,31,
+6691269029,https://www.strava.com/activities/6691269029,2022-02-16,Course à pied,10.0,2784,27,
+6665668732,https://www.strava.com/activities/6665668732,2022-02-11,Course à pied,10.03,2956,32,
+6649704382,https://www.strava.com/activities/6649704382,2022-02-08,Course à pied,10.01,2974,35,
+6485738895,https://www.strava.com/activities/6485738895,2022-01-07,Course à pied,10.25,2939,34,
+6461378014,https://www.strava.com/activities/6461378014,2022-01-02,Course à pied,9.38,3323,4,
+6311349950,https://www.strava.com/activities/6311349950,2021-11-26,Marche / randonnée,25.42,3997,86,
+6300658274,https://www.strava.com/activities/6300658274,2021-11-24,Course à pied,9.01,2410,4,
+6278446786,https://www.strava.com/activities/6278446786,2021-11-19,Course à pied,9.02,2442,5,
+6233211879,https://www.strava.com/activities/6233211879,2021-11-09,Course à pied,9.01,2489,4,
+6213962269,https://www.strava.com/activities/6213962269,2021-11-05,Course à pied,9.34,2753,10,
+6205643164,https://www.strava.com/activities/6205643164,2021-11-03,Course à pied,10.01,2779,14,
+5925775314,https://www.strava.com/activities/5925775314,2021-09-08,Course à pied,9.0,2503,7,
+5897761788,https://www.strava.com/activities/5897761788,2021-09-03,Course à pied,10.0,2784,34,
+5887100525,https://www.strava.com/activities/5887100525,2021-09-01,Course à pied,10.0,2947,34,
+5811651212,https://www.strava.com/activities/5811651212,2021-08-18,Course à pied,2.11,693,46,
+5802801008,https://www.strava.com/activities/5802801008,2021-08-16,Course à pied,3.92,1393,61,
+5797534349,https://www.strava.com/activities/5797534349,2021-08-15,Course à pied,4.32,1678,131,
+5747347949,https://www.strava.com/activities/5747347949,2021-08-06,Course à pied,8.53,2249,4,
+5747185811,https://www.strava.com/activities/5747185811,2021-08-06,Course à pied,1.2,315,0,
+5743819772,https://www.strava.com/activities/5743819772,2021-08-05,Vélo,4.06,744,30,
+5738069133,https://www.strava.com/activities/5738069133,2021-08-04,Vélo,4.49,602,30,
+5730986099,https://www.strava.com/activities/5730986099,2021-08-03,Course à pied,9.01,2477,4,
+5694531395,https://www.strava.com/activities/5694531395,2021-07-27,Course à pied,14.01,3770,7,
+5630766093,https://www.strava.com/activities/5630766093,2021-07-15,Course à pied,10.01,2794,23,
+5623579021,https://www.strava.com/activities/5623579021,2021-07-13,Vélo,11.21,1916,77,
+5621961913,https://www.strava.com/activities/5621961913,2021-07-13,Vélo,10.93,1648,34,
+5598922687,https://www.strava.com/activities/5598922687,2021-07-09,Course à pied,8.85,2728,4,
+5588726022,https://www.strava.com/activities/5588726022,2021-07-07,Course à pied,6.38,1738,30,
+5566988570,https://www.strava.com/activities/5566988570,2021-07-03,Course à pied,8.87,2800,22,
+5552216557,https://www.strava.com/activities/5552216557,2021-06-30,Course à pied,8.88,2315,4,
+5538988343,https://www.strava.com/activities/5538988343,2021-06-27,Vélo,14.44,2428,52,
+5532495178,https://www.strava.com/activities/5532495178,2021-06-26,Vélo,37.07,6733,334,
+5531137423,https://www.strava.com/activities/5531137423,2021-06-26,Vélo,25.63,4717,254,
+5530382195,https://www.strava.com/activities/5530382195,2021-06-26,Vélo,14.38,2874,10,
+5528148740,https://www.strava.com/activities/5528148740,2021-06-25,Vélo,69.15,12390,126,
+5515645259,https://www.strava.com/activities/5515645259,2021-06-23,Course à pied,10.1,2834,33,
+5494617081,https://www.strava.com/activities/5494617081,2021-06-19,Vélo,4.68,885,64,
+5494033724,https://www.strava.com/activities/5494033724,2021-06-19,Vélo,7.91,1375,14,
+5491998714,https://www.strava.com/activities/5491998714,2021-06-18,Vélo,10.63,1650,104,
+5491490715,https://www.strava.com/activities/5491490715,2021-06-18,Vélo,10.6,1587,72,
+5484481636,https://www.strava.com/activities/5484481636,2021-06-17,Course à pied,8.71,2270,4,
+5451005002,https://www.strava.com/activities/5451005002,2021-06-11,Course à pied,9.18,2831,7,
+5439788040,https://www.strava.com/activities/5439788040,2021-06-09,Vélo,20.9,2723,13,
+5433906188,https://www.strava.com/activities/5433906188,2021-06-08,Course à pied,9.22,2633,4,
+5415215900,https://www.strava.com/activities/5415215900,2021-06-05,Course à pied,9.05,2290,4,
+5399873168,https://www.strava.com/activities/5399873168,2021-06-02,Vélo,27.31,3644,19,
+5389872592,https://www.strava.com/activities/5389872592,2021-05-31,Course à pied,0.31,150,0,
+5389803418,https://www.strava.com/activities/5389803418,2021-05-31,Course à pied,9.7,3010,36,
+5371072318,https://www.strava.com/activities/5371072318,2021-05-28,Course à pied,9.2,2394,6,
+5354611464,https://www.strava.com/activities/5354611464,2021-05-25,Course à pied,9.0,2535,6,
+5338356115,https://www.strava.com/activities/5338356115,2021-05-22,Course à pied,10.56,2678,7,
+5322377194,https://www.strava.com/activities/5322377194,2021-05-19,Course à pied,10.37,3028,15,
+5311404281,https://www.strava.com/activities/5311404281,2021-05-17,Course à pied,9.31,2849,6,
+5283319726,https://www.strava.com/activities/5283319726,2021-05-12,Course à pied,8.5,2280,8,
+5266077943,https://www.strava.com/activities/5266077943,2021-05-09,Course à pied,7.94,2595,45,
+5259981825,https://www.strava.com/activities/5259981825,2021-05-08,Course à pied,21.13,6008,13,
+5240030910,https://www.strava.com/activities/5240030910,2021-05-04,Course à pied,12.81,3595,45,
+5221188393,https://www.strava.com/activities/5221188393,2021-05-01,Course à pied,6.07,1555,4,
+5217292607,https://www.strava.com/activities/5217292607,2021-04-30,Course à pied,10.01,2960,5,
+5200598979,https://www.strava.com/activities/5200598979,2021-04-27,Course à pied,10.18,3130,5,
+5191876213,https://www.strava.com/activities/5191876213,2021-04-25,Vélo,14.13,3498,53,
+5189089029,https://www.strava.com/activities/5189089029,2021-04-25,Course à pied,8.31,2673,30,
+5184967453,https://www.strava.com/activities/5184967453,2021-04-24,Vélo,14.32,3283,19,
+5176705630,https://www.strava.com/activities/5176705630,2021-04-23,Course à pied,8.93,2826,5,
+5171327798,https://www.strava.com/activities/5171327798,2021-04-22,Course à pied,9.01,2420,4,
+5161493495,https://www.strava.com/activities/5161493495,2021-04-20,Vélo,7.95,1464,46,
+5160338096,https://www.strava.com/activities/5160338096,2021-04-20,Vélo,7.85,1213,16,
+5158560036,https://www.strava.com/activities/5158560036,2021-04-20,Course à pied,9.0,2417,4,
+5139905079,https://www.strava.com/activities/5139905079,2021-04-17,Course à pied,10.22,2590,5,
+5118564617,https://www.strava.com/activities/5118564617,2021-04-13,Course à pied,10.18,2751,7,
+5095335086,https://www.strava.com/activities/5095335086,2021-04-09,Course à pied,9.84,3196,34,
+5084189287,https://www.strava.com/activities/5084189287,2021-04-07,Course à pied,21.06,6035,12,
+5054282192,https://www.strava.com/activities/5054282192,2021-04-02,Course à pied,10.14,2825,4,
+5042746566,https://www.strava.com/activities/5042746566,2021-03-31,Course à pied,9.94,3106,12,
+5030181467,https://www.strava.com/activities/5030181467,2021-03-29,Course à pied,5.43,1472,37,

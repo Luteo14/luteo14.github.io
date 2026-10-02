@@ -16,6 +16,7 @@ dur=num(df['Durée de déplacement']).fillna(num(df['Temps écoulé']))
 elev=num(df['Dénivelé positif']).fillna(0)
 hr=num(df['Fréquence cardiaque moyenne'])
 raw=df["Type d'activité"].astype(str)
+activity_id=pd.to_numeric(df["ID de l'activité"],errors="coerce")
 def cat(s):
  l=s.lower()
  if 'course' in l or 'run' in l or 'trail' in l: return 'Course à pied'
@@ -30,7 +31,8 @@ for i in range(len(df)):
  if pd.isna(dates.iloc[i]): continue
  d=float(dist.iloc[i]) if pd.notna(dist.iloc[i]) else 0
  sec=float(dur.iloc[i]) if pd.notna(dur.iloc[i]) else 0
- activities.append({'date':dates.iloc[i].strftime('%Y-%m-%d'),'sport':sport.iloc[i],'distance_km':round(d,3),'duration_s':round(sec),'elevation_m':round(float(elev.iloc[i]) if pd.notna(elev.iloc[i]) else 0),'avg_hr':round(float(hr.iloc[i])) if pd.notna(hr.iloc[i]) else None})
+ aid=int(activity_id.iloc[i]) if pd.notna(activity_id.iloc[i]) else None
+ activities.append({'id':aid,'strava_url':f'https://www.strava.com/activities/{aid}' if aid else None,'date':dates.iloc[i].strftime('%Y-%m-%d'),'sport':sport.iloc[i],'distance_km':round(d,3),'duration_s':round(sec),'elevation_m':round(float(elev.iloc[i]) if pd.notna(elev.iloc[i]) else 0),'avg_hr':round(float(hr.iloc[i])) if pd.notna(hr.iloc[i]) else None})
 (data_dir/'activities.json').write_text(json.dumps(activities,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
 # public CSV
 pd.DataFrame(activities).to_csv(data_dir/'activities-public.csv',index=False)

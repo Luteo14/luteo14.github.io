@@ -37,3 +37,26 @@ python -m http.server 8000
 ```
 
 Puis ouvrir `http://localhost:8000`. Pour tester OAuth en production, utiliser le frontend GitHub Pages configuré dans `FRONTEND_URL`.
+
+## V1.3 — Vue Performance
+
+La navigation inclut désormais un onglet **Performance** qui calcule localement, à partir des activités de course :
+
+- records estimés sur 5 km, 10 km, semi-marathon et marathon ;
+- lien direct vers l'activité Strava utilisée comme référence quand son identifiant est disponible ;
+- prévisions théoriques 5 km → marathon avec le modèle de Riegel (exposant 1,06) ;
+- meilleure référence récente (180 jours) ;
+- évolution annuelle de l'équivalent 10 km ;
+- tableau des meilleures activités de référence.
+
+### Important sur les records
+
+L'export d'activités ne contient pas les temps de passage détaillés. Un « record » affiché est donc une **estimation** obtenue à partir de l'allure moyenne d'une activité dont la distance est proche de la distance cible (± environ 5 à 15 %). Le site le signale explicitement et fournit le lien Strava de l'activité source.
+
+`prepare_data.py` exporte maintenant `id` et `strava_url`. Après un nouvel export Strava, relancer :
+
+```bash
+python prepare_data.py
+```
+
+Pour la synchronisation API, le Worker renvoie également `id` et `strava_url`.

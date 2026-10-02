@@ -30,6 +30,7 @@ function switchTab(name) {
     const views = {
         dashboard: 'dashboardView',
         training: 'trainingView',
+        performance: 'performanceView',
         strava: 'stravaView'
     };
 
@@ -56,6 +57,9 @@ function switchTab(name) {
     if (name === 'training') {
         initTraining();
     }
+    if (name === 'performance') {
+        initPerformance();
+    }
 }
 
 document.querySelectorAll('.tab').forEach(b => {
@@ -79,6 +83,24 @@ const startDate=new Date(today);startDate.setDate(today.getDate()+((8-today.getD
 document.getElementById('planForm').addEventListener('submit',generatePlan);
 window.addEventListener('load',()=>{try{const p=JSON.parse(localStorage.getItem('runDataPlan'));if(p){document.getElementById('goalType').value=p.goal;document.getElementById('raceDate').value=p.date;document.getElementById('targetTime').value=p.target||'';document.getElementById('sessionsWeek').value=p.n;document.getElementById('startKm').value=p.start;document.getElementById('longDay').value=p.longDay;}}catch(e){}});
 
+// --- Performance (V1.3) ---
+const RACE_DISTANCES=[{key:'5k',label:'5 km',km:5},{key:'10k',label:'10 km',km:10},{key:'half',label:'Semi',km:21.0975},{key:'marathon',label:'Marathon',km:42.195}];
+const fmtTime=s=>{if(!Number.isFinite(s)||s<=0)return '—';s=Math.round(s);const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=s%60;return h?`${h}h ${String(m).padStart(2,'0')}m ${String(sec).padStart(2,'0')}s`:`${m}:${String(sec).padStart(2,'0')}`};
+const paceTextFromSeconds=(sec,km)=>{if(!km||!sec)return '—';const p=sec/60/km,mm=Math.floor(p),ss=Math.round((p-mm)*60);return `${mm}:${String(ss===60?0:ss).padStart(2,'0')}/km`};
+const riegel=(timeSec,d1,d2,exp=1.06)=>timeSec*Math.pow(d2/d1,exp);
+function performanceRuns(){return DATA.filter(a=>a.sport==='Course à pied'&&a.distance_km>=3&&a.duration_s>0).filter(a=>{const p=a.duration_s/60/a.distance_km;return p>=3&&p<=9})}
+function activityUrl(a){return a.strava_url||(a.id?`https://www.strava.com/activities/${a.id}`:null)}
+function distanceRecord(target){const candidates=performanceRuns().filter(a=>a.distance_km>=target*.95&&a.distance_km<=target*1.15);if(!candidates.length)return null;return candidates.map(a=>({...a,estimated_time:a.duration_s*(target/a.distance_km)})).sort((a,b)=>a.estimated_time-b.estimated_time)[0]}
+function recentReference(){const runs=performanceRuns();if(!runs.length)return null;const latest=Math.max(...runs.map(a=>new Date(a.date).getTime()));const cutoff=latest-180*86400000;let pool=runs.filter(a=>new Date(a.date).getTime()>=cutoff&&a.distance_km>=5&&a.distance_km<=32);if(!pool.length)pool=runs.filter(a=>a.distance_km>=5&&a.distance_km<=32);if(!pool.length)return null;return pool.map(a=>({...a,eq10:riegel(a.duration_s,a.distance_km,10)})).sort((a,b)=>a.eq10-b.eq10)[0]}
+function predictionConfidence(ref,target){const ratio=Math.max(ref.distance_km,target)/Math.min(ref.distance_km,target);if(ratio<=1.25)return 'Élevée';if(ratio<=2.2)return 'Moyenne';return 'Prudente'}
+function annual10k(){const groups={};performanceRuns().filter(a=>a.distance_km>=5&&a.distance_km<=32).forEach(a=>{const y=new Date(a.date).getFullYear(),v=riegel(a.duration_s,a.distance_km,10);if(!groups[y]||v<groups[y])groups[y]=v});return Object.entries(groups).sort((a,b)=>+a[0]-+b[0])}
+function initPerformance(){if(!DATA.length)return;const records=RACE_DISTANCES.map(d=>({...d,record:distanceRecord(d.km)}));document.getElementById('recordCards').innerHTML=records.map(d=>{const r=d.record,u=r?activityUrl(r):null;return `<article class="record-card"><div class="record-distance">${d.label}</div><div class="record-time">${r?fmtTime(r.estimated_time):'—'}</div><div class="record-meta">${r?`${paceTextFromSeconds(r.estimated_time,d.km)} · ${new Date(r.date).toLocaleDateString('fr-FR')}`:'Aucune activité comparable'}</div>${u?`<a class="strava-link" href="${u}" target="_blank" rel="noopener noreferrer">Voir l’activité sur Strava ↗</a>`:''}<div class="record-source">${r?'Estimation depuis '+fmt.format(r.distance_km)+' km':'Distance non disponible'}</div></article>`}).join('');
+const ref=recentReference();if(!ref){document.getElementById('performanceSnapshot').textContent='Données insuffisantes';document.getElementById('predictionCards').innerHTML='<p class="form-note">Pas assez de courses exploitables pour calculer les projections.</p>';return}document.getElementById('performanceSnapshot').textContent=`Référence récente : ${fmt.format(ref.distance_km)} km · ${new Date(ref.date).toLocaleDateString('fr-FR')}`;
+const preds=RACE_DISTANCES.map(d=>({...d,time:riegel(ref.duration_s,ref.distance_km,d.km),confidence:predictionConfidence(ref,d.km)}));document.getElementById('predictionCards').innerHTML=preds.map(p=>`<div class="prediction-row"><div><strong>${p.label}</strong><span>${p.confidence}</span></div><div class="prediction-value"><strong>${fmtTime(p.time)}</strong><span>${paceTextFromSeconds(p.time,p.km)}</span></div></div>`).join('');document.getElementById('predictionNote').textContent='Prévisions théoriques calculées avec le modèle de Riegel (exposant 1,06) à partir de la meilleure référence des 180 derniers jours. Elles ne constituent pas un chrono garanti.';
+const refUrl=activityUrl(ref);document.getElementById('performanceReference').innerHTML=[['Référence',`${fmt.format(ref.distance_km)} km`],['Temps',fmtTime(ref.duration_s)],['Allure',paceTextFromSeconds(ref.duration_s,ref.distance_km)],['Équiv. 10 km',fmtTime(ref.eq10)]].map(([l,v])=>`<div class="metric"><strong>${v}</strong><span>${l}</span></div>`).join('');document.getElementById('performanceCoachNote').innerHTML=`Référence du ${new Date(ref.date).toLocaleDateString('fr-FR')}. ${refUrl?`<a class="strava-link inline" href="${refUrl}" target="_blank" rel="noopener noreferrer">Ouvrir sur Strava ↗</a>`:''}`;
+const evo=annual10k();chart('performanceEvolutionChart','line',evo.map(x=>x[0]),[{label:'Équivalent 10 km (minutes)',data:evo.map(x=>x[1]/60),borderColor:C.accent,backgroundColor:C.accent,tension:.25,pointRadius:4}]);
+const best=[...performanceRuns()].filter(a=>a.distance_km>=5).map(a=>({...a,eq10:riegel(a.duration_s,a.distance_km,10)})).sort((a,b)=>a.eq10-b.eq10).slice(0,12);document.getElementById('performanceTable').innerHTML=best.map(a=>{const u=activityUrl(a);return `<tr><td>${new Date(a.date).toLocaleDateString('fr-FR')}</td><td>${fmt.format(a.distance_km)} km</td><td>${fmtTime(a.duration_s)}</td><td>${paceTextFromSeconds(a.duration_s,a.distance_km)}</td><td>${fmtTime(a.eq10)}</td><td>${u?`<a class="strava-link" href="${u}" target="_blank" rel="noopener noreferrer">Strava ↗</a>`:'—'}</td></tr>`}).join('')}
+
 // --- Connexion Strava API (V1.2) ---
 const API_BASE=(window.RUN_DATA_CONFIG?.API_BASE||'').replace(/\/$/,'');
 let LOCAL_DATA=[];
@@ -90,5 +112,5 @@ async function syncStrava(){const b=document.getElementById('syncStrava');b.disa
 function connectStrava(){if(!apiReady()){refreshStravaStatus();return}window.location.href=API_BASE+'/auth/login'}
 async function disconnectStrava(){if(!confirm('Révoquer l’accès Strava et supprimer les jetons du backend ?'))return;try{await api('/api/disconnect',{method:'POST'});if(LOCAL_DATA.length)DATA=LOCAL_DATA;render();await refreshStravaStatus()}catch(e){document.getElementById('stravaMessage').textContent=e.message}}
 document.getElementById('connectStrava')?.addEventListener('click',connectStrava);document.getElementById('syncStrava')?.addEventListener('click',syncStrava);document.getElementById('disconnectStrava')?.addEventListener('click',disconnectStrava);
-const _switchTab=switchTab;switchTab=function(name){_switchTab(name);if(name==='strava')refreshStravaStatus()};
+const _switchTab=switchTab;switchTab=function(name){_switchTab(name);if(name==='strava')refreshStravaStatus();if(name==='performance')initPerformance()};
 const params=new URLSearchParams(location.search);if(params.get('strava')==='connected'){history.replaceState({},'',location.pathname);setTimeout(()=>{switchTab('strava');syncStrava()},300)}
