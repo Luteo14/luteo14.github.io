@@ -57,7 +57,12 @@ function switchTab(name) {
         initTraining();
     }
 }
-
+document.querySelectorAll('.tab').forEach(
+    b => b.addEventListener(
+        'click',
+        () => switchTab(b.dataset.tab)
+    )
+);
 function runData(){return DATA.filter(x=>x.sport==='Course à pied').sort((a,b)=>a.date.localeCompare(b.date));}
 function trainingStats(){const r=runData();if(!r.length)return {avg4:0,sessions4:0,longest:0,elev4:0,last:null};const last=new Date(r[r.length-1].date),start=new Date(last);start.setDate(start.getDate()-27);const recent=r.filter(x=>new Date(x.date)>=start);const byWeek={};recent.forEach(x=>{const z=new Date(x.date);const monday=new Date(z);monday.setDate(z.getDate()-((z.getDay()+6)%7));const k=iso(monday);byWeek[k]=(byWeek[k]||0)+x.distance_km});const weekly=Object.values(byWeek);return {avg4:weekly.length?sum(weekly,x=>x)/4:0,sessions4:recent.length/4,longest:Math.max(0,...recent.map(x=>x.distance_km)),elev4:sum(recent,x=>x.elevation_m),last};}
 function initTraining(){if(!DATA.length)return;const s=trainingStats();const input=document.getElementById('startKm');if(!input.value)input.value=Math.max(15,Math.round(s.avg4));const rd=document.getElementById('raceDate');if(!rd.value){const d=new Date();d.setDate(d.getDate()+84);rd.value=iso(d)}document.getElementById('trainingSnapshot').textContent=`Base récente : ${fmt.format(s.avg4)} km/sem · ${fmt.format(s.sessions4)} séances/sem`;
