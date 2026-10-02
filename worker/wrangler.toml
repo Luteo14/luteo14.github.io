@@ -4,8 +4,8 @@ compatibility_date = "2026-09-29"
 
 [[kv_namespaces]]
 binding = "TOKENS"
-id = "REMPLACE_PAR_TON_KV_NAMESPACE_ID"
+id = "cebf207103074536a37532f867033588"
 
 [vars]
 FRONTEND_URL = "https://luteo14.github.io"
-STRAVA_CLIENT_ID = "REMPLACE_PAR_TON_CLIENT_ID"
+STRAVA_CLIENT_ID = "212577"
