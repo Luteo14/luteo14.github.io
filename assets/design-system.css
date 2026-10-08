@@ -1,0 +1,4 @@
+/* LUTEO14 V1.6 — tokens de marque */
+:root{--brand-navy:#111a42;--brand-blue:#3468f5;--brand-sky:#74c9f8;--brand-pink:#f34d91;--brand-pink-soft:#f9b7d0;--brand-violet:#8455d8;--brand-text:#f8f7fc;--brand-muted:#b9c3dd;--brand-gradient:linear-gradient(120deg,#3468f5,#8455d8 52%,#f34d91);--brand-radius:20px;--brand-focus:0 0 0 3px #74c9f8}
+:focus-visible{outline:3px solid #74c9f8;outline-offset:4px}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
