@@ -10,3 +10,6 @@
 :root{--bg:#111a42;--panel:#1b2652;--panel2:#253366;--text:#f8f7fc;--muted:#b9c3dd;--accent:#f34d91;--line:#465587;--green:#74c9f8}
 body{background:radial-gradient(circle at 85% 0%,#364e9a77,transparent 38%),#111a42}
 a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #74c9f8;outline-offset:3px}
+
+/* Acces au guide marathon */
+.marathon-nav-link{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;margin:4px 0;border:1px solid #f34d91;border-radius:14px;color:#f9b7d0;text-decoration:none;font-weight:700;white-space:nowrap}.marathon-nav-link:hover,.marathon-nav-link:focus-visible{background:#f34d9122;color:white}
