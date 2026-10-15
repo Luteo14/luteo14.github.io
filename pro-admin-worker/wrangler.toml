@@ -3,9 +3,9 @@ main = "src/index.js"
 compatibility_date = "2026-10-01"
 
 [vars]
-ACCESS_AUD = "REMPLACER_PAR_AUD_ACCESS"
-ACCESS_TEAM_DOMAIN = "https://REMPLACER.cloudflareaccess.com"
-ADMIN_EMAIL = "REMPLACER_PAR_EMAIL_ADMIN"
+ACCESS_AUD = "696cdea3bba358a073e58ee7fcdc632d0e56dd36ca8602bba9695b09e210cc6e"
+ACCESS_TEAM_DOMAIN = "https://hidden-silence-9188.cloudflareaccess.com"
+ADMIN_EMAIL = "julien.theaud@gmail.com"
 
 [[d1_databases]]
 binding = "DB"
