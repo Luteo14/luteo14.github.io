@@ -1,0 +1,17 @@
+name = "luteo-pro-admin"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+ACCESS_AUD = "REMPLACER_PAR_AUD_ACCESS"
+ACCESS_TEAM_DOMAIN = "https://REMPLACER.cloudflareaccess.com"
+ADMIN_EMAIL = "REMPLACER_PAR_EMAIL_ADMIN"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "luteo-pro-docs"
+database_id = "57733c25-f17d-44a0-8e91-262dd0e56334"
+
+[[r2_buckets]]
+binding = "FILES"
+bucket_name = "luteo-pro-private"
