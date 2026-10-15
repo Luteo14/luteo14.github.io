@@ -1,0 +1,12 @@
+{
+  "name": "luteo-pro-docs",
+  "private": true,
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "db:migrate": "wrangler d1 execute luteo-pro-docs --remote --file=./schema.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

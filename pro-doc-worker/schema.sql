@@ -1,0 +1,2 @@
+CREATE TABLE IF NOT EXISTS documents (id TEXT PRIMARY KEY, domain TEXT NOT NULL, service TEXT NOT NULL, title TEXT NOT NULL, description TEXT NOT NULL DEFAULT '', tags TEXT NOT NULL DEFAULT '', filename TEXT NOT NULL, mime TEXT NOT NULL, bytes INTEGER NOT NULL, visibility TEXT NOT NULL CHECK (visibility IN ('public','private')), object_key TEXT NOT NULL, created_at TEXT NOT NULL, updated_at TEXT NOT NULL);
+CREATE INDEX IF NOT EXISTS idx_documents_category ON documents(domain, service, visibility);

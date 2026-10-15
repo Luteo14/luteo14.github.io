@@ -1,0 +1,17 @@
+name = "luteo-pro-docs"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+PUBLIC_ORIGIN = "https://luteo14.github.io"
+ACCESS_AUD = "REMPLACER_PAR_AUD_CLOUDFLARE_ACCESS"
+ACCESS_TEAM_DOMAIN = "https://REMPLACER.cloudflareaccess.com"
+
+[[r2_buckets]]
+binding = "FILES"
+bucket_name = "luteo-pro-private"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "luteo-pro-docs"
+database_id = "REMPLACER_PAR_ID_D1"
