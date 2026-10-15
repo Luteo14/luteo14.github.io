@@ -1,0 +1,132 @@
+[
+  {
+    "slug": "formation",
+    "title": "Formation",
+    "items": [
+      {
+        "slug": "formations-et-certifications-agile",
+        "title": "Formations et certifications Agile"
+      },
+      {
+        "slug": "acculturation-dediees-dcs-vpcs",
+        "title": "Acculturation dédiées DCS VPCS"
+      },
+      {
+        "slug": "formations-a-la-carte",
+        "title": "Formations à la carte"
+      },
+      {
+        "slug": "bootcamp-sensibilisation-agilite",
+        "title": "Bootcamp sensibilisation Agilité"
+      }
+    ]
+  },
+  {
+    "slug": "accompagnement",
+    "title": "Accompagnement",
+    "items": [
+      {
+        "slug": "audit-de-transformation",
+        "title": "Audit de transformation"
+      },
+      {
+        "slug": "audit-dorganisation",
+        "title": "Audit d’organisation"
+      },
+      {
+        "slug": "amelioration-continue",
+        "title": "Amélioration continue"
+      },
+      {
+        "slug": "demarche-de-resolution-de-probleme",
+        "title": "Démarche de résolution de problème"
+      },
+      {
+        "slug": "accompagnement-a-la-mise-en-place-dun-produit",
+        "title": "Accompagnement à la mise en place d’un produit"
+      },
+      {
+        "slug": "accompagnement-aux-outils",
+        "title": "Accompagnement aux outils"
+      },
+      {
+        "slug": "mise-en-place-dune-equipe",
+        "title": "Mise en place d’une équipe"
+      },
+      {
+        "slug": "construction-dune-equipe",
+        "title": "Construction d’une équipe"
+      },
+      {
+        "slug": "management-visuel",
+        "title": "Management visuel"
+      }
+    ]
+  },
+  {
+    "slug": "avant-vente",
+    "title": "Avant-vente",
+    "items": [
+      {
+        "slug": "accompagnement-lors-des-rencontres-commerciales",
+        "title": "Accompagnement lors des rencontres commerciales"
+      },
+      {
+        "slug": "reponses-a-appel-doffre",
+        "title": "Réponses à appel d’offre"
+      },
+      {
+        "slug": "conference-dexpert",
+        "title": "Conférence d’expert"
+      },
+      {
+        "slug": "facilitation-deie-executive-insights-exchange",
+        "title": "Facilitation d’EIE (Executive Insights Exchange)"
+      }
+    ]
+  },
+  {
+    "slug": "facilitation",
+    "title": "Facilitation",
+    "items": [
+      {
+        "slug": "conception-et-animation-dateliers",
+        "title": "Conception et animation d’ateliers"
+      },
+      {
+        "slug": "ateliers-dideation",
+        "title": "Ateliers d’idéation"
+      },
+      {
+        "slug": "conception-de-seminaire-intelligence-collective",
+        "title": "Conception de séminaire / intelligence collective"
+      },
+      {
+        "slug": "facilitation-graphique",
+        "title": "Facilitation graphique"
+      },
+      {
+        "slug": "retrospective",
+        "title": "Rétrospective"
+      }
+    ]
+  },
+  {
+    "slug": "coaching",
+    "title": "Coaching",
+    "items": [
+      {
+        "slug": "atelier-codev",
+        "title": "Atelier CoDev"
+      },
+      {
+        "slug": "accompagnement-professionnel",
+        "title": "Accompagnement professionnel"
+      },
+      {
+        "slug": "coaching-the-coach",
+        "title": "Coaching the coach"
+      }
+    ]
+  }
+]
