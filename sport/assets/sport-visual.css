@@ -3,3 +3,5 @@
 .sport-visual-copy{display:grid;gap:8px}.sport-visual-copy strong{font-size:clamp(28px,5vw,52px);letter-spacing:.03em}.sport-visual-copy small{font-size:clamp(13px,2vw,17px)}
 .sport-visual-banner:focus-visible{outline:3px solid #f34d91;outline-offset:3px}
 @media(max-width:560px){.sport-visual-banner{background-position:center top;min-height:185px}}
+
+.sport-quick-nav{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 16px}.sport-quick-nav a{padding:10px 14px;background:#1b2652;border:1px solid #50669b;border-radius:12px;color:#fff;text-decoration:none;font-weight:600}.sport-quick-nav a:hover,.sport-quick-nav a:focus-visible{border-color:#f34d91;background:#253366}.sport-quick-nav a:focus-visible{outline:3px solid #74c9f8;outline-offset:2px}@media(max-width:550px){.sport-quick-nav a{flex:1 1 44%;text-align:center}}
