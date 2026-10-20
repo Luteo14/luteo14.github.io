@@ -1,17 +1,11 @@
-/* Navigation directe vers les vues existantes de RUN // DATA. */
-(() => {
-  const allowed = new Set(['dashboard', 'performance', 'training', 'strava']);
-  const requested = new URLSearchParams(location.search).get('tab');
-  if (allowed.has(requested)) {
-    const button = document.querySelector('.tab[data-tab="' + requested + '"]');
-    if (button) button.click();
-  }
-  document.querySelectorAll('.tabs .tab').forEach(button => {
-    button.addEventListener('click', () => {
-      const url = new URL(location.href);
-      if (button.dataset.tab === 'dashboard') url.searchParams.delete('tab');
-      else url.searchParams.set('tab', button.dataset.tab);
-      history.replaceState({}, '', url.pathname + url.search + url.hash);
-    });
-  });
+// Ouvre les onglets historiques de RUN // DATA depuis des liens directs.
+(function(){
+  const params=new URLSearchParams(location.search);
+  const tab=params.get('tab');
+  if(!tab)return;
+  const btn=document.querySelector('.tab[data-tab="'+CSS.escape(tab)+'"]');
+  if(!btn)return;
+  const activate=()=>{if(!btn.classList.contains('active'))btn.click();};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(activate,120));
+  else setTimeout(activate,120);
 })();
