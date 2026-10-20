@@ -1,0 +1,5 @@
+/* LUTEO14 Sport — habillage visuel sans modifier les calculs */
+.sport-visual-banner{display:flex;align-items:end;min-height:clamp(180px,26vw,330px);padding:clamp(18px,4vw,36px);margin:0 0 24px;border-radius:20px;overflow:hidden;background:linear-gradient(90deg,rgba(7,15,37,.85),rgba(7,15,37,.06)),url('hero-running.webp') center 6% / cover no-repeat;color:#fff;text-decoration:none;box-shadow:0 12px 35px #050a1b55}
+.sport-visual-copy{display:grid;gap:8px}.sport-visual-copy strong{font-size:clamp(28px,5vw,52px);letter-spacing:.03em}.sport-visual-copy small{font-size:clamp(13px,2vw,17px)}
+.sport-visual-banner:focus-visible{outline:3px solid #f34d91;outline-offset:3px}
+@media(max-width:560px){.sport-visual-banner{background-position:center top;min-height:185px}}
