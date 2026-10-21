@@ -1,0 +1,17 @@
+name = "luteo-sport-journal-admin"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+ACCESS_AUD = "898573559d146938f237d2a05a77366c3e134a3ae5e66697a7a9677ffd41ce71"
+ACCESS_TEAM_DOMAIN = "https://hidden-silence-9188.cloudflareaccess.com"
+ADMIN_EMAIL = "julien.theaud@gmail.com"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "luteo-pro-docs"
+database_id = "57733c25-f17d-44a0-8e91-262dd0e56334"
+
+[[r2_buckets]]
+binding = "FILES"
+bucket_name = "luteo-pro-private"

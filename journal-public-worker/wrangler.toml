@@ -1,0 +1,12 @@
+name = "luteo-sport-journal-public"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "luteo-pro-docs"
+database_id = "57733c25-f17d-44a0-8e91-262dd0e56334"
+
+[[r2_buckets]]
+binding = "FILES"
+bucket_name = "luteo-pro-private"
