@@ -107,14 +107,43 @@ let LOCAL_DATA=[];
 function apiReady(){return API_BASE && !API_BASE.includes('REMPLACE-MOI')}
 async function api(path,opts={}){const r=await fetch(API_BASE+path,{credentials:'include',...opts});if(!r.ok){let msg='Erreur API';try{msg=(await r.json()).error||msg}catch{}throw new Error(msg)}return r.status===204?null:r.json()}
 function setStravaButtons(connected){document.getElementById('connectStrava')?.classList.toggle('hidden',connected);document.getElementById('syncStrava')?.classList.toggle('hidden',!connected);document.getElementById('disconnectStrava')?.classList.toggle('hidden',!connected)}
-async function refreshStravaStatus(){if(!document.getElementById('stravaStatus'))return;if(!apiReady()){document.getElementById('stravaStatus').textContent='Backend à configurer';document.getElementById('stravaMessage').textContent="Déploie le Worker puis remplace API_BASE dans js/config.js.";setStravaButtons(false);return}try{const s=await api('/api/status');setStravaButtons(!!s.connected);document.getElementById('stravaStatus').textContent=s.connected?'● Strava connecté':'○ Non connecté';document.getElementById('stravaMetrics').innerHTML=[['Statut',s.connected?'Connecté':'Non connecté'],['Athlète',s.athlete_name||'—'],['Dernière synchro',s.last_sync?new Date(s.last_sync).toLocaleString('fr-FR'):'—'],['Cache',s.cached_activities!=null?`${s.cached_activities} activités`:'—']].map(([l,v])=>`<div class="metric"><strong>${v}</strong><span>${l}</span></div>`).join('');document.getElementById('stravaMessage').textContent=s.connected?'Tu peux synchroniser tes activités.':'Connecte ton compte pour charger tes activités privées.';}catch(e){document.getElementById('stravaStatus').textContent='API indisponible';document.getElementById('stravaMessage').textContent=e.message}}
-async function syncStrava(){const b=document.getElementById('syncStrava');b.disabled=true;b.textContent='Synchronisation…';try{const payload=await api('/api/activities?sync=1');if(Array.isArray(payload.activities)){const merged=mergeActivities(LOCAL_DATA.length?LOCAL_DATA:DATA,payload.activities);DATA=merged;await storeActivities(payload.activities,payload.last_sync);refreshYears();render();updateStorageBadge(payload.last_sync,DATA.length);document.getElementById('stravaMessage').textContent=`${payload.activities.length} activités Strava synchronisées et conservées ; ${DATA.length} activités au total.`;}await refreshStravaStatus()}catch(e){document.getElementById('stravaMessage').textContent=e.message}finally{b.disabled=false;b.textContent='Synchroniser maintenant'}}
-
-function connectStrava(){if(!apiReady()){refreshStravaStatus();return}window.location.href=API_BASE+'/auth/login'}
-async function disconnectStrava(){if(!confirm('Révoquer Strava, supprimer les jetons et le cache Cloudflare, et effacer les activités Strava locales ?'))return;try{const result=await api('/api/disconnect',{method:'POST'});await clearStoredActivities();if(!result.revoked)alert('Cache supprime, mais revocation Strava non confirmee : verifie les applications autorisees dans Strava.');DATA=[...LOCAL_DATA];refreshYears();render();updateStorageBadge(null,DATA.length);await refreshStravaStatus()}catch(e){document.getElementById('stravaMessage').textContent=e.message}}
+let stravaBridge=null;
+function launchStravaBridge(){
+ if(!apiReady()){document.getElementById('stravaMessage').textContent='Worker Strava non configuré';return}
+ const nonce=Array.from(crypto.getRandomValues(new Uint8Array(16)),x=>x.toString(16).padStart(2,'0')).join('');
+ const popup=window.open(API_BASE+'/bridge#nonce='+nonce,'luteoStravaSecure','width=660,height=750');
+ if(!popup){document.getElementById('stravaMessage').textContent='Autorise les fenêtres contextuelles pour ce site, puis réessaie.';return}
+ stravaBridge={popup,nonce};document.getElementById('stravaMessage').textContent='Connexion sécurisée ouverte : poursuis dans la nouvelle fenêtre.';
+}
+async function refreshStravaStatus(){
+ if(!document.getElementById('stravaStatus'))return;
+ document.getElementById('stravaStatus').textContent='Session sécurisée';
+ document.getElementById('stravaMessage').textContent='Pour consulter ou synchroniser Strava, ouvre la fenêtre sécurisée. Le Dashboard conserve les activités déjà synchronisées.';
+ setStravaButtons(true);
+ document.getElementById('connectStrava').classList.remove('hidden');
+}
+function connectStrava(){launchStravaBridge()}
+function syncStrava(){launchStravaBridge()}
+function disconnectStrava(){launchStravaBridge();document.getElementById('stravaMessage').textContent='Dans la fenêtre sécurisée, utilise « Déconnecter et supprimer ».'}
+window.addEventListener('message',async event=>{
+ if(!stravaBridge||event.origin!==new URL(API_BASE).origin||event.source!==stravaBridge.popup)return;
+ const d=event.data;if(!d||d.source!=='luteo-strava-bridge-v341'||d.nonce!==stravaBridge.nonce)return;
+ const message=document.getElementById('stravaMessage');
+ if(d.type==='disconnected'){try{await clearStoredActivities()}catch(e){console.warn(e)}DATA=[...LOCAL_DATA];refreshYears();render();updateStorageBadge(null,DATA.length);document.getElementById('stravaStatus').textContent='○ Strava non connecté';message.textContent=d.result?.revoked?'Données supprimées et autorisation Strava révoquée.':'Données supprimées ; révocation Strava à vérifier.';stravaBridge=null;return}
+ if(d.type==='error'){message.textContent='Synchronisation : '+String(d.message||'Erreur');return}
+ if(d.type==='status'){document.getElementById('stravaStatus').textContent=d.status?.connected?'● Strava connecté':'○ Strava non connecté';return}
+ if(d.type==='activities'&&Array.isArray(d.payload?.activities)){
+   const payload=d.payload;DATA=mergeActivities(LOCAL_DATA.length?LOCAL_DATA:DATA,payload.activities);
+   try{await storeActivities(payload.activities,payload.last_sync)}catch(e){console.warn('IndexedDB :',e)}
+   refreshYears();render();updateStorageBadge(payload.last_sync,DATA.length);
+   message.textContent=`${payload.activities.length} activités synchronisées ; ${DATA.length} activités disponibles.`;
+   document.getElementById('stravaStatus').textContent='● Strava connecté';
+   stravaBridge=null;
+ }
+});
 document.getElementById('connectStrava')?.addEventListener('click',connectStrava);document.getElementById('syncStrava')?.addEventListener('click',syncStrava);document.getElementById('disconnectStrava')?.addEventListener('click',disconnectStrava);
 const _switchTab=switchTab;switchTab=function(name){_switchTab(name);if(name==='strava')refreshStravaStatus();if(name==='performance')initPerformance()};
-const params=new URLSearchParams(location.search);if(params.get('strava')==='connected'){history.replaceState({},'',location.pathname);setTimeout(()=>{switchTab('strava');syncStrava()},300)}
+const params=new URLSearchParams(location.search);if(params.get('strava')==='connected'){history.replaceState({},'',location.pathname);setTimeout(()=>switchTab('strava'),300)}
 
 // V3.3 — cache navigateur persistant (IndexedDB), source de secours : export CSV.
 function openSportDb(){return new Promise((resolve,reject)=>{if(!('indexedDB' in window))return reject(Error('IndexedDB indisponible'));const r=indexedDB.open('luteo14-sport',1);r.onupgradeneeded=()=>r.result.createObjectStore('cache');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
