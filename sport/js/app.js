@@ -169,3 +169,33 @@ async function recalculateRecords(){
  finally{b.disabled=false;b.textContent='↻ Recalculer les records estimés'}
 }
 document.getElementById('recalculateRecords')?.addEventListener('click',recalculateRecords);
+
+// LUTEO14 V3.5 - Synthese entrainement, source locale et tendance.
+// Aucun appel direct vers les routes protegees Cloudflare Access.
+(function(){
+  const css=document.createElement('style');
+  css.textContent=`.v35-panel{margin:18px 0;padding:20px;border:1px solid #465587;border-radius:16px;background:#14213a;color:#f5f7ff}.v35-panel h2{margin:0 0 8px;font-size:1.2rem}.v35-sub{color:#b9c3dd;font-size:.9rem;margin-bottom:14px}.v35-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.v35-stat{background:#202f50;border-radius:12px;padding:14px}.v35-stat strong{display:block;font-size:1.4rem;color:#f9a6cc}.v35-stat span{font-size:.85rem;color:#d0d9ef}.v35-note{font-size:.85rem;color:#d0d9ef;margin-top:12px;line-height:1.5}`;
+  document.head.appendChild(css);
+  function box(id,anchor,title){let e=document.getElementById(id);if(e)return e;const target=document.getElementById(anchor);if(!target)return null;e=document.createElement('section');e.id=id;e.className='v35-panel';e.setAttribute('aria-label',title);target.parentNode.insertBefore(e,target);return e}
+  const safeNum=n=>Number.isFinite(n)?n:0;
+  function stats(){
+    const runs=DATA.filter(a=>a.sport==='Course à pied'&&Number.isFinite(+a.distance_km)&&!isNaN(Date.parse(a.date)));
+    if(!runs.length)return null;
+    const latest=Math.max(...runs.map(a=>Date.parse(a.date)));
+    const inRange=(daysAgoStart,daysAgoEnd)=>runs.filter(a=>{const age=(latest-Date.parse(a.date))/86400000;return age>=daysAgoStart&&age<daysAgoEnd});
+    const totalKm=items=>sum(items,a=>a.distance_km);
+    const last7=inRange(0,7),prev7=inRange(7,14),last28=inRange(0,28),prev28=inRange(28,56);
+    const current=totalKm(last28),previous=totalKm(prev28);
+    const longest=Math.max(0,...last28.map(a=>+a.distance_km||0));
+    return {latest,last7,prev7,last28,prev28,week:totalKm(last7),prevWeek:totalKm(prev7),month:current,prevMonth:previous,longest,sessions:last28.length,source:window.__v35Source||'Données disponibles'};
+  }
+  function metric(label,value){return `<div class="v35-stat"><strong>${value}</strong><span>${label}</span></div>`}
+  function drawDashboard(){const e=box('v35Training','kpis','Pilotage de l’entraînement');if(!e)return;const s=stats();if(!s){e.innerHTML='<h2>Pilotage de l’entraînement</h2><p>Aucune activité de course disponible.</p>';return}
+    const change=s.prevMonth>0?`${s.month>=s.prevMonth?'+':''}${Math.round((s.month/s.prevMonth-1)*100)} %`:'Non calculable';
+    e.innerHTML=`<h2>Pilotage de l’entraînement</h2><div class="v35-sub">Référence : dernière activité du ${new Date(s.latest).toLocaleDateString('fr-FR')} · ${s.source}</div><div class="v35-grid">${metric('7 derniers jours',fmt.format(s.week)+' km')}${metric('7 jours précédents',fmt.format(s.prevWeek)+' km')}${metric('28 derniers jours',fmt.format(s.month)+' km')}${metric('Évolution 28 j / 28 j',change)}${metric('Séances sur 28 jours',s.sessions)}${metric('Plus longue sortie sur 28 jours',fmt.format(s.longest)+' km')}</div><div class="v35-note">Fenêtres glissantes calculées à partir de la date de la dernière activité, et non de la date du jour. Une variation de volume ne constitue pas à elle seule un diagnostic de fatigue ou de progression.</div>`;
+  }
+  function drawPerformance(){const e=box('v35Performance','recordCards','Lecture des performances');if(!e)return;const s=stats();e.innerHTML=`<h2>Comprendre mes performances</h2><div class="v35-sub">Records estimés et projections : deux notions distinctes</div><div class="v35-note">Les « records estimés » existants sont extrapolés à partir de sorties de distance voisine. Ce ne sont pas des meilleurs passages GPS certifiés. Les prévisions Riegel sont des projections mathématiques, pas des chronos garantis. ${s?'Volume des 28 derniers jours : '+fmt.format(s.month)+' km, sur '+s.sessions+' séances.':'Synchronise des activités pour afficher les indicateurs.'}</div>`}
+  const previousRender=render;render=function(){previousRender();drawDashboard();if(document.getElementById('performanceView')?.classList.contains('active'))drawPerformance()};
+  const previousPerformance=initPerformance;initPerformance=function(){previousPerformance();drawPerformance()};
+  const previousBadge=updateStorageBadge;updateStorageBadge=function(date,count){window.__v35Source=date?'Cache Strava synchronisé le '+new Date(date).toLocaleString('fr-FR'):'Export historique / cache local';previousBadge(date,count);drawDashboard()};
+})();
