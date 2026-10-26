@@ -36,7 +36,47 @@ function decodeGarminFile(buffer){
   else if(bytes.length>=4&&bytes[1]===0&&bytes[3]===0){encoding='utf-16le'}
   return new TextDecoder(encoding,{fatal:true}).decode(bytes.subarray(offset)).replace(/^\uFEFF/,'');
 }
-async function render(){const datasets={};for(const k of keys)datasets[k]=await dbOp('readonly','get',k);const acts=unwrap(datasets.activities?.data);$('activities').textContent=acts?String(acts.length):'Non disponible';const latest=acts?.slice().sort((a,b)=>String(dateAt(b)||'').localeCompare(String(dateAt(a)||'')))[0];$('lastActivity').textContent=dateAt(latest)||'Non disponible';const sleep=datasets.sleep?.data;showMetric('sleep','sleepSource',sleep,['dailySleepDTO.sleepTimeSeconds','sleepTimeSeconds','sleepDurationInSeconds','totalSleepSeconds','sleepSeconds'],' h',v=>(v/3600).toFixed(1));const battery=getBodyBattery(datasets['body-battery']?.data);$('battery').textContent=battery?`${battery.value} / 100`:'Non disponible';$('batterySource').textContent=battery?`Observé · Garmin · ${battery.date||'date inconnue'}`:'Champ non reconnu · Garmin';showMetric('hrv','hrvSource',datasets.hrv?.data,['hrvSummary.lastNightAvg','hrvSummary.weeklyAvg','lastNightAvg','weeklyAvg','hrvValue'],' ms');const imports=Object.values(datasets).filter(Boolean);$('lastSync').textContent=imports.length?'Dernier import local : '+new Date(Math.max(...imports.map(x=>Date.parse(x.importedAt)))).toLocaleString('fr-FR'):'';$('advice').textContent='Les indicateurs affichés sont des mesures Garmin lorsqu’un champ reconnu est présent. Pour évaluer une tendance, il faut plusieurs jours comparables et tenir compte du ressenti. Aucun score de récupération n’est inféré ici.'}
+function batterySeries(data){
+  const days=unwrap(data)||((data&&typeof data==='object')?[data]:[]);
+  return days.map(day=>{
+    const descriptors=day?.bodyBatteryValueDescriptorDTOList||[];
+    const idx=descriptors.find(d=>d.bodyBatteryValueDescriptorKey==='bodyBatteryLevel')?.bodyBatteryValueDescriptorIndex??1;
+    const ti=descriptors.find(d=>d.bodyBatteryValueDescriptorKey==='timestamp')?.bodyBatteryValueDescriptorIndex??0;
+    const points=(day?.bodyBatteryValuesArray||[]).filter(row=>Array.isArray(row)&&Number.isFinite(Number(row[idx]))&&Number(row[idx])>=0&&Number(row[idx])<=100).sort((a,b)=>Number(a[ti])-Number(b[ti]));
+    return {date:dateAt(day),first:points.length?Number(points[0][idx]):null,last:points.length?Number(points[points.length-1][idx]):null,charged:Number.isFinite(day?.charged)?day.charged:null,drained:Number.isFinite(day?.drained)?day.drained:null};
+  }).filter(d=>d.date&&d.last!==null).sort((a,b)=>a.date.localeCompare(b.date));
+}
+function drawBatteryChart(series,days){
+  const canvas=$('batteryChart'),note=$('batteryChartNote');if(!canvas)return;
+  const end=series.at(-1)?.date;const filtered=end?series.filter(d=>{const delta=(Date.parse(end+'T12:00:00Z')-Date.parse(d.date+'T12:00:00Z'))/86400000;return delta>=0&&delta<days}):[];
+  note.textContent=filtered.length?`${filtered.length} jour(s) mesuré(s) sur ${days} jours · dernière valeur quotidienne observée (pas une mesure en temps réel).`:'Aucune mesure disponible sur cette période.';
+  const w=canvas.width=900,h=canvas.height=300,ctx=canvas.getContext('2d');ctx.clearRect(0,0,w,h);
+  const pad={left:52,right:18,top:18,bottom:52};const pw=w-pad.left-pad.right,ph=h-pad.top-pad.bottom;
+  ctx.font='14px system-ui';ctx.strokeStyle='#536485';ctx.fillStyle='#bdc8e1';ctx.lineWidth=1;
+  for(let val=0;val<=100;val+=25){const y=pad.top+ph*(1-val/100);ctx.beginPath();ctx.moveTo(pad.left,y);ctx.lineTo(w-pad.right,y);ctx.stroke();ctx.fillText(String(val),10,y+4)}
+  if(!filtered.length)return;
+  const n=filtered.length;const gap=pw/n;const bw=Math.min(36,gap*.65);
+  filtered.forEach((d,i)=>{const x=pad.left+gap*(i+.5),bar=ph*d.last/100;ctx.fillStyle='#f34d91';ctx.fillRect(x-bw/2,pad.top+ph-bar,bw,bar);ctx.fillStyle='#bdc8e1';ctx.textAlign='center';if(n<=10||i%Math.ceil(n/8)===0||i===n-1)ctx.fillText(d.date.slice(5).replace('-','/'),x,h-22)});ctx.textAlign='start';
+}
+let batteryWindow=7;
+async function updateBatteryChart(){const stored=await dbOp('readonly','get','body-battery');drawBatteryChart(batterySeries(stored?.data),batteryWindow)}
+$('battery7')?.addEventListener('click',()=>{batteryWindow=7;updateBatteryChart()});
+$('battery28')?.addEventListener('click',()=>{batteryWindow=28;updateBatteryChart()});
+$('garminSync')?.addEventListener('click',async()=>{
+  const btn=$('garminSync'),status=$('status');const token=$('garminSessionToken')?.value.trim();
+  if(!token){status.textContent='Démarre le compagnon Python local, puis saisis son code de session temporaire.';return}
+  btn.disabled=true;status.textContent='Récupération Garmin en cours (jusqu’à 15 requêtes)…';
+  try{
+    const r=await fetch('http://127.0.0.1:8765/sync',{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:'{}',cache:'no-store'});
+    const payload=await r.json();if(!r.ok)throw Error(payload.error||'Erreur HTTP '+r.status);
+    for(const k of ['sleep','body-battery','hrv']){
+      if(payload[k]!==undefined&&payload[k]!==null)await dbOp('readwrite','put',{data:payload[k],importedAt:payload.synced_at||new Date().toISOString()},k);
+    }
+    await render();status.textContent='Garmin actualisé sur cet ordinateur. '+(payload.errors?.length?payload.errors.length+' jour(s)/indicateur(s) indisponibles.':'Sommeil, VFC et Body Battery reçus.');
+  }catch(e){status.textContent='Actualisation impossible : '+e.message+' · Vérifie que le serveur local est lancé et que le navigateur autorise les connexions au réseau local.'}
+  finally{btn.disabled=false}
+});
+async function render(){const datasets={};for(const k of keys)datasets[k]=await dbOp('readonly','get',k);const acts=unwrap(datasets.activities?.data);$('activities').textContent=acts?String(acts.length):'Non disponible';const latest=acts?.slice().sort((a,b)=>String(dateAt(b)||'').localeCompare(String(dateAt(a)||'')))[0];$('lastActivity').textContent=dateAt(latest)||'Non disponible';const sleep=datasets.sleep?.data;showMetric('sleep','sleepSource',sleep,['dailySleepDTO.sleepTimeSeconds','sleepTimeSeconds','sleepDurationInSeconds','totalSleepSeconds','sleepSeconds'],' h',v=>(v/3600).toFixed(1));const battery=getBodyBattery(datasets['body-battery']?.data);$('battery').textContent=battery?`${battery.value} / 100`:'Non disponible';$('batterySource').textContent=battery?`Observé · Garmin · ${battery.date||'date inconnue'}`:'Champ non reconnu · Garmin';showMetric('hrv','hrvSource',datasets.hrv?.data,['hrvSummary.lastNightAvg','hrvSummary.weeklyAvg','lastNightAvg','weeklyAvg','hrvValue'],' ms');const imports=Object.values(datasets).filter(Boolean);$('lastSync').textContent=imports.length?'Dernier import local : '+new Date(Math.max(...imports.map(x=>Date.parse(x.importedAt)))).toLocaleString('fr-FR'):'';await updateBatteryChart();$('advice').textContent='Les indicateurs affichés sont des mesures Garmin lorsqu’un champ reconnu est présent. Pour évaluer une tendance, il faut plusieurs jours comparables et tenir compte du ressenti. Aucun score de récupération n’est inféré ici.'}
 $('garminFiles').addEventListener('change',async e=>{let ok=0,errors=[];for(const f of e.target.files){const type=keys.find(k=>f.name.toLowerCase().startsWith(k+'.')||f.name.toLowerCase().startsWith(k+'_')||f.name.toLowerCase()===k+'.json');if(!type){errors.push(f.name+' : nom attendu sleep.json, body-battery.json, hrv.json ou activities.json');continue}try{if(f.size>12*1024*1024)throw Error('fichier trop volumineux');const data=JSON.parse(decodeGarminFile(await f.arrayBuffer()));if(!data||typeof data!=='object')throw Error('JSON invalide');await dbOp('readwrite','put',{data,importedAt:new Date().toISOString()},type);ok++}catch(err){errors.push(f.name+' : '+err.message)}}$('status').textContent=`${ok} fichier(s) importé(s). ${errors.join(' ; ')}`;await render();e.target.value=''});
 $('clear').addEventListener('click',async()=>{if(!confirm('Supprimer toutes les données Garmin stockées dans ce navigateur ?'))return;await dbOp('readwrite','clear');$('status').textContent='Données Garmin locales supprimées.';await render()});
 render().catch(e=>$('status').textContent='Stockage local indisponible : '+e.message);
