@@ -1,8 +1,10 @@
 (()=>{if(document.querySelector('[data-luteo-nav]'))return;
-const here=location.pathname;
-const links=[['Accueil SPORT','/sport/'],['Dashboard','/sport/dashboard/'],['Performance','/sport/dashboard/?tab=performance'],['Mon plan','/sport/dashboard/?tab=training'],['Simulateur','/sport/allure/'],['Marathon','/sport/marathon/'],['Photos','/sport/photos/'],['Strava','/sport/dashboard/?tab=strava']];
-const nav=document.createElement('nav');nav.className='luteo-nav';nav.setAttribute('data-luteo-nav','');nav.setAttribute('aria-label','Navigation SPORT');
-nav.innerHTML='<a class="luteo-brand" href="/sport/">LUTEO14 <b>// SPORT</b></a><div class="luteo-links">'+links.map(([t,u])=>'<a href="'+u+'"'+((here===u.split('?')[0])?' aria-current="page"':'')+'>'+t+'</a>').join('')+'</div>';
-document.body.prepend(nav);
-const css=document.createElement('link');css.rel='stylesheet';css.href='/sport/assets/v30.css';document.head.append(css);
+const path=location.pathname, tab=new URLSearchParams(location.search).get('tab');
+const entries=[['Accueil','/sport/'],['Dashboard','/sport/dashboard/'],['Mon Coach','/sport/coach/'],['Performance','/sport/dashboard/?tab=performance'],['Objectifs','/sport/dashboard/?tab=dashboard#v37-objectives'],['Mes données','/sport/donnees/']];
+const section=path.startsWith('/sport/coach/')?'Mon Coach':path.startsWith('/sport/donnees/')?'Mes données':path.startsWith('/sport/dashboard/')?(tab==='performance'?'Performance':'Dashboard'):path==='/sport/'?'Accueil':path.includes('/marathon/')?'Marathon':path.includes('/allure/')?'Simulateur':path.includes('/photos/')?'Photos':'SPORT';
+const nav=document.createElement('nav');nav.className='luteo-nav';nav.dataset.luteoNav='';nav.setAttribute('aria-label','Navigation SPORT');
+const brand=document.createElement('a');brand.className='luteo-brand';brand.href='/sport/';brand.innerHTML='LUTEO14 <b>// SPORT</b>';nav.append(brand);
+const links=document.createElement('div');links.className='luteo-links';for(const [label,href] of entries){const a=document.createElement('a');a.href=href;a.textContent=label;if(label===section)a.setAttribute('aria-current','page');links.append(a)}nav.append(links);document.body.prepend(nav);
+const crumb=document.createElement('div');crumb.className='luteo-breadcrumb';crumb.setAttribute('aria-label','Fil d’Ariane');const home=document.createElement('a');home.href='/sport/';home.textContent='SPORT';crumb.append(home);if(section!=='Accueil'){const sep=document.createElement('span');sep.textContent=' / ';crumb.append(sep);const current=document.createElement('strong');current.textContent=section;crumb.append(current)}nav.after(crumb);
+const css=document.createElement('link');css.rel='stylesheet';css.href='/sport/assets/sport-unified.css?v=4.2.0';document.head.append(css);
 })();
