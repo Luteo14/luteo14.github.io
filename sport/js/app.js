@@ -7,7 +7,7 @@ let sports={};d.forEach(x=>sports[x.sport]=(sports[x.sport]||0)+x.duration_s/360
 let years=[...new Set(DATA.map(x=>new Date(x.date).getFullYear()))].sort();let annual=years.map(Y=>sum(DATA.filter(x=>x.sport==='Course à pied'&&new Date(x.date).getFullYear()===Y),x=>x.distance_km));chart('annualChart','line',years,[{label:'km course',data:annual,borderColor:C.accent,backgroundColor:C.accent,tension:.25,pointRadius:4}]);let ae=years.map(Y=>sum(DATA.filter(x=>x.sport==='Course à pied'&&new Date(x.date).getFullYear()===Y),x=>x.elevation_m));chart('elevChart','bar',years,[{label:'D+ course',data:ae,backgroundColor:C.green,borderRadius:4}]);let as=years.map(Y=>DATA.filter(x=>x.sport==='Course à pied'&&new Date(x.date).getFullYear()===Y).length);chart('sessionsChart','bar',years,[{label:'séances course',data:as,backgroundColor:'#3468f5',borderRadius:4}]);
 let now=new Date(Math.max(...DATA.map(x=>new Date(x.date))));let wlabels=[],wdata=[];for(let i=11;i>=0;i--){let end=new Date(now);end.setDate(end.getDate()-7*i);let start=new Date(end);start.setDate(start.getDate()-6);wlabels.push(`${start.getDate()}/${start.getMonth()+1}`);wdata.push(sum(runs.filter(x=>{let z=new Date(x.date);return z>=start&&z<=end}),x=>x.distance_km))}chart('weeklyChart','line',wlabels,[{label:'km / semaine',data:wdata,borderColor:C.green,backgroundColor:C.green,tension:.25}]);
 let recent=[...d].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,20);document.getElementById('activityCount').textContent=`${d.length} activités`;document.getElementById('activitiesTable').innerHTML=recent.map(a=>`<tr><td>${new Date(a.date).toLocaleDateString('fr-FR')}</td><td><span class="pill">${a.sport}</span></td><td>${fmt.format(a.distance_km)} km</td><td>${dur(a.duration_s)}</td><td>${fmt.format(a.elevation_m)} m</td><td>${pace(a)}</td></tr>`).join('')}
-fetch('/sport/data/activities.json').then(r=>r.json()).then(async d=>{DATA=d;LOCAL_DATA=[...d];try{const saved=await loadStoredActivities();if(saved?.activities?.length){DATA=mergeActivities(d,saved.activities);updateStorageBadge(saved.saved_at,DATA.length)}}catch(e){console.warn('Stockage local indisponible',e)}const years=[...new Set(d.map(x=>new Date(x.date).getFullYear()))].sort((a,b)=>b-a);const s=document.getElementById('yearFilter');s.innerHTML='<option value="all">Toutes</option>'+years.map(y=>`<option value="${y}" ${y===years[0]?'selected':''}>${y}</option>`).join('');s.onchange=render;render()}).catch(e=>document.querySelector('main').innerHTML='<div class="card"><h2>Impossible de charger les données</h2><p>Lancez le site via GitHub Pages ou un serveur HTTP local.</p></div>');
+fetch('/sport/data/activities.json').then(r=>r.json()).then(async d=>{DATA=d;LOCAL_DATA=[...d];try{const saved=await loadStoredActivities();if(saved?.activities?.length){DATA=mergeActivities(d,saved.activities);updateStorageBadge(saved.saved_at,DATA.length)}}catch(e){console.warn('Stockage local indisponible',e)}const years=[...new Set(DATA.map(x=>new Date(x.date).getFullYear()))].sort((a,b)=>b-a);const s=document.getElementById('yearFilter');s.innerHTML='<option value="all">Toutes</option>'+years.map(y=>`<option value="${y}" ${y===years[0]?'selected':''}>${y}</option>`).join('');s.onchange=render;render()}).catch(e=>document.querySelector('main').innerHTML='<div class="card"><h2>Impossible de charger les données</h2><p>Lancez le site via GitHub Pages ou un serveur HTTP local.</p></div>');
 // --- Navigation & plan d'entraînement ---
 const DAY_NAMES=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
 const iso=d=>d.toISOString().slice(0,10);
@@ -105,7 +105,6 @@ const best=[...performanceRuns()].filter(a=>a.distance_km>=5).map(a=>({...a,eq10
 const API_BASE=(window.RUN_DATA_CONFIG?.API_BASE||'').replace(/\/$/,'');
 let LOCAL_DATA=[];
 function apiReady(){return API_BASE && !API_BASE.includes('REMPLACE-MOI')}
-async function api(path,opts={}){const r=await fetch(API_BASE+path,{credentials:'include',...opts});if(!r.ok){let msg='Erreur API';try{msg=(await r.json()).error||msg}catch{}throw new Error(msg)}return r.status===204?null:r.json()}
 function setStravaButtons(connected){document.getElementById('connectStrava')?.classList.toggle('hidden',connected);document.getElementById('syncStrava')?.classList.toggle('hidden',!connected);document.getElementById('disconnectStrava')?.classList.toggle('hidden',!connected)}
 let stravaBridge=null;
 function launchStravaBridge(){
@@ -137,6 +136,7 @@ window.addEventListener('message',async event=>{
    try{await storeActivities(payload.activities,payload.last_sync)}catch(e){console.warn('IndexedDB :',e)}
    refreshYears();render();updateStorageBadge(payload.last_sync,DATA.length);
    message.textContent=`${payload.activities.length} activités synchronisées ; ${DATA.length} activités disponibles.`;
+   if(document.getElementById('performanceView')?.classList.contains('active'))initPerformance();
    document.getElementById('stravaStatus').textContent='● Strava connecté';
    stravaBridge=null;
  }
@@ -154,5 +154,18 @@ function clearStoredActivities(){return cacheOp('readwrite',s=>s.delete('strava'
 function mergeActivities(fallback,live){const m=new Map();for(const a of fallback||[]){const key=a.id?`id:${a.id}`:`csv:${a.date}:${a.sport}:${a.distance_km}`;m.set(key,a)}for(const a of live||[]){const key=a.id?`id:${a.id}`:`csv:${a.date}:${a.sport}:${a.distance_km}`;m.set(key,a)}return [...m.values()].sort((a,b)=>String(a.date).localeCompare(String(b.date)))}
 function refreshYears(){const s=document.getElementById('yearFilter');if(!s)return;const selected=s.value,years=[...new Set(DATA.map(a=>new Date(a.date).getFullYear()).filter(Number.isFinite))].sort((a,b)=>b-a);s.innerHTML='<option value="all">Toutes</option>'+years.map(y=>`<option value="${y}">${y}</option>`).join('');s.value=years.some(y=>String(y)===selected)?selected:(years[0]?String(years[0]):'all')}
 function updateStorageBadge(date,count){const el=document.getElementById('sportStorageStatus');if(el)el.textContent=`${count} activités disponibles · ${date?'Strava synchronisé le '+new Date(date).toLocaleString('fr-FR'):'export local'}`}
-async function recalculateRecords(){const b=document.getElementById('recalculateRecords');if(!b)return;b.disabled=true;b.textContent='Recalcul en cours…';try{if(apiReady()){try{const p=await api('/api/activities');if(Array.isArray(p.activities)){DATA=mergeActivities(LOCAL_DATA.length?LOCAL_DATA:DATA,p.activities);await storeActivities(p.activities,p.last_sync);updateStorageBadge(p.last_sync,DATA.length)}}catch(e){console.warn('Recalcul hors ligne :',e.message)}}refreshYears();render();initPerformance();document.getElementById('recordsRecalculatedAt').textContent='Records recalculés le '+new Date().toLocaleString('fr-FR')+' à partir des activités disponibles.'}catch(e){document.getElementById('recordsRecalculatedAt').textContent='Échec du recalcul : '+e.message}finally{b.disabled=false;b.textContent='↻ Recalculer les records estimés'}}
+async function recalculateRecords(){
+ const b=document.getElementById('recalculateRecords');if(!b)return;
+ b.disabled=true;b.textContent='Recalcul en cours…';
+ try{
+   // Les activites sont deja en memoire / IndexedDB. Aucun fetch cross-origin
+   // vers une route Cloudflare Access depuis GitHub Pages.
+   const saved=await loadStoredActivities().catch(()=>null);
+   if(saved?.activities?.length){DATA=mergeActivities(LOCAL_DATA.length?LOCAL_DATA:DATA,saved.activities);updateStorageBadge(saved.saved_at,DATA.length)}
+   refreshYears();render();initPerformance();
+   const el=document.getElementById('recordsRecalculatedAt');
+   if(el)el.textContent='Records recalcules le '+new Date().toLocaleString('fr-FR')+' sur les donnees disponibles. Pour actualiser Strava, utilise « Synchroniser maintenant ».';
+ }catch(e){const el=document.getElementById('recordsRecalculatedAt');if(el)el.textContent='Echec du recalcul : '+e.message}
+ finally{b.disabled=false;b.textContent='↻ Recalculer les records estimés'}
+}
 document.getElementById('recalculateRecords')?.addEventListener('click',recalculateRecords);
