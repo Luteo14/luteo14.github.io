@@ -93,8 +93,11 @@ function openGarminCloud(){
 $('garminCloudSync')?.addEventListener('click',openGarminCloud);
 window.addEventListener('message',async event=>{
  if(!garminCloudBridge||event.origin!==new URL(GARMIN_CLOUD_BASE).origin||event.source!==garminCloudBridge.popup)return;
- const msg=event.data;if(msg?.source!=='luteo-garmin-v39'||msg.nonce!==garminCloudBridge.nonce||msg.type!=='snapshot')return;
+ const msg=event.data;if(msg?.source!=='luteo-garmin-v39'||msg.nonce!==garminCloudBridge.nonce)return;
+  if(msg.type==='error'){$('status').textContent='Garmin Cloud : '+String(msg.message||'Erreur');return}
+  if(msg.type==='synced'){$('status').textContent='Synchronisation Garmin Cloudflare terminee.';return}
+  if(msg.type!=='snapshot')return;
  let count=0;
  for(const k of ['sleep','body-battery','hrv'])if(msg.payload?.[k]!==undefined){await dbOp('readwrite','put',{data:msg.payload[k],importedAt:msg.payload.updated_at||new Date().toISOString()},k);count++}
- await render();$('status').textContent=count+' catégories Garmin chargées depuis Cloudflare · '+(msg.payload.updated_at||'date inconnue');garminCloudBridge=null;
+ await render();$('status').textContent=count+' catégories Garmin chargées depuis Cloudflare · '+(msg.payload.updated_at||'date inconnue');// Keep the bridge reference for further refreshes from the same secure window.
 });

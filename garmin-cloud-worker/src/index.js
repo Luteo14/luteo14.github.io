@@ -14,12 +14,61 @@ async function owner(req,env){
  if(!await crypto.subtle.verify('RSASSA-PKCS1-v1_5',key,b64url(parts[2]),encoder.encode(parts[0]+'.'+parts[1])))throw Error('Signature invalide');
 }
 function response(data,status=200){return new Response(JSON.stringify(data),{status,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}})}
-function bridge(env){const frontend=JSON.stringify(env.FRONTEND_ORIGIN);return new Response(`<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Garmin — espace sécurisé</title><style>body{font:16px system-ui;background:#101c32;color:white;max-width:680px;margin:8vh auto;padding:24px}button{background:#e94e91;border:0;border-radius:10px;padding:12px;color:white;cursor:pointer}</style><h1>Garmin Cloud — LUTEO14</h1><p id="status">Chargement des données sauvegardées…</p><button id="reload">Actualiser les données Cloudflare</button><script>const ORIGIN=${frontend},nonce=new URLSearchParams(location.hash.slice(1)).get('nonce');async function load(){try{const r=await fetch('/api/snapshot',{credentials:'same-origin'});if(!r.ok)throw Error('HTTP '+r.status);const data=await r.json();if(window.opener&&nonce)window.opener.postMessage({source:'luteo-garmin-v39',nonce,type:'snapshot',payload:data},ORIGIN);document.getElementById('status').textContent='Données Cloudflare transmises au tableau de bord. Dernière mise à jour : '+(data.updated_at||'inconnue')}catch(e){document.getElementById('status').textContent='Erreur : '+e.message}}document.getElementById('reload').onclick=load;load();</script></html>`,{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'",'Referrer-Policy':'no-referrer'}})}
+function bridge(env){
+ const frontend=JSON.stringify(env.FRONTEND_ORIGIN);
+ return new Response(`<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Garmin Cloud - LUTEO14</title><style>body{font:16px system-ui;background:#101c32;color:white;max-width:680px;margin:8vh auto;padding:24px}button{background:#e94e91;border:0;border-radius:10px;padding:12px 18px;color:white;cursor:pointer;margin:6px}button:disabled{opacity:.5}p{line-height:1.5}</style></head><body><h1>Garmin Cloud - Espace securise</h1><p id="status" role="status">Connexion securisee etablie.</p><button id="sync">Synchroniser Garmin maintenant</button><button id="reload">Charger les donnees enregistrees</button><script>
+const ORIGIN=${frontend},nonce=new URLSearchParams(location.hash.slice(1)).get('nonce');
+function inform(type,data={}){if(window.opener&&nonce&&/^[a-f0-9]{32}$/.test(nonce))window.opener.postMessage({source:'luteo-garmin-v39',nonce,type,...data},ORIGIN)}
+async function snapshot(){const r=await fetch('/api/snapshot',{credentials:'same-origin',cache:'no-store'});if(!r.ok)throw Error('Lecture Cloudflare : HTTP '+r.status);const payload=await r.json();inform('snapshot',{payload});return payload}
+async function load(){const el=document.getElementById('status');try{const data=await snapshot();el.textContent='Donnees transmises au tableau de bord. Derniere mise a jour : '+(data.updated_at||'inconnue')}catch(e){el.textContent='Erreur : '+e.message;inform('error',{message:e.message})}}
+async function sync(){const b=document.getElementById('sync'),el=document.getElementById('status');b.disabled=true;el.textContent='Synchronisation Garmin en cours, patiente quelques instants...';try{const r=await fetch('/api/sync',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:'{}',cache:'no-store'});const result=await r.json();if(!r.ok)throw Error(result.error||'HTTP '+r.status);const data=await snapshot();el.textContent='Garmin synchronise : '+result.categories+' categories. '+(data.updated_at||'');inform('synced',{result})}catch(e){el.textContent='Erreur de synchronisation : '+e.message;inform('error',{message:e.message})}finally{b.disabled=false}}
+document.getElementById('sync').onclick=sync;document.getElementById('reload').onclick=load;load();
+</script></body></html>`,{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'",'Referrer-Policy':'no-referrer','X-Content-Type-Options':'nosniff'}})
+}
+const GARMIN_HOST='https://personal.connectapi.garmin.com';
+function isoDay(offset){const d=new Date();d.setUTCDate(d.getUTCDate()+offset);return d.toISOString().slice(0,10)}
+async function getGarminToken(env){
+ if(!env.GARMIN_PERSONAL_API_KEY)throw Error('Secret GARMIN_PERSONAL_API_KEY absent');
+ const r=await fetch(GARMIN_HOST+'/personalapitoken-service/personal-api/personal-api-key/token',{method:'POST',headers:{Authorization:'ApiKey '+env.GARMIN_PERSONAL_API_KEY,Accept:'application/json'},signal:AbortSignal.timeout(18000)});
+ if(!r.ok)throw Error('Authentification Garmin HTTP '+r.status);
+ const data=await r.json();const token=data.access_token||data.accessToken||data.token;
+ if(typeof token!=='string'||!token)throw Error('Reponse de jeton Garmin non reconnue');
+ return token;
+}
+async function garminGet(token,path){
+ const r=await fetch(GARMIN_HOST+path,{headers:{Authorization:'Bearer '+token,Accept:'application/json'},signal:AbortSignal.timeout(18000)});
+ if(!r.ok)throw Error('Garmin HTTP '+r.status+' sur '+path.split('?')[0]);
+ return r.status===204?null:await r.json();
+}
+async function syncGarmin(env){
+ const token=await getGarminToken(env);
+ const today=isoDay(0),start=isoDay(-27);
+ const battery=await garminGet(token,'/wellness-service/wellness/bodyBattery/reports/daily?'+new URLSearchParams({startDate:start,endDate:today,chunks:'1'}));
+ const dates=Array.from({length:7},(_,i)=>isoDay(i-6));
+ const sleep=[],hrv=[];
+ // Requests are sequential to reduce API pressure and avoid unpredictable rate limiting.
+ for(const date of dates){
+   const s=await garminGet(token,'/sleep-service/sleep/dailySleep?date='+date);
+   if(s) sleep.push({...s,calendarDate:s.calendarDate||date});
+   const h=await garminGet(token,'/hrv-service/hrv/'+date);
+   if(h) hrv.push({...h,calendarDate:h.calendarDate||date});
+ }
+ const payload={'body-battery':battery,sleep,hrv};
+ const now=new Date().toISOString();
+ for(const [cat,data] of Object.entries(payload)){
+   await env.DB.prepare('INSERT INTO garmin_snapshots(category,payload,updated_at) VALUES(?,?,?) ON CONFLICT(category) DO UPDATE SET payload=excluded.payload,updated_at=excluded.updated_at').bind(cat,JSON.stringify(data),now).run();
+ }
+ return {ok:true,categories:3,updated_at:now,days:{'body-battery':28,sleep:7,hrv:7}};
+}
 export default {async fetch(req,env){const u=new URL(req.url);try{
  if(u.pathname==='/health')return response({ok:true});
  // No CORS on private API: authenticated browser navigates to /bridge.
  await owner(req,env);
  if(req.method==='GET'&&u.pathname==='/bridge')return bridge(env);
+ if(req.method==='POST'&&u.pathname==='/api/sync'){
+   const origin=req.headers.get('Origin');if(origin&&origin!==u.origin)return response({error:'Origine refusee'},403);
+   return response(await syncGarmin(env));
+ }
  if(req.method==='GET'&&u.pathname==='/api/snapshot'){
   const rows=await env.DB.prepare('SELECT category,payload,updated_at FROM garmin_snapshots').all();const out={updated_at:null};
   for(const row of rows.results||[]){out[row.category]=JSON.parse(row.payload);if(!out.updated_at||row.updated_at>out.updated_at)out.updated_at=row.updated_at}return response(out);
