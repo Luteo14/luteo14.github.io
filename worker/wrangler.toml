@@ -1,6 +1,6 @@
 name = "luteo-strava-api"
 main = "src/index.js"
-compatibility_date = "2026-09-29"
+compatibility_date = "2026-10-01"
 
 [[kv_namespaces]]
 binding = "TOKENS"
@@ -9,3 +9,8 @@ id = "cebf207103074536a37532f867033588"
 [vars]
 FRONTEND_URL = "https://luteo14.github.io"
 STRAVA_CLIENT_ID = "212577"
+ACCESS_AUD = "8d1e0bf1603774b7e858da8d01a6b89056f2ea10ea2f6688fdfd2e0df694d440"
+ACCESS_TEAM_DOMAIN = "https://hidden-silence-9188.cloudflareaccess.com"
+ADMIN_EMAIL = "julien.theaud@gmail.com"
+# Optional: STRAVA_ATHLETE_ID = "123456"
+# STRAVA_CLIENT_SECRET must be a Wrangler secret, never committed.
