@@ -27,13 +27,38 @@ document.getElementById('sync').onclick=sync;document.getElementById('reload').o
 }
 const GARMIN_HOST='https://personal.connectapi.garmin.com';
 function isoDay(offset){const d=new Date();d.setUTCDate(d.getUTCDate()+offset);return d.toISOString().slice(0,10)}
-async function getGarminToken(env){
- if(!env.GARMIN_PERSONAL_API_KEY)throw Error('Secret GARMIN_PERSONAL_API_KEY absent');
- const r=await fetch(GARMIN_HOST+'/personalapitoken-service/personal-api/personal-api-key/token',{method:'POST',headers:{Authorization:'ApiKey '+env.GARMIN_PERSONAL_API_KEY,Accept:'application/json'},signal:AbortSignal.timeout(18000)});
- if(!r.ok)throw Error('Authentification Garmin HTTP '+r.status);
- const data=await r.json();const token=data.access_token||data.accessToken||data.token;
- if(typeof token!=='string'||!token)throw Error('Reponse de jeton Garmin non reconnue');
- return token;
+async function getGarminToken(env) {
+  if (!env.GARMIN_PERSONAL_API_KEY) {
+    throw new Error('Secret GARMIN_PERSONAL_API_KEY absent');
+  }
+
+  const url =
+    'https://personal.connectapi.garmin.com' +
+    '/personalapitoken-service/personal-api/personal-api-key/token';
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Accept': '*/*',
+      'Authorization': `ApiKey ${env.GARMIN_PERSONAL_API_KEY}`
+    },
+    signal: AbortSignal.timeout(18000)
+  });
+
+  if (!response.ok) {
+    throw new Error(
+      `Authentification Garmin HTTP ${response.status}`
+    );
+  }
+
+  // Garmin renvoie directement le bearer token en texte brut.
+  const token = (await response.text()).trim();
+
+  if (!token || token.split('.').length !== 3) {
+    throw new Error('Jeton Garmin invalide ou non reconnu');
+  }
+
+  return token;
 }
 async function garminGet(token,path){
  const r=await fetch(GARMIN_HOST+path,{headers:{Authorization:'Bearer '+token,Accept:'application/json'},signal:AbortSignal.timeout(18000)});
