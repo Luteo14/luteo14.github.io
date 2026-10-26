@@ -80,3 +80,21 @@ async function render(){const datasets={};for(const k of keys)datasets[k]=await 
 $('garminFiles').addEventListener('change',async e=>{let ok=0,errors=[];for(const f of e.target.files){const type=keys.find(k=>f.name.toLowerCase().startsWith(k+'.')||f.name.toLowerCase().startsWith(k+'_')||f.name.toLowerCase()===k+'.json');if(!type){errors.push(f.name+' : nom attendu sleep.json, body-battery.json, hrv.json ou activities.json');continue}try{if(f.size>12*1024*1024)throw Error('fichier trop volumineux');const data=JSON.parse(decodeGarminFile(await f.arrayBuffer()));if(!data||typeof data!=='object')throw Error('JSON invalide');await dbOp('readwrite','put',{data,importedAt:new Date().toISOString()},type);ok++}catch(err){errors.push(f.name+' : '+err.message)}}$('status').textContent=`${ok} fichier(s) importé(s). ${errors.join(' ; ')}`;await render();e.target.value=''});
 $('clear').addEventListener('click',async()=>{if(!confirm('Supprimer toutes les données Garmin stockées dans ce navigateur ?'))return;await dbOp('readwrite','clear');$('status').textContent='Données Garmin locales supprimées.';await render()});
 render().catch(e=>$('status').textContent='Stockage local indisponible : '+e.message);
+
+// V3.9 - Cloudflare Access popup bridge (no cross-origin authenticated fetch).
+let garminCloudBridge=null;
+const GARMIN_CLOUD_BASE='https://luteo-garmin-cloud.luteo-strava-api.workers.dev';
+function openGarminCloud(){
+ const nonce=Array.from(crypto.getRandomValues(new Uint8Array(16)),b=>b.toString(16).padStart(2,'0')).join('');
+ const popup=window.open(GARMIN_CLOUD_BASE+'/bridge#nonce='+nonce,'luteoGarminCloud','width=700,height=750');
+ if(!popup){$('status').textContent='Autorise les fenêtres contextuelles pour actualiser depuis Cloudflare.';return}
+ garminCloudBridge={popup,nonce};$('status').textContent='Authentifie-toi dans la fenêtre Cloudflare Access.';
+}
+$('garminCloudSync')?.addEventListener('click',openGarminCloud);
+window.addEventListener('message',async event=>{
+ if(!garminCloudBridge||event.origin!==new URL(GARMIN_CLOUD_BASE).origin||event.source!==garminCloudBridge.popup)return;
+ const msg=event.data;if(msg?.source!=='luteo-garmin-v39'||msg.nonce!==garminCloudBridge.nonce||msg.type!=='snapshot')return;
+ let count=0;
+ for(const k of ['sleep','body-battery','hrv'])if(msg.payload?.[k]!==undefined){await dbOp('readwrite','put',{data:msg.payload[k],importedAt:msg.payload.updated_at||new Date().toISOString()},k);count++}
+ await render();$('status').textContent=count+' catégories Garmin chargées depuis Cloudflare · '+(msg.payload.updated_at||'date inconnue');garminCloudBridge=null;
+});
