@@ -103,3 +103,49 @@ async function renderRecoveryAnalytics(){if(!$('recoveryCoverage'))return;const 
 $('recovery7')?.addEventListener('click',()=>{recoveryWindow=7;renderRecoveryAnalytics()});$('recovery28')?.addEventListener('click',()=>{recoveryWindow=28;renderRecoveryAnalytics()});$('coachGoal')?.addEventListener('change',()=>{localStorage.setItem('luteo-coach-goal', $('coachGoal').value);renderRecoveryAnalytics()});try{const g=localStorage.getItem('luteo-coach-goal');if(g&&[...$('coachGoal').options].some(o=>o.value===g))$('coachGoal').value=g}catch{}
 // Redessiner apres chaque import ou synchronisation Cloudflare sans toucher au Worker.
 const recoveryObserver=new MutationObserver(()=>renderRecoveryAnalytics().catch(console.warn));if($('lastSync'))recoveryObserver.observe($('lastSync'),{childList:true,characterData:true,subtree:true});renderRecoveryAnalytics().catch(console.warn);
+
+
+/* V4.5 — Cartes Focus inspirées de la densité d'information Garmin Connect.
+   Données observées uniquement, aucun chiffre de démonstration. */
+function focusNumber(n,decimals=0){return Number.isFinite(n)?n.toLocaleString('fr-FR',{minimumFractionDigits:decimals,maximumFractionDigits:decimals}):'—'}
+function focusDate(d){if(!d)return 'Date indisponible';const parts=d.split('-');return parts.length===3?`${parts[2]}/${parts[1]}/${parts[0]}`:d}
+function focusTrendChart(id,days,rows,type,color,ceiling){
+ const map=new Map(rows.map(x=>[x.date,x.value]));
+ const labels=days.map(x=>x.slice(5).replace('-','/'));
+ const data=days.map(x=>map.has(x)?map.get(x):null);
+ coachChart(id,type,labels,[{label:'Mesures observées',data,backgroundColor:color,borderColor:color,pointRadius:2,spanGaps:false}],{
+  legend:false,hardMin:0,hardMax:ceiling,beginAtZero:true,xTicks:4
+ });
+}
+async function renderCoachFocus(){
+ if(!$('coachFocus'))return;
+ const [batteryRecord,sleepRecord,hrvRecord,strava]=await Promise.all([
+  dbOp('readonly','get','body-battery'),dbOp('readonly','get','sleep'),dbOp('readonly','get','hrv'),readStravaCache()
+ ]);
+ const batteryRows=batterySeries(batteryRecord?.data).map(x=>({date:x.date,value:x.last}));
+ const sleepRows=sleepSeries(sleepRecord?.data),hrvRows=hrvSeries(hrvRecord?.data),runRows=stravaDaily(strava);
+ const lastBattery=batteryRows.at(-1),lastSleep=sleepRows.at(-1),lastHrv=hrvRows.at(-1);
+ $('focusBattery').textContent=focusNumber(lastBattery?.value);
+ $('focusBatteryDate').textContent=lastBattery?'Mesuré le '+focusDate(lastBattery.date):'Mesure non disponible';
+ $('focusSleep').textContent=lastSleep?focusNumber(lastSleep.value,1)+' h':'—';
+ $('focusSleepDate').textContent=lastSleep?'Nuit du '+focusDate(lastSleep.date):'Mesure non disponible';
+ $('focusHrv').textContent=focusNumber(lastHrv?.value);
+ $('focusHrvDate').textContent=lastHrv?'Nuit du '+focusDate(lastHrv.date):'Mesure non disponible';
+ const latest=[...batteryRows,...sleepRows,...hrvRows,...runRows].map(x=>x.date).sort().at(-1);
+ if(!latest)return;
+ const dates=dayList(latest,7);
+ const total=runRows.filter(x=>dates.includes(x.date)).reduce((s,x)=>s+x.value,0);
+ const runs=runRows.filter(x=>dates.includes(x.date)).length;
+ $('focusDistance').textContent=strava?.activities?focusNumber(total,1):'—';
+ $('focusDistanceDetail').textContent=strava?.activities?`${runs} jour(s) avec course · période du ${focusDate(dates[0])} au ${focusDate(latest)}`:'Activités non chargées sur cet appareil';
+ focusTrendChart('focusBatteryChart',dates,batteryRows,'line','#f34d91',100);
+ focusTrendChart('focusSleepChart',dates,sleepRows,'bar','#74c9f8',12);
+ focusTrendChart('focusRunningChart',dates,runRows,'bar','#f34d91');
+ focusTrendChart('focusHrvChart',dates,hrvRows,'line','#a18cfb');
+}
+/* Les imports et transferts Cloudflare actualisent déjà #lastSync. */
+if($('lastSync')){
+ const focusObserver=new MutationObserver(()=>renderCoachFocus().catch(console.warn));
+ focusObserver.observe($('lastSync'),{childList:true,characterData:true,subtree:true});
+}
+renderCoachFocus().catch(console.warn);
