@@ -12,6 +12,7 @@ async function owner(req,env){
  const jwk=(await r.json()).keys?.find(k=>k.kid===head.kid&&k.kty==='RSA');if(!jwk)throw Error('Cle JWT introuvable');
  const key=await crypto.subtle.importKey('jwk',jwk,{name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['verify']);
  if(!await crypto.subtle.verify('RSASSA-PKCS1-v1_5',key,b64url(parts[2]),encoder.encode(parts[0]+'.'+parts[1])))throw Error('Signature invalide');
+ return p.email.toLowerCase();
 }
 function response(data,status=200){return new Response(JSON.stringify(data),{status,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}})}
 function bridge(env){
@@ -25,6 +26,10 @@ async function sync(){const b=document.getElementById('sync'),el=document.getEle
 document.getElementById('sync').onclick=sync;document.getElementById('reload').onclick=load;load();
 </script></body></html>`,{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'",'Referrer-Policy':'no-referrer','X-Content-Type-Options':'nosniff'}})
 }
+
+function objectivesBridge(env){const origin=JSON.stringify(env.FRONTEND_ORIGIN);return new Response(`<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Objectifs LUTEO14</title><style>body{font:16px system-ui;background:#101c32;color:white;max-width:680px;margin:8vh auto;padding:24px}p{line-height:1.55}</style><h1>Objectifs SPORT</h1><p id="status">Connexion sécurisée établie. Cette fenêtre permet la synchronisation de tes objectifs entre appareils.</p><script>const ORIGIN=${origin},nonce=new URLSearchParams(location.hash.slice(1)).get('nonce');function post(type,data={}){if(window.opener&&nonce)window.opener.postMessage({source:'luteo-objectives-v44',nonce,type,...data},ORIGIN)}async function api(method,path,body){const r=await fetch(path,{method,credentials:'same-origin',cache:'no-store',headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined});const data=await r.json().catch(()=>({}));if(!r.ok)throw Error(data.error||'HTTP '+r.status);return data}window.addEventListener('message',async e=>{if(e.origin!==ORIGIN||e.source!==window.opener)return;const m=e.data;if(!m||m.source!=='luteo-objectives-v44'||m.nonce!==nonce)return;try{if(m.action==='list'){const d=await api('GET','/api/objectives');post('list',d)}else if(m.action==='upsert'){const d=await api('POST','/api/objectives',m.payload);post('saved',d)}else if(m.action==='delete'){const d=await api('DELETE','/api/objectives/'+encodeURIComponent(m.payload.id));post('deleted',d)}}catch(err){post('error',{message:err.message})}});post('ready');</script>`,{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'",'Referrer-Policy':'no-referrer'}})}
+function cleanObjective(x){if(!x||typeof x!=='object')throw Error('Objectif invalide');const id=String(x.id||'').slice(0,80),name=String(x.name||'').trim().slice(0,100),date=String(x.date||''),distance=Number(x.distance),weeklyKm=Number(x.weeklyKm||0),goal=String(x.goal||'');if(!/^[a-zA-Z0-9-]{8,80}$/.test(id)||!name||!/^\d{4}-\d{2}-\d{2}$/.test(date)||!Number.isFinite(distance)||distance<=0||distance>500||!/^\d{1,3}:\d{2}:\d{2}$/.test(goal))throw Error('Objectif invalide');return {id,name,date,distance,goal,weeklyKm:Number.isFinite(weeklyKm)?Math.max(0,Math.min(300,weeklyKm)):0,place:String(x.place||'').slice(0,100),result:String(x.result||'').slice(0,16),stravaUrl:/^https:\/\/(www\.)?strava\.com\//.test(String(x.stravaUrl||''))?String(x.stravaUrl):'',notes:String(x.notes||'').slice(0,3000)}}
+
 const GARMIN_HOST='https://personal.connectapi.garmin.com';
 function isoDay(offset){const d=new Date();d.setUTCDate(d.getUTCDate()+offset);return d.toISOString().slice(0,10)}
 async function getGarminToken(env) {
@@ -88,8 +93,12 @@ async function syncGarmin(env){
 export default {async fetch(req,env){const u=new URL(req.url);try{
  if(u.pathname==='/health')return response({ok:true});
  // No CORS on private API: authenticated browser navigates to /bridge.
- await owner(req,env);
+ const email=await owner(req,env);
  if(req.method==='GET'&&u.pathname==='/bridge')return bridge(env);
+ if(req.method==='GET'&&u.pathname==='/objectives-bridge')return objectivesBridge(env);
+ if(req.method==='GET'&&u.pathname==='/api/objectives'){const rows=await env.DB.prepare('SELECT id,payload,updated_at,deleted_at FROM sport_objectives WHERE owner_email=? ORDER BY updated_at DESC').bind(email).all();return response({objectives:(rows.results||[]).map(r=>({id:r.id,payload:JSON.parse(r.payload),updatedAt:r.updated_at,deletedAt:r.deleted_at}))})}
+ if(req.method==='POST'&&u.pathname==='/api/objectives'){const origin=req.headers.get('Origin');if(origin&&origin!==u.origin)return response({error:'Origine refusee'},403);const raw=await req.json();const obj=cleanObjective(raw);const now=new Date().toISOString();await env.DB.prepare('INSERT INTO sport_objectives(id,owner_email,payload,updated_at,deleted_at) VALUES(?,?,?,?,NULL) ON CONFLICT(id) DO UPDATE SET owner_email=excluded.owner_email,payload=excluded.payload,updated_at=excluded.updated_at,deleted_at=NULL').bind(obj.id,email,JSON.stringify(obj),now).run();return response({ok:true,id:obj.id,updatedAt:now})}
+ if(req.method==='DELETE'&&u.pathname.startsWith('/api/objectives/')){const id=decodeURIComponent(u.pathname.split('/').pop()||'');if(!/^[a-zA-Z0-9-]{8,80}$/.test(id))return response({error:'Identifiant invalide'},400);const now=new Date().toISOString();await env.DB.prepare('UPDATE sport_objectives SET deleted_at=?,updated_at=? WHERE id=? AND owner_email=?').bind(now,now,id,email).run();return response({ok:true,id,updatedAt:now})}
  if(req.method==='POST'&&u.pathname==='/api/sync'){
    const origin=req.headers.get('Origin');if(origin&&origin!==u.origin)return response({error:'Origine refusee'},403);
    return response(await syncGarmin(env));

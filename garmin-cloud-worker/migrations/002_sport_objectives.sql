@@ -1,4 +1,3 @@
--- V4.3 PREPARATION ONLY: do not run until authenticated API is deployed.
 CREATE TABLE IF NOT EXISTS sport_objectives (
  id TEXT PRIMARY KEY,
  owner_email TEXT NOT NULL,
