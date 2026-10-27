@@ -33,3 +33,23 @@ body:has(#recovery) main{max-width:1380px;margin:auto;width:100%;padding:0 clamp
 /* V4.5 — Mon Coach Focus / mosaïque inspirée des tableaux de bord sportifs */
 .coach-focus{margin:22px 0 38px}.coach-section-head{display:flex;justify-content:space-between;align-items:end;gap:18px;flex-wrap:wrap;margin-bottom:18px}.coach-section-head h2{font-size:clamp(25px,3vw,36px);margin:4px 0}.coach-section-head p:not(.eyebrow){color:var(--sport-muted);margin:5px 0;max-width:740px}.focus-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}.focus-card{grid-column:span 4;min-width:0;background:linear-gradient(145deg,#1b3052,#142440);border:1px solid #405579;border-radius:19px;padding:22px;box-shadow:0 9px 30px #0209172c}.focus-card-feature{grid-column:span 5}.focus-card:nth-child(2){grid-column:span 4}.focus-card:nth-child(3){grid-column:span 3}.focus-card:nth-child(4){grid-column:span 6}.focus-card:nth-child(5){grid-column:span 6}.focus-card-head{display:flex;align-items:center;gap:12px}.focus-card-head h3{margin:0 0 3px;font-size:16px}.focus-card-head small{color:#b8cae8}.focus-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;color:#fff;background:#334c79;font-size:25px}.focus-card-feature .focus-icon{background:#a62867}.focus-value{display:flex;align-items:baseline;gap:8px;margin:17px 0 0}.focus-value strong{font-size:clamp(29px,3.2vw,48px);letter-spacing:-.04em;line-height:1.12}.focus-value span{color:#bed0ef;font-size:18px}.focus-sub{color:#b8c9e5;font-size:13px;min-height:18px;margin:10px 0 18px}.focus-mini-chart,.focus-spark{height:116px;position:relative}.focus-mini-chart canvas,.focus-spark canvas{display:block;width:100%!important;height:100%!important;max-height:none!important;min-height:0!important}.focus-goal .button{margin-top:4px}.coach-focus .button{font-size:14px}.coach-hero{border-bottom:1px solid #ffffff15;padding-bottom:23px!important}#recoveryAnalytics{margin-top:36px}#recoveryAnalytics .recovery-grid article{background:#152946}.focus-grid .focus-card:focus-within{border-color:#d96da6}#recovery>.panel[hidden]{display:none!important}
 @media(max-width:900px){.focus-card-feature,.focus-card:nth-child(2),.focus-card:nth-child(3),.focus-card:nth-child(4),.focus-card:nth-child(5){grid-column:span 6}}@media(max-width:620px){.focus-grid{grid-template-columns:1fr}.focus-card-feature,.focus-card:nth-child(2),.focus-card:nth-child(3),.focus-card:nth-child(4),.focus-card:nth-child(5){grid-column:1}.focus-card{padding:19px}.focus-mini-chart,.focus-spark{height:108px}}
+
+/* V4.6 — cartes personnalisables et résumé de semaine */
+.focus-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.focus-grid>.focus-card{grid-column:span 4!important;min-width:0}
+.focus-grid>.focus-card[hidden]{display:none!important}
+.focus-grid>.focus-card.focus-card-feature{grid-column:span 6!important}
+.focus-preferences{border:1px solid #45618b;background:#142743;border-radius:18px;padding:22px;margin-top:22px}
+.focus-preferences[hidden]{display:none!important}
+.focus-preference-row{display:flex;align-items:center;gap:10px;border-bottom:1px solid #ffffff18;padding:10px 0}
+.focus-preference-row label{flex:1;display:flex;align-items:center;gap:10px}
+.focus-preference-row button{min-width:40px;padding:7px 10px;color:#fff;cursor:pointer}
+.focus-preference-row button:disabled{opacity:.35}
+.coach-field{display:flex;flex-direction:column;gap:6px;font-size:13px;color:#d5dff0}
+.coach-field select,.coach-field input{width:100%;box-sizing:border-box;border:1px solid #60739c;border-radius:9px;padding:9px;background:#0e1b32;color:#fff;font:inherit}
+.coach-mini-help{display:block;color:#aebed9;font-size:12px;line-height:1.4;margin-top:10px}
+.week-controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.week-progress{height:11px;border-radius:30px;background:#33405b;overflow:hidden}
+.week-progress>div{height:100%;width:0;background:#f34d91;transition:width .3s ease}
+@media(max-width:1000px){.focus-grid>.focus-card,.focus-grid>.focus-card.focus-card-feature{grid-column:span 6!important}}
+@media(max-width:640px){.focus-grid>.focus-card,.focus-grid>.focus-card.focus-card-feature{grid-column:1/-1!important}}
