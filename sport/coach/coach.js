@@ -161,21 +161,53 @@ renderCoachFocus().catch(console.warn);
  let prefs=read(prefKey,{order:ids,hidden:[]});
  function normalize(){prefs.order=[...new Set([...(Array.isArray(prefs.order)?prefs.order:[]),...ids])].filter(x=>ids.includes(x));prefs.hidden=(Array.isArray(prefs.hidden)?prefs.hidden:[]).filter(x=>ids.includes(x))}
  function drawPrefs(){normalize();const holder=$('focusPreferenceList');if(!holder)return;holder.replaceChildren();for(const [i,k] of prefs.order.entries()){const card=cards.find(c=>c.dataset.focusKey===k),row=document.createElement('div');row.className='focus-preference-row';const label=document.createElement('label'),input=document.createElement('input');input.type='checkbox';input.checked=!prefs.hidden.includes(k);input.addEventListener('change',()=>{prefs.hidden=input.checked?prefs.hidden.filter(x=>x!==k):[...new Set([...prefs.hidden,k])];apply()});label.append(input,document.createTextNode(' '+(card.querySelector('h3')?.textContent||k)));row.append(label);for(const [txt,diff] of [['↑',-1],['↓',1]]){const b=document.createElement('button');b.type='button';b.className='secondary';b.textContent=txt;b.setAttribute('aria-label',txt==='↑'?'Monter '+k:'Descendre '+k);b.disabled=i+diff<0||i+diff>=prefs.order.length;b.onclick=()=>{const dest=i+diff;[prefs.order[i],prefs.order[dest]]=[prefs.order[dest],prefs.order[i]];apply()};row.append(b)}holder.append(row)}}
- function apply(){normalize();for(const key of prefs.order){const card=cards.find(c=>c.dataset.focusKey===key);if(!card)continue;grid.append(card);card.hidden=prefs.hidden.includes(key)}write(prefKey,prefs);drawPrefs()}
+ function apply(){normalize();for(const key of prefs.order){const card=cards.find(c=>c.dataset.focusKey===key);if(!card)continue;grid.append(card);card.hidden=prefs.hidden.includes(key)}write(prefKey,prefs);drawPrefs();window.coachV47?.save()}
  $('focusCustomize')?.addEventListener('click',()=>{const el=$('focusPreferences'),opened=el.hidden;el.hidden=!opened;$('focusCustomize').setAttribute('aria-expanded',String(opened))});
  $('focusReset')?.addEventListener('click',()=>{prefs={order:[...ids],hidden:[]};apply()});
  apply();
  const stored=read(weekKey,{km:40,sessions:4});for(const [id,v] of [['weekKmTarget',stored.km],['weekSessionsTarget',stored.sessions]])$(id).value=v;
- function saveTargets(){const km=Number($('weekKmTarget').value),sessions=Number($('weekSessionsTarget').value);if(!Number.isFinite(km)||km<1||km>250||!Number.isInteger(sessions)||sessions<1||sessions>14)return;write(weekKey,{km,sessions});updateWeek()}
+ function saveTargets(){const km=Number($('weekKmTarget').value),sessions=Number($('weekSessionsTarget').value);if(!Number.isFinite(km)||km<1||km>250||!Number.isInteger(sessions)||sessions<1||sessions>14)return;write(weekKey,{km,sessions,manual:true});updateWeek();window.coachV47?.save()}
  $('weekKmTarget').addEventListener('change',saveTargets);$('weekSessionsTarget').addEventListener('change',saveTargets);
  const storedFeeling=read(feelingKey,{});const today=new Date().toLocaleDateString('en-CA');
  $('dailyFeeling').value=storedFeeling.date===today?storedFeeling.value||'':'';
  $('dailyFeeling').addEventListener('change',()=>{write(feelingKey,{date:today,value:$('dailyFeeling').value});updateReadiness()});
  const avgLast=(rows,endDays,startDays=0)=>{const now=new Date(),start=new Date(now);start.setDate(start.getDate()-endDays+1);start.setHours(0,0,0,0);const upper=new Date(now);upper.setDate(upper.getDate()-startDays);upper.setHours(23,59,59,999);const values=rows.filter(x=>{const d=new Date(x.date+'T12:00:00');return d>=start&&d<=upper&&Number.isFinite(x.value)}).map(x=>x.value);return values.length>=4?values.reduce((a,b)=>a+b,0)/values.length:null};
  async function updateReadiness(){const [bb,sl,hr]=await Promise.all(['body-battery','sleep','hrv'].map(k=>dbOp('readonly','get',k)));const streams=[{name:'Body Battery',rows:batterySeries(bb?.data).map(x=>({date:x.date,value:x.last})),delta:10,relative:false},{name:'sommeil',rows:sleepSeries(sl?.data),delta:.5,relative:false},{name:'VFC',rows:hrvSeries(hr?.data),delta:.10,relative:true}];const signals=[];let compared=0;for(const s of streams){const recent=avgLast(s.rows,7),prior=avgLast(s.rows,14,7);if(recent===null||prior===null||!prior)continue;compared++;if((s.relative?recent/prior<1-s.delta:recent<prior-s.delta))signals.push(s.name)}const f=$('dailyFeeling').value;let title='À compléter',msg='Renseigne ton ressenti. Les tendances Garmin sont analysées seulement si au moins 4 jours sont disponibles dans chaque période.';if(f==='tired'){title='Fatigue ressentie';msg='Privilégie une séance facile ou du repos selon tes sensations.'}else if(f){title=signals.length>=2?'Vigilance':signals.length===1?'À surveiller':'Tendance habituelle';msg=compared?`${compared} indicateur(s) comparables ; ${signals.length?signals.join(', ')+' en recul':'aucun recul marqué détecté'}. ${f==='good'?'Ressenti positif.':'Ressenti habituel.'}`:'Historique Garmin insuffisant pour comparer les semaines. Écoute tes sensations.'} $('dailyReadiness').textContent=title;$('dailyReadinessDetail').textContent=msg}
- async function updateWeek(){const strava=await readStravaCache();const now=new Date(),monday=new Date(now);monday.setHours(0,0,0,0);monday.setDate(monday.getDate()-(monday.getDay()+6)%7);const end=new Date(monday);end.setDate(end.getDate()+7);const activities=(strava?.activities||[]).filter(a=>a.sport==='Course à pied').filter(a=>{const dt=new Date(a.date);return dt>=monday&&dt<end&&dt<=now});const km=activities.reduce((sum,a)=>sum+(Number(a.distance_km)||0),0);const targetKm=Number($('weekKmTarget').value)||40,planned=Number($('weekSessionsTarget').value)||4,progress=Math.min(100,Math.round(km/targetKm*100));$('weekKm').textContent=strava?.activities?focusNumber(km,1):'—';$('weekSummary').textContent=strava?.activities?`${activities.length} séance(s) réalisées · ${Math.max(0,planned-activities.length)} restante(s) sur ${planned} prévues`:'Synchronise Strava pour afficher les séances.';$('weekRemaining').textContent=strava?.activities?`${focusNumber(Math.max(0,targetKm-km),1)} km restant(s) vers ${targetKm} km ciblés`:'Cibles indicatives définies manuellement';$('weekProgressFill').style.width=(strava?.activities?progress:0)+'%';$('weekProgress').setAttribute('aria-valuenow',String(strava?.activities?progress:0))}
+ async function updateWeek(){const strava=await readStravaCache();const now=new Date(),monday=new Date(now);monday.setHours(0,0,0,0);monday.setDate(monday.getDate()-(monday.getDay()+6)%7);const end=new Date(monday);end.setDate(end.getDate()+7);const activities=(strava?.activities||[]).filter(a=>a.sport==='Course à pied').filter(a=>{const dt=new Date(a.date);return dt>=monday&&dt<end&&dt<=now});const km=activities.reduce((sum,a)=>sum+(Number(a.distance_km)||0),0);const targetKm=Number($('weekKmTarget').value)||40,planned=Number($('weekSessionsTarget').value)||4,progress=Math.min(100,Math.round(km/targetKm*100));$('weekKm').textContent=strava?.activities?focusNumber(km,1):'—';$('weekSummary').textContent=strava?.activities?`${activities.length} séance(s) réalisées · ${Math.max(0,planned-activities.length)} restante(s) sur ${planned} prévues`:'Synchronise Strava pour afficher les séances.';$('weekRemaining').textContent=strava?.activities?`${focusNumber(Math.max(0,targetKm-km),1)} km restant(s) vers ${targetKm} km ciblés`:'Synchronise Strava pour comparer le plan au réalisé';$('weekProgressFill').style.width=(strava?.activities?progress:0)+'%';$('weekProgress').setAttribute('aria-valuenow',String(strava?.activities?progress:0))}
+ window.addEventListener('luteo-coach-v47-loaded',()=>{prefs=read(prefKey,{order:ids,hidden:[]});apply();const w=read(weekKey,{km:40,sessions:4});$('weekKmTarget').value=w.km;$('weekSessionsTarget').value=w.sessions;updateWeek().catch(console.warn)});
  async function refresh(){await Promise.all([updateWeek(),updateReadiness()])}
  if($('lastSync'))new MutationObserver(()=>refresh().catch(console.warn)).observe($('lastSync'),{childList:true,subtree:true,characterData:true});
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh().catch(console.warn)});
  refresh().catch(console.warn);
+})();
+
+
+/* V4.7 — pont Cloudflare Access, sans fetch cross-origin des données privées. */
+(function(){
+ const CLOUD='https://luteo-garmin-cloud.luteo-strava-api.workers.dev';let bridge=null,objectives=[];const $=id=>document.getElementById(id);
+ const prefKey='luteo-coach-v46-cards',weekKey='luteo-coach-v46-week';
+ const read=k=>{try{return JSON.parse(localStorage.getItem(k)||'null')}catch{return null}};
+ const status=t=>{if($('coachCloudStatus'))$('coachCloudStatus').textContent=t};
+ function save(){if(!bridge?.ready)return;bridge.popup.postMessage({source:'luteo-coach-v47',nonce:bridge.nonce,action:'save',preferences:{...read(prefKey),week:read(weekKey)}},new URL(CLOUD).origin)}
+ window.coachV47={save};
+ function applyPlan(){const today=new Date().toISOString().slice(0,10);const active=objectives.filter(x=>!x.deletedAt&&x.payload?.date>=today).sort((a,b)=>a.payload.date.localeCompare(b.payload.date))[0];
+  if(!active){status('Préférences synchronisées · aucun objectif futur trouvé.');return}
+  const goal=active.payload,days=(new Date(goal.date+'T12:00:00Z')-new Date(today+'T12:00:00Z'))/86400000;
+  const factor=days<7?.4:days<14?.65:days<21?.8:1;const target=Math.round(Number(goal.weeklyKm||0)*factor*10)/10;
+  const label=$('weekPlanInfo');if(label)label.textContent=`${goal.name} · ${goal.date} · cible planifiée ${target} km/semaine${factor<1?' (affûtage)':''}`;
+  const current=read(weekKey);if(target>0&&(!current||!current.manual)){
+   const next={km:target,sessions:current?.sessions||4,manual:false};localStorage.setItem(weekKey,JSON.stringify(next));window.dispatchEvent(new Event('luteo-coach-v47-loaded'));save();
+  }
+  if($('focusGoal'))$('focusGoal').textContent=goal.name;
+ }
+ $('coachCloudConnect')?.addEventListener('click',()=>{const nonce=Array.from(crypto.getRandomValues(new Uint8Array(16)),b=>b.toString(16).padStart(2,'0')).join('');const popup=window.open(CLOUD+'/coach-bridge#nonce='+nonce,'luteoCoachCloud','width=680,height=680');if(!popup){status('Autorise les fenêtres contextuelles pour te connecter.');return}bridge={nonce,popup,ready:false};status('Connexion Cloudflare Access en cours…')});
+ window.addEventListener('message',event=>{if(!bridge||event.origin!==new URL(CLOUD).origin||event.source!==bridge.popup)return;const m=event.data;if(m?.source!=='luteo-coach-v47'||m.nonce!==bridge.nonce)return;
+  if(m.type==='error'){status('Synchronisation indisponible : '+String(m.message||'erreur'));return}
+  if(m.type==='initial'){
+   bridge.ready=true;objectives=Array.isArray(m.objectives)?m.objectives:[];
+   if(m.preferences){localStorage.setItem(prefKey,JSON.stringify({order:m.preferences.order,hidden:m.preferences.hidden}));localStorage.setItem(weekKey,JSON.stringify({...m.preferences.week,manual:true}));window.dispatchEvent(new Event('luteo-coach-v47-loaded'))}
+   applyPlan();status('Objectifs et préférences chargés depuis Cloudflare.');
+  }
+  if(m.type==='saved')status('Préférences enregistrées dans ton espace sécurisé.');
+ });
 })();

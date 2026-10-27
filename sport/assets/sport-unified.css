@@ -53,3 +53,5 @@ body:has(#recovery) main{max-width:1380px;margin:auto;width:100%;padding:0 clamp
 .week-progress>div{height:100%;width:0;background:#f34d91;transition:width .3s ease}
 @media(max-width:1000px){.focus-grid>.focus-card,.focus-grid>.focus-card.focus-card-feature{grid-column:span 6!important}}
 @media(max-width:640px){.focus-grid>.focus-card,.focus-grid>.focus-card.focus-card-feature{grid-column:1/-1!important}}
+
+.coach-cloud-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin:1rem 0 1.5rem}.coach-cloud-toolbar span{font-size:.9rem;opacity:.85}
