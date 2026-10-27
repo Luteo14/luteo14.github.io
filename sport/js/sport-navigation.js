@@ -1,11 +1,13 @@
-// Ouvre les onglets historiques de RUN // DATA depuis des liens directs.
+// LUTEO14 V4.3: direct links to legacy views without a duplicate tab bar.
 (function(){
-  const params=new URLSearchParams(location.search);
-  const tab=params.get('tab');
-  if(!tab)return;
-  const btn=document.querySelector('.tab[data-tab="'+CSS.escape(tab)+'"]');
-  if(!btn)return;
-  const activate=()=>{if(!btn.classList.contains('active'))btn.click();};
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(activate,120));
-  else setTimeout(activate,120);
+ const params=new URLSearchParams(location.search);
+ const tab=params.get('tab');
+ const allowed=new Set(['dashboard','training','performance','strava']);
+ if(!allowed.has(tab))return;
+ const activate=()=>{
+  if(typeof window.switchTab==='function')window.switchTab(tab);
+  else console.warn('Vue RUN // DATA indisponible :',tab);
+ };
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(activate,120));
+ else setTimeout(activate,120);
 })();

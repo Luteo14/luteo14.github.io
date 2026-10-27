@@ -11,3 +11,13 @@ body:has(#recovery) main{max-width:1380px;width:100%;padding:clamp(16px,2.5vw,36
 #coachLegacyImport{display:none!important}#coachDataShortcut{margin:16px 0;padding:20px;border:1px solid var(--sport-line);border-radius:16px;background:var(--sport-card)}#coachDataShortcut a,.sport-unified-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--sport-pink);border:0;border-radius:12px;color:white;text-decoration:none;font-weight:700;padding:12px 18px;cursor:pointer}
 .sport-unified-card{background:var(--sport-card);border:1px solid var(--sport-line);border-radius:20px;padding:24px}.sport-data-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.sport-data-grid h2{margin:0 0 12px}.sport-data-grid p{color:var(--sport-muted);line-height:1.55}.sport-data-grid .actions{display:flex;gap:10px;flex-wrap:wrap}.sport-data-grid .secondary{background:#30466c}.sport-data-status{margin-top:16px;color:#a9dfff;font-size:14px}.sport-unified-note{font-size:13px;color:#b9c8e3}
 @media(max-width:780px){.sport-data-grid{grid-template-columns:1fr}.luteo-nav{position:relative}.luteo-links{width:100%}#recovery canvas{height:260px!important;min-height:260px}#dashboardView .grid canvas{min-height:240px;max-height:320px}}
+
+/* V4.3 — Single primary navigation */
+body:has(#dashboardView) nav.tabs,body:has(#dashboardView) .sport-quick-nav{display:none!important}
+.luteo-nav{box-shadow:0 10px 28px #030a193d}
+.luteo-links a[aria-current="page"]{outline:1px solid #f34d91}
+#recoveryAnalytics .recovery-grid{grid-template-columns:1fr!important;gap:24px}
+#recoveryAnalytics .recovery-grid article{padding:26px;min-width:0}
+#recoveryAnalytics .recovery-grid canvas{width:100%!important;height:340px!important;min-height:340px}
+#dashboardView .grid canvas{min-height:320px}
+@media(max-width:780px){#recoveryAnalytics .recovery-grid article{padding:16px}#recoveryAnalytics .recovery-grid canvas{height:260px!important;min-height:260px}}
