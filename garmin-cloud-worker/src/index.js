@@ -37,6 +37,32 @@ async function api(method,path,payload){const r=await fetch(path,{method,credent
 window.addEventListener('message',async e=>{const m=e.data;if(e.origin!==ORIGIN||e.source!==window.opener||m?.source!=='luteo-plan-v48'||m.nonce!==nonce)return;try{if(m.action==='load'){const [sessions,objectives]=await Promise.all([api('GET','/api/training/sessions'),api('GET','/api/objectives')]);post('loaded',{sessions:sessions.sessions,objectives:objectives.objectives})}if(m.action==='save'){const r=await api('PUT','/api/training/sessions',m.sessions);post('saved',{updatedAt:r.updatedAt})}}catch(err){post('error',{message:err.message})}});
 post('ready');document.getElementById('status').textContent='Connexion établie. Tu peux revenir à LUTEO14.';
 </script></body>`,{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'",'Referrer-Policy':'no-referrer'}})}
+
+function nutritionBridge(env){const origin=JSON.stringify(env.FRONTEND_ORIGIN);return new Response(`<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nutrition · LUTEO14 Cloud</title><body style="background:#101c32;color:white;font:16px system-ui;padding:2rem"><h1>Nutrition · Synchronisation sécurisée</h1><p id="status">Connexion établie.</p><script>
+const ORIGIN=${origin},nonce=new URLSearchParams(location.hash.slice(1)).get('nonce');
+function post(type,data={}){if(window.opener&&/^[a-f0-9]{32}$/.test(nonce||''))window.opener.postMessage({source:'luteo-nutrition-v511',nonce,type,...data},ORIGIN)}
+async function api(method,data,version){const r=await fetch('/api/nutrition',{method,credentials:'same-origin',cache:'no-store',headers:method==='PUT'?{'Content-Type':'application/json'}:{},body:method==='PUT'?JSON.stringify({data,expectedUpdatedAt:version}):undefined});const result=await r.json().catch(()=>({}));if(!r.ok)throw Error(result.error||'HTTP '+r.status);return result}
+window.addEventListener('message',async e=>{const m=e.data;if(e.origin!==ORIGIN||e.source!==window.opener||m?.source!=='luteo-nutrition-v511'||m.nonce!==nonce)return;try{if(m.action==='load'){const r=await api('GET');post('loaded',r)}if(m.action==='save'){const r=await api('PUT',m.data,m.expectedUpdatedAt);post('saved',r)}}catch(err){post('error',{message:err.message})}});
+post('ready');
+</script></body>`,{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'none'; script-src 'unsafe-inline'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'",'Referrer-Policy':'no-referrer'}})}
+function validateNutrition(input){
+ if(!input||typeof input!=='object'||Array.isArray(input))throw Error('Nutrition invalide');
+ const {startDate,endDate,persons,choices,checked}=input;
+ const day=d=>typeof d==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(d)&&!Number.isNaN(Date.parse(d+'T12:00:00Z'));
+ if(!day(startDate)||!day(endDate))throw Error('Dates invalides');
+ const span=Math.round((Date.parse(endDate+'T12:00:00Z')-Date.parse(startDate+'T12:00:00Z'))/86400000);
+ if(span<0||span>60||!Number.isInteger(persons)||persons<1||persons>12)throw Error('Période ou personnes invalides');
+ if(!choices||typeof choices!=='object'||Array.isArray(choices)||!checked||typeof checked!=='object'||Array.isArray(checked))throw Error('Menus invalides');
+ if(Object.keys(choices).length>366||Object.keys(checked).length>500)throw Error('Trop de données');
+ const cleanChoices={};for(const [date,meals] of Object.entries(choices)){
+  if(!day(date)||!meals||typeof meals!=='object'||Array.isArray(meals))throw Error('Repas invalides');
+  const clean={};for(const [meal,id] of Object.entries(meals)){
+   if(!['Petit-déjeuner','Déjeuner','Dîner','Collation'].includes(meal)||typeof id!=='string'||!/^[a-z0-9_\-]{1,60}$/.test(id))throw Error('Recette invalide');clean[meal]=id;
+  }cleanChoices[date]=clean;
+ }
+ const cleanChecked={};for(const [key,v] of Object.entries(checked)){if(key.length>160||typeof v!=='boolean')throw Error('Liste invalide');cleanChecked[key]=v}
+ return {startDate,endDate,persons,choices:cleanChoices,checked:cleanChecked};
+}
 function cleanTrainingSession(x){if(!x||typeof x!=='object')throw Error('Séance invalide');const id=String(x.id||''),date=String(x.date||''),type=String(x.type||''),km=Number(x.km),title=String(x.title||'').trim(),objectiveId=String(x.objectiveId||'');if(!/^[a-zA-Z0-9-]{8,80}$/.test(id)||!/^\d{4}-\d{2}-\d{2}$/.test(date)||!Number.isFinite(Date.parse(date+'T12:00:00Z'))||!['easy','long','tempo','interval','recovery','race'].includes(type)||!Number.isFinite(km)||km<0||km>100||!title||title.length>100||objectiveId.length>80)throw Error('Séance invalide');return {id,date,type,km,title,objectiveId,notes:String(x.notes||'').slice(0,500)}}
 
 function cleanObjective(x){if(!x||typeof x!=='object')throw Error('Objectif invalide');const id=String(x.id||'').slice(0,80),name=String(x.name||'').trim().slice(0,100),date=String(x.date||''),distance=Number(x.distance),weeklyKm=Number(x.weeklyKm||0),goal=String(x.goal||'');if(!/^[a-zA-Z0-9-]{8,80}$/.test(id)||!name||!/^\d{4}-\d{2}-\d{2}$/.test(date)||!Number.isFinite(distance)||distance<=0||distance>500||!/^\d{1,3}:\d{2}:\d{2}$/.test(goal))throw Error('Objectif invalide');return {id,name,date,distance,goal,weeklyKm:Number.isFinite(weeklyKm)?Math.max(0,Math.min(300,weeklyKm)):0,place:String(x.place||'').slice(0,100),result:String(x.result||'').slice(0,16),stravaUrl:/^https:\/\/(www\.)?strava\.com\//.test(String(x.stravaUrl||''))?String(x.stravaUrl):'',notes:String(x.notes||'').slice(0,3000)}}
@@ -107,6 +133,30 @@ export default {async fetch(req,env){const u=new URL(req.url);try{
  const email=await owner(req,env);
  if(req.method==='GET'&&u.pathname==='/bridge')return bridge(env);
 
+
+ if(req.method==='GET'&&u.pathname==='/nutrition-bridge')return nutritionBridge(env);
+ if(req.method==='GET'&&u.pathname==='/api/nutrition'){
+  const row=await env.DB.prepare('SELECT payload,updated_at FROM sport_nutrition_plans WHERE owner_email=?').bind(email).first();
+  return response({data:row?JSON.parse(row.payload):null,updatedAt:row?.updated_at||null});
+ }
+ if(req.method==='PUT'&&u.pathname==='/api/nutrition'){
+  const origin=req.headers.get('Origin');if(origin&&origin!==u.origin)return response({error:'Origine refusee'},403);
+  const raw=await req.text();if(raw.length>100000)return response({error:'Trop de donnees'},413);
+  let payload;try{payload=JSON.parse(raw)}catch{return response({error:'JSON invalide'},400)}
+  let data;try{data=validateNutrition(payload.data)}catch(e){return response({error:e.message},400)}
+  const previous=await env.DB.prepare('SELECT updated_at FROM sport_nutrition_plans WHERE owner_email=?').bind(email).first();
+  const expected=payload.expectedUpdatedAt||null;
+  if((previous?.updated_at||null)!==expected)return response({error:'Modifications plus recentes sur un autre appareil. Recharge les menus avant de sauvegarder.'},409);
+  const now=new Date().toISOString();
+  if(previous){
+   const updated=await env.DB.prepare('UPDATE sport_nutrition_plans SET payload=?,updated_at=? WHERE owner_email=? AND updated_at=?').bind(JSON.stringify(data),now,email,previous.updated_at).run();
+   if(updated.meta?.changes===0)return response({error:'Conflit de synchronisation'},409);
+  }else{
+   const result=await env.DB.prepare('INSERT OR IGNORE INTO sport_nutrition_plans(owner_email,payload,updated_at) VALUES(?,?,?)').bind(email,JSON.stringify(data),now).run();
+   if(result.meta?.changes===0)return response({error:'Conflit de synchronisation'},409);
+  }
+  return response({ok:true,updatedAt:now});
+ }
  if(req.method==='GET'&&u.pathname==='/training-bridge')return trainingBridge(env);
  if(req.method==='GET'&&u.pathname==='/api/training/sessions'){
   const rows=await env.DB.prepare('SELECT payload FROM sport_training_sessions WHERE owner_email=? ORDER BY session_date,id').bind(email).all();

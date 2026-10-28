@@ -43,6 +43,9 @@ jobs:
       - name: Install Playwright Chromium
         run: node node_modules/playwright/cli.js install --with-deps chromium
 
+      - name: Garmin and Nutrition quality tests
+        run: node --test tests/quality/*.test.cjs
+
       - name: SQL integration tests
         run: python scripts/test_d1_schema.py
 
