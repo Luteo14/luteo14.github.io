@@ -6,8 +6,50 @@ window.addEventListener('message',e=>{if(!bridge||e.origin!==ORIGIN||e.source!==
 $('save').onclick=()=>{if(!bridge?.ready){$('cloudState').textContent='Connecte-toi à Cloudflare avant d’enregistrer.';return}send('save',{sessions})};$('previous').onclick=()=>{offset--;render()};$('next').onclick=()=>{offset++;render()};
 function fillObjectives(){const el=$('objective');el.replaceChildren(new Option('Aucune',''));for(const o of objectives)el.add(new Option(o.name+' · '+o.date,o.id))}
 function match(planned,used){const choices=activities.filter(a=>!used.has(a.id)&&a.date===planned.date&&Math.abs(a.km-planned.km)<=Math.max(2,planned.km*.35));choices.sort((a,b)=>Math.abs(a.km-planned.km)-Math.abs(b.km-planned.km));if(!choices.length)return null;used.add(choices[0].id);return choices[0]}
-function render(){const start=weekStart(),dates=Array.from({length:7},(_,i)=>day(start,i)),rows=sessions.filter(s=>dates.includes(s.date)),used=new Set();$('weekLabel').textContent='Semaine du '+dates[0]+' au '+dates[6];$('planned').textContent=rows.reduce((a,s)=>a+s.km,0).toFixed(1)+' km';const actual=activities.filter(a=>dates.includes(a.date));$('actual').textContent=actual.length?actual.reduce((a,s)=>a+s.km,0).toFixed(1)+' km':'—';let matched=0;const cal=$('calendar');cal.replaceChildren();for(const date of dates){const box=document.createElement('article');box.className='plan-day';const h=document.createElement('h3');h.textContent=new Date(date+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'short'});box.append(h);for(const s of rows.filter(x=>x.date===date)){const a=match(s,used);if(a)matched++;const b=document.createElement('div');b.className='plan-item '+(a?'done':'unmatched');b.tabIndex=0;b.setAttribute('role','button');const label=document.createElement('strong');label.textContent=s.title+' · '+s.km+' km';const note=document.createElement('small');note.textContent=a?'À confirmer · '+a.km.toFixed(1)+' km Strava'+(a.duration_s?' · '+Math.round(a.duration_s/60/a.km)+' min/km':''):'Prévu · sans rapprochement';b.append(label,note);if(a?.url){const link=document.createElement('a');link.href=a.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Voir sur Strava ↗';link.style.display='block';link.style.marginTop='6px';link.onclick=e=>e.stopPropagation();b.append(link)}b.onclick=()=>edit(s);b.onkeydown=e=>{if(e.key==='Enter')edit(s)};box.append(b)}cal.append(box)}$('matched').textContent=matched+' / '+rows.length;const future=objectives.filter(o=>o.date>=today()).sort((a,b)=>a.date.localeCompare(b.date))[0];$('goal').textContent=future?future.name:'Aucun objectif futur';updateRecovery(rows,actual);refreshGpxSessions()}
-function edit(s){$('sid').value=s.id;$('date').value=s.date;$('title').value=s.title;$('type').value=s.type;$('km').value=s.km;$('objective').value=s.objectiveId||'';$('notes').value=s.notes||'';$('remove').hidden=false;$('sessionForm').scrollIntoView({behavior:'smooth'})}
+function render(){const start=weekStart(),dates=Array.from({length:7},(_,i)=>day(start,i)),rows=sessions.filter(s=>dates.includes(s.date)),used=new Set();$('weekLabel').textContent='Semaine du '+dates[0]+' au '+dates[6];$('planned').textContent=rows.reduce((a,s)=>a+s.km,0).toFixed(1)+' km';const actual=activities.filter(a=>dates.includes(a.date));
+$('actual').textContent =
+  actual.length
+    ? actual
+        .reduce((a, s) => a + s.km, 0)
+        .toLocaleString('fr-FR', {
+          minimumFractionDigits: 1,
+          maximumFractionDigits: 1
+        }) + ' km'
+    : '—';
+  let matched=0;
+  const cal=$('calendar');
+  cal.replaceChildren();
+  for(const date of dates){
+    const box=document.createElement('article');box.className='plan-day';
+    const h=document.createElement('h3');
+    h.textContent=new Date(date+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'short'});
+    box.append(h);
+    for(const s of rows.filter(x=>x.date===date)){
+      const a=match(s,used);if(a)matched++;
+      const b=document.createElement('div');b.className='plan-item '+(a?'done':'unmatched');
+      b.tabIndex=0;b.setAttribute('role','button');
+      const label=document.createElement('strong');label.textContent=s.title+' · '+s.km+' km';
+      const note=document.createElement('small');
+      note.textContent=a?'Rapprochement possible : '+a.km.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})+' km Strava':'Prévu · sans rapprochement';
+      b.append(label,note);
+      if(a?.url){const link=document.createElement('a');link.href=a.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Voir sur Strava ↗';link.onclick=e=>e.stopPropagation();b.append(link)}
+      b.onclick=()=>edit(s);b.onkeydown=e=>{if(e.key==='Enter')edit(s)};
+      box.append(b);
+    }
+    cal.append(box);
+  }
+  $('matched').textContent=matched+' / '+rows.length;
+  const future=objectives.filter(o=>o.date>=today()).sort((a,b)=>a.date.localeCompare(b.date))[0];
+  $('goal').textContent=future?future.name:'Aucun objectif futur';
+  refreshGpxSessions();
+  updateRecovery(rows,actual);
+}
+function edit(s){
+  $('sid').value=s.id;$('date').value=s.date;$('title').value=s.title;
+  $('type').value=s.type;$('km').value=s.km;$('objective').value=s.objectiveId||'';
+  $('notes').value=s.notes||'';$('remove').hidden=false;
+  $('sessionForm').scrollIntoView({behavior:'smooth'});
+}
 $('sessionForm').onsubmit=e=>{e.preventDefault();const id=$('sid').value||crypto.randomUUID(),s={id,date:$('date').value,title:$('title').value.trim(),type:$('type').value,km:Number($('km').value),objectiveId:$('objective').value,notes:$('notes').value};if(!s.title||!s.date||!Number.isFinite(s.km)||s.km<0||s.km>100)return;sessions=sessions.filter(x=>x.id!==id).concat(s);dirty=true;$('cloudState').textContent='Modifications à enregistrer dans Cloudflare.';$('sessionForm').reset();$('sid').value='';$('remove').hidden=true;render()};$('remove').onclick=()=>{const id=$('sid').value;if(id&&confirm('Supprimer cette séance ?')){sessions=sessions.filter(s=>s.id!==id);dirty=true;$('sessionForm').reset();$('sid').value='';$('remove').hidden=true;render()}};
 // V4.8.1 — Source Strava commune à RUN // DATA : luteo14-sport/cache/strava.
 // Ne crée aucune base fictive et ne déclenche aucun appel API protégé.
