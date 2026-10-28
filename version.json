@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "version": "5.2.1",
+=======
+  "version": "5.2.0",
+>>>>>>> origin/main
   "name": "LUTEO14",
   "release": "Smart Update",
   "releasedAt": "2026-10-28",
