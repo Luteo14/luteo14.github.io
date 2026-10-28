@@ -30,6 +30,8 @@ Suivre `worker/README.md`. Après déploiement du Worker, modifier `js/config.js
 
 Cette V1.2 n'envoie pas les données récupérées via l'API Strava à un modèle d'IA. Le cache backend est limité à 7 jours. Les données API ne sont pas commitées dans GitHub.
 
+
+
 ## Développement local
 
 ```bash
