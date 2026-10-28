@@ -1,0 +1,8 @@
+{
+  "version": "5.2.1",
+  "name": "LUTEO14",
+  "release": "Smart Update",
+  "releasedAt": "2026-10-28",
+  "build": "local",
+  "environment": "production"
+}
