@@ -1,0 +1,8 @@
+node_modules/
+playwright-report/
+test-results/
+.venv-garmin/
+**/.wrangler/
+Garmin-Exports/
+.env
+.env.*
