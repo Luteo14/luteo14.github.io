@@ -1,54 +1,43 @@
 name: LUTEO14 Quality Advanced
-
 on:
   pull_request:
     branches: [main]
   push:
     branches: [main]
   workflow_dispatch:
-
 permissions:
   contents: read
-
 jobs:
   quality-advanced:
     name: quality-advanced
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-
+    timeout-minutes: 25
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
+      - name: Node.js 22
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-
-      - name: Setup Python
+          cache: npm
+      - name: Python 3.12
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund
-
-      - name: Check Playwright installation
+      - name: Dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Syntax checks
         run: |
-          node --version
-          npm --version
-          npm ls @playwright/test playwright
-          ls -l node_modules/.bin/playwright
-
-      - name: Install Playwright Chromium
-        run: node node_modules/playwright/cli.js install --with-deps chromium
-
-      - name: SQL integration tests
+          node --check sport/coach/plan/plan.js
+          node --check garmin-cloud-worker/src/index.js
+      - name: Generator and Cloudflare Worker API tests (isolated)
+        run: node --test tests/quality/*.test.cjs
+      - name: D1 SQL migration tests (in memory)
         run: python scripts/test_d1_schema.py
-
+      - name: Install Chromium
+        run: node node_modules/playwright/cli.js install --with-deps chromium
       - name: Browser regression tests
         run: node node_modules/playwright/cli.js test
-
       - name: Upload Playwright report
         if: always()
         uses: actions/upload-artifact@v4
