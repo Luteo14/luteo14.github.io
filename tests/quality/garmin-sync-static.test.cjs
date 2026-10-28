@@ -1,0 +1,14 @@
+const {test}=require('node:test');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const root=path.resolve(__dirname,'../..');
+const coach=fs.readFileSync(path.join(root,'sport/coach/coach.js'),'utf8');
+const html=fs.readFileSync(path.join(root,'sport/coach/index.html'),'utf8');
+const nutrition=fs.readFileSync(path.join(root,'sport/nutrition/nutrition.js'),'utf8');
+const nh=fs.readFileSync(path.join(root,'sport/nutrition/index.html'),'utf8');
+test('Garmin : bouton visible et statut de fraîcheur',()=>{assert.match(html,/id="garminCloudPanel"/);assert.match(html,/id="garminFreshness"/);assert.match(html,/id="garminCloudSync"/)});
+test('Garmin : authentification via bridge, nonce et origine vérifiés',()=>{assert.match(coach,/event\.origin!==garminCloudOrigin/);assert.match(coach,/msg\.nonce!==garminCloudBridge\.nonce/)});
+test('Garmin : snapshot daté et complet avant remplacement du cache',()=>{assert.match(coach,/Snapshot incomplet/);assert.match(coach,/cloudUpdatedAt:payload\.updated_at/);assert.match(coach,/await renderRecoveryAnalytics\(\)/)});
+test('Nutrition : dates début/fin modifiables et plage valide',()=>{assert.match(nh,/id="startDate"/);assert.match(nh,/id="endDate"/);assert.match(nutrition,/function applyPeriod/);assert.match(nutrition,/validRange/)});
+test('Nutrition : bridge Cloudflare D1 pour synchroniser entre appareils',()=>{assert.match(nh,/id="cloudNutrition"/);assert.match(nutrition,/nutrition-bridge/);assert.match(nutrition,/expectedUpdatedAt/)});

@@ -32,5 +32,44 @@ test('Nutrition : export CSV de courses',async({page})=>{
  const downloadPromise=page.waitForEvent('download');
  await page.getByRole('button',{name:'Exporter en CSV'}).click();
  const download=await downloadPromise;
- expect(download.suggestedFilename()).toMatch(/courses-marathon-2026\.csv$/);
+ expect(download.suggestedFilename()).toMatch(/luteo14-courses-2026-10-24-2026-11-07\.csv$/);
+});
+
+
+test('Nutrition : période personnalisable et courses recalculées',async({page})=>{
+ await page.goto('/sport/nutrition/');
+ await expect(page.locator('.day-card')).toHaveCount(15);
+ await page.locator('#startDate').fill('2026-10-27');
+ await page.locator('#startDate').dispatchEvent('change');
+ await page.locator('#endDate').fill('2026-10-30');
+ await page.locator('#endDate').dispatchEvent('change');
+ await expect(page.locator('.day-card')).toHaveCount(4);
+ await expect(page.locator('.day-card .meal select')).toHaveCount(16);
+ await page.getByRole('button',{name:'Liste de courses'}).click();
+ await expect(page.locator('#shopping .shopping-item').first()).toBeVisible();
+});
+
+test('Nutrition : dates conservées après rechargement',async({page})=>{
+ await page.goto('/sport/nutrition/');
+ await page.locator('#startDate').fill('2026-10-25');
+ await page.locator('#startDate').dispatchEvent('change');
+ await page.locator('#endDate').fill('2026-10-29');
+ await page.locator('#endDate').dispatchEvent('change');
+ await page.reload();
+ await expect(page.locator('#startDate')).toHaveValue('2026-10-25');
+ await expect(page.locator('#endDate')).toHaveValue('2026-10-29');
+ await expect(page.locator('.day-card')).toHaveCount(5);
+});
+
+test('Nutrition : dates invalides refusées',async({page})=>{
+ await page.goto('/sport/nutrition/');
+ await page.locator('#startDate').fill('2026-11-10');
+ await page.locator('#startDate').dispatchEvent('change');
+ await expect(page.locator('#startDate')).toHaveValue('2026-10-24');
+ await expect(page.locator('.day-card')).toHaveCount(15);
+});
+
+test('Nutrition : bouton de synchronisation Cloudflare présent',async({page})=>{
+ await page.goto('/sport/nutrition/');
+ await expect(page.locator('#cloudNutrition')).toBeVisible();
 });
