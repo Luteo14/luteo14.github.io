@@ -3,3 +3,8 @@ activities.csv
 *.fit.gz
 .DS_Store
 node_modules/
+
+.wrangler/
+test-results/
+playwright-report/
+backup-*.sql

@@ -1,0 +1,3 @@
+CREATE TABLE IF NOT EXISTS sport_sync_preferences (owner_email TEXT PRIMARY KEY, enabled INTEGER NOT NULL DEFAULT 0, sync_time TEXT NOT NULL DEFAULT '07:00', timezone TEXT NOT NULL DEFAULT 'Europe/Paris', garmin_enabled INTEGER NOT NULL DEFAULT 1, strava_enabled INTEGER NOT NULL DEFAULT 0, updated_at TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS sport_sync_runs (owner_email TEXT NOT NULL, source TEXT NOT NULL, local_date TEXT NOT NULL, status TEXT NOT NULL, started_at TEXT NOT NULL, completed_at TEXT, details TEXT, PRIMARY KEY(owner_email,source,local_date));
+CREATE INDEX IF NOT EXISTS idx_sport_sync_runs_recent ON sport_sync_runs(owner_email,started_at DESC);

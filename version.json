@@ -1,8 +1,8 @@
 {
-  "version": "5.2.0",
+  "version": "5.2.1",
   "name": "LUTEO14",
-  "release": "Smart Update",
+  "release": "Garmin Smart Update - Recovery",
   "releasedAt": "2026-10-28",
-  "build": "local",
+  "build": "recovery-local",
   "environment": "production"
 }

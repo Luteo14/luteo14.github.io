@@ -12,3 +12,6 @@ ADMIN_EMAIL = "julien.theaud@gmail.com"
 binding = "DB"
 database_name = "luteo-pro-docs"
 database_id = "57733c25-f17d-44a0-8e91-262dd0e56334"
+
+[triggers]
+crons = ["*/15 * * * *"]
