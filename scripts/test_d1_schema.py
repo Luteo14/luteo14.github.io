@@ -9,7 +9,7 @@ MIGRATIONS = ROOT / 'garmin-cloud-worker' / 'migrations'
 class D1SchemaTests(unittest.TestCase):
     def setUp(self):
         self.db = sqlite3.connect(':memory:')
-        for filename in ('002_sport_objectives.sql', '004_training_sessions.sql'):
+        for filename in ('002_sport_objectives.sql', '004_training_sessions.sql', '005_nutrition_plans.sql'):
             self.db.executescript((MIGRATIONS / filename).read_text(encoding='utf-8-sig'))
 
     def tearDown(self):
@@ -24,6 +24,15 @@ class D1SchemaTests(unittest.TestCase):
         self.assertEqual(self.db.execute("SELECT payload FROM sport_training_sessions WHERE owner_email=?",('b@test.invalid',)).fetchone()[0],'{"km":12}')
         self.db.execute("DELETE FROM sport_training_sessions WHERE owner_email=? AND id=?",('a@test.invalid','s1'))
         self.assertEqual(self.db.execute('SELECT COUNT(*) FROM sport_training_sessions').fetchone()[0],1)
+
+    def test_nutrition_create_update_and_persistence(self):
+        sql = 'INSERT INTO sport_nutrition_plans(owner_email,payload,updated_at) VALUES(?,?,?)'
+        self.db.execute(sql, ('a@test.invalid', '{"startDate":"2026-10-24","endDate":"2026-11-07"}', '2026-10-28'))
+        self.db.execute(sql, ('b@test.invalid', '{"startDate":"2026-11-01","endDate":"2026-11-05"}', '2026-10-28'))
+        self.db.execute('UPDATE sport_nutrition_plans SET payload=? WHERE owner_email=?', ('{"persons":3}', 'a@test.invalid'))
+        self.db.commit()
+        self.assertEqual(self.db.execute('SELECT payload FROM sport_nutrition_plans WHERE owner_email=?', ('a@test.invalid',)).fetchone()[0], '{"persons":3}')
+        self.assertIn('2026-11-01', self.db.execute('SELECT payload FROM sport_nutrition_plans WHERE owner_email=?', ('b@test.invalid',)).fetchone()[0])
 
     def test_objective_create_update_soft_delete(self):
         sql='INSERT INTO sport_objectives(id,owner_email,payload,updated_at,deleted_at) VALUES(?,?,?,?,NULL)'
