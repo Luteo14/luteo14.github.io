@@ -1,35 +1,61 @@
 name: LUTEO14 Quality Advanced
+
 on:
   pull_request:
     branches: [main]
   push:
     branches: [main]
   workflow_dispatch:
+
 permissions:
   contents: read
+
 jobs:
   quality-advanced:
     name: quality-advanced
     runs-on: ubuntu-latest
     timeout-minutes: 20
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - uses: actions/setup-python@v5
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: npm install --no-audit --no-fund
-      - run: npx playwright install --with-deps chromium
-      - name: SQL integration tests (in-memory only)
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Check Playwright installation
+        run: |
+          node --version
+          npm --version
+          npm ls @playwright/test playwright
+          ls -l node_modules/.bin/playwright
+
+      - name: Install Playwright Chromium
+        run: node node_modules/playwright/cli.js install --with-deps chromium
+
+      - name: SQL integration tests
         run: python scripts/test_d1_schema.py
+
       - name: Browser regression tests
-        run: npx playwright test
-      - name: Upload report
+        run: node node_modules/playwright/cli.js test
+
+      - name: Upload Playwright report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: quality-advanced-report
-          path: playwright-report/
+          path: |
+            playwright-report/
+            test-results/
           retention-days: 14
+          if-no-files-found: warn

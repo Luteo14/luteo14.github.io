@@ -2,3 +2,4 @@ activities.csv
 *.fit
 *.fit.gz
 .DS_Store
+node_modules/
