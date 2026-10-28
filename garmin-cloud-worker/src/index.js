@@ -127,8 +127,6 @@ async function syncGarmin(env){
  }
  return {ok:true,categories:3,updated_at:now,days:{'body-battery':28,sleep:7,hrv:7}};
 }
-
-
 function syncSettingsBridge(env){const origin=JSON.stringify(env.FRONTEND_ORIGIN);return new Response(`<!doctype html><html lang="fr"><meta charset="utf-8"><title>Programmation SPORT</title><body style="background:#101c32;color:white;font:16px system-ui;padding:2rem"><h1>Programmation des données SPORT</h1><p id="state">Connexion sécurisée…</p><script>
 const ORIGIN=${origin},nonce=new URLSearchParams(location.hash.slice(1)).get('nonce');
 function post(type,payload){if(window.opener&&/^[a-f0-9]{32}$/.test(nonce||''))window.opener.postMessage({source:'luteo-sync-settings-v52',nonce,type,payload},ORIGIN)}
@@ -176,6 +174,7 @@ export default {async scheduled(event,env,ctx){ctx.waitUntil((async()=>{const em
   await env.DB.prepare('INSERT INTO sport_sync_preferences(owner_email,enabled,sync_time,timezone,garmin_enabled,strava_enabled,updated_at) VALUES(?,?,?,?,?,?,?) ON CONFLICT(owner_email) DO UPDATE SET enabled=excluded.enabled,sync_time=excluded.sync_time,timezone=excluded.timezone,garmin_enabled=excluded.garmin_enabled,strava_enabled=excluded.strava_enabled,updated_at=excluded.updated_at').bind(email,p.enabled?1:0,p.time,p.timezone,p.garmin?1:0,p.strava?1:0,new Date().toISOString()).run();
   return response({ok:true});
  }
+
  if(req.method==='GET'&&u.pathname==='/bridge')return bridge(env);
 
 
