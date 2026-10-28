@@ -127,10 +127,54 @@ async function syncGarmin(env){
  }
  return {ok:true,categories:3,updated_at:now,days:{'body-battery':28,sleep:7,hrv:7}};
 }
-export default {async fetch(req,env){const u=new URL(req.url);try{
+function syncSettingsBridge(env){const origin=JSON.stringify(env.FRONTEND_ORIGIN);return new Response(`<!doctype html><html lang="fr"><meta charset="utf-8"><title>Programmation SPORT</title><body style="background:#101c32;color:white;font:16px system-ui;padding:2rem"><h1>Programmation des données SPORT</h1><p id="state">Connexion sécurisée…</p><script>
+const ORIGIN=${origin},nonce=new URLSearchParams(location.hash.slice(1)).get('nonce');
+function post(type,payload){if(window.opener&&/^[a-f0-9]{32}$/.test(nonce||''))window.opener.postMessage({source:'luteo-sync-settings-v52',nonce,type,payload},ORIGIN)}
+async function api(method,data){const r=await fetch('/api/sync-settings',{method,credentials:'same-origin',cache:'no-store',headers:method==='PUT'?{'Content-Type':'application/json'}:{},body:method==='PUT'?JSON.stringify(data):undefined});const result=await r.json().catch(()=>({}));if(!r.ok)throw Error(result.error||'HTTP '+r.status);return result}
+window.addEventListener('message',async e=>{if(e.origin!==ORIGIN||e.source!==window.opener||e.data?.source!=='luteo-sync-settings-v52'||e.data?.nonce!==nonce||e.data?.type!=='save')return;try{await api('PUT',e.data.payload);post('saved',await api('GET'));document.getElementById('state').textContent='Préférences enregistrées.'}catch(err){post('error',{message:err.message});document.getElementById('state').textContent=err.message}});
+api('GET').then(d=>{post('loaded',d);document.getElementById('state').textContent='Connecté. Tu peux revenir à Mes données.'}).catch(e=>{post('error',{message:e.message});document.getElementById('state').textContent=e.message});
+<\/script></body></html>`,{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'"}})}
+
+// V5.2 - scheduled synchronization (server-only, no public cron endpoint)
+function syncLocalParts(now=new Date(),zone='Europe/Paris'){
+ const parts=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:zone,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now).map(p=>[p.type,p.value]));
+ return {date:`${parts.year}-${parts.month}-${parts.day}`,minute:Number(parts.hour)*60+Number(parts.minute)};
+}
+function syncDue(p,now=new Date(),source='garmin'){
+ if(!p||!Number(p.enabled)||!Number(p[source+'_enabled']))return null;
+ if(!/^([01]\d|2[0-3]):[0-5]\d$/.test(p.sync_time))return null;
+ const local=syncLocalParts(now,p.timezone||'Europe/Paris');
+ const [h,m]=p.sync_time.split(':').map(Number);
+ // A 15-minute scheduler runs at or after the selected time, once per local date.
+ return local.minute>=h*60+m?local.date:null;
+}
+async function claimSync(env,ownerEmail,source,date){
+ const now=new Date().toISOString();const r=await env.DB.prepare('INSERT OR IGNORE INTO sport_sync_runs(owner_email,source,local_date,status,started_at) VALUES(?,?,?,?,?)').bind(ownerEmail,source,date,'running',now).run();
+ return (r.meta?.changes||0)>0;
+}
+async function finishSync(env,ownerEmail,source,date,status,details){
+ await env.DB.prepare('UPDATE sport_sync_runs SET status=?,completed_at=?,details=? WHERE owner_email=? AND source=? AND local_date=?').bind(status,new Date().toISOString(),String(details||'').slice(0,300),ownerEmail,source,date).run();
+}
+
+export default {async scheduled(event,env,ctx){ctx.waitUntil((async()=>{const email=String(env.ADMIN_EMAIL||'').toLowerCase();if(!email)return;const p=await env.DB.prepare('SELECT * FROM sport_sync_preferences WHERE owner_email=?').bind(email).first();const date=syncDue(p,new Date(event.scheduledTime),'garmin');if(!date||!await claimSync(env,email,'garmin',date))return;try{await syncGarmin(env);await finishSync(env,email,'garmin',date,'success','Snapshot Garmin actualisé')}catch(e){console.error('Scheduled Garmin sync failed:',e.message);await finishSync(env,email,'garmin',date,'failed',e.message)}})())},async fetch(req,env){const u=new URL(req.url);try{
  if(u.pathname==='/health')return response({ok:true});
  // No CORS on private API: authenticated browser navigates to /bridge.
  const email=await owner(req,env);
+ if(req.method==='GET'&&u.pathname==='/sync-settings-bridge')return syncSettingsBridge(env);
+ if(req.method==='GET'&&u.pathname==='/api/sync-settings'){
+  const p=await env.DB.prepare('SELECT * FROM sport_sync_preferences WHERE owner_email=?').bind(email).first();
+  const rows=await env.DB.prepare('SELECT source,local_date,status,started_at,completed_at,details FROM sport_sync_runs WHERE owner_email=? ORDER BY started_at DESC LIMIT 20').bind(email).all();
+  return response({preferences:p?{enabled:!!p.enabled,time:p.sync_time,timezone:p.timezone,garmin:!!p.garmin_enabled,strava:!!p.strava_enabled}:{enabled:false,time:'07:00',timezone:'Europe/Paris',garmin:true,strava:false},runs:rows.results||[]});
+ }
+ if(req.method==='PUT'&&u.pathname==='/api/sync-settings'){
+  const origin=req.headers.get('Origin');if(origin&&origin!==u.origin)return response({error:'Origine refusée'},403);
+  const raw=await req.text();if(raw.length>2000)return response({error:'Requête trop volumineuse'},413);
+  let p;try{p=JSON.parse(raw)}catch{return response({error:'JSON invalide'},400)}
+  if(!p||typeof p.enabled!=='boolean'||typeof p.garmin!=='boolean'||typeof p.strava!=='boolean'||!/^([01]\d|2[0-3]):[0-5]\d$/.test(p.time)||p.timezone!=='Europe/Paris')return response({error:'Paramètres invalides'},400);
+  await env.DB.prepare('INSERT INTO sport_sync_preferences(owner_email,enabled,sync_time,timezone,garmin_enabled,strava_enabled,updated_at) VALUES(?,?,?,?,?,?,?) ON CONFLICT(owner_email) DO UPDATE SET enabled=excluded.enabled,sync_time=excluded.sync_time,timezone=excluded.timezone,garmin_enabled=excluded.garmin_enabled,strava_enabled=excluded.strava_enabled,updated_at=excluded.updated_at').bind(email,p.enabled?1:0,p.time,p.timezone,p.garmin?1:0,p.strava?1:0,new Date().toISOString()).run();
+  return response({ok:true});
+ }
+
  if(req.method==='GET'&&u.pathname==='/bridge')return bridge(env);
 
 
