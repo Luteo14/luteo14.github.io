@@ -14,3 +14,12 @@ ACCESS_TEAM_DOMAIN = "https://hidden-silence-9188.cloudflareaccess.com"
 ADMIN_EMAIL = "julien.theaud@gmail.com"
 # Optional: STRAVA_ATHLETE_ID = "123456"
 # STRAVA_CLIENT_SECRET must be a Wrangler secret, never committed.
+
+# Lot 3 : même base D1 et même calendrier que Garmin, mais Worker indépendant.
+[[d1_databases]]
+binding = "DB"
+database_name = "luteo-pro-docs"
+database_id = "57733c25-f17d-44a0-8e91-262dd0e56334"
+
+[triggers]
+crons = ["*/15 * * * *"]

@@ -51,7 +51,41 @@ document.getElementById('connect').onclick=()=>{location.href='/auth/login?nonce
 </script></html>`,{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",'Referrer-Policy':'no-referrer'}})
 }
 
-export default {async fetch(req,env){const u=new URL(req.url);if(req.method==='OPTIONS')return new Response(null,{status:204,headers:cors(env)});try{
+
+// V5.2.2 - Programmation Strava autonome ; ne modifie pas le Worker Garmin.
+function stravaLocalParts(now,zone='Europe/Paris'){
+ const p=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:zone,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now).map(x=>[x.type,x.value]));
+ return {date:`${p.year}-${p.month}-${p.day}`,minute:Number(p.hour)*60+Number(p.minute)};
+}
+function stravaDue(p,now){
+ if(!p||!Number(p.enabled)||!Number(p.strava_enabled))return null;
+ if(!/^([01]\d|2[0-3]):[0-5]\d$/.test(p.sync_time)||p.timezone!=='Europe/Paris')return null;
+ const local=stravaLocalParts(now,p.timezone);
+ const [h,m]=p.sync_time.split(':').map(Number);
+ return local.minute>=h*60+m?local.date:null;
+}
+async function claimStravaSync(env,email,date){
+ const r=await env.DB.prepare('INSERT OR IGNORE INTO sport_sync_runs(owner_email,source,local_date,status,started_at) VALUES(?,?,?,?,?)').bind(email,'strava',date,'running',new Date().toISOString()).run();
+ return (r.meta?.changes||0)>0;
+}
+async function finishStravaSync(env,email,date,status,details){
+ await env.DB.prepare('UPDATE sport_sync_runs SET status=?,completed_at=?,details=? WHERE owner_email=? AND source=? AND local_date=?').bind(status,new Date().toISOString(),String(details).slice(0,300),email,'strava',date).run();
+}
+async function scheduledStrava(event,env){
+ const email=String(env.ADMIN_EMAIL||'').toLowerCase();if(!email||!env.DB)throw Error('Configuration Strava D1 absente');
+ const p=await env.DB.prepare('SELECT * FROM sport_sync_preferences WHERE owner_email=?').bind(email).first();
+ const date=stravaDue(p,new Date(event.scheduledTime));
+ if(!date||!await claimStravaSync(env,email,date))return;
+ try{
+  const cache=await fetchActivities(env);
+  await finishStravaSync(env,email,date,'success',`${cache.activities.length} activités actualisées`);
+ }catch(e){
+  console.error('Scheduled Strava sync failed:',e.message);
+  await finishStravaSync(env,email,date,'failed',e.message);
+ }
+}
+
+export default {async scheduled(event,env,ctx){ctx.waitUntil(scheduledStrava(event,env))},async fetch(req,env){const u=new URL(req.url);if(req.method==='OPTIONS')return new Response(null,{status:204,headers:cors(env)});try{
 if(u.pathname==='/health')return json(env,{ok:true});
 await requireOwner(req,env);
 if(req.method==='POST'&&!sameOrigin(req,env))return json(env,{error:'Origine non autorisee'},403);
