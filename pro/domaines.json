@@ -1,0 +1,273 @@
+[
+  {
+    "slug": "gestion-de-projet",
+    "title": "Gestion de projet",
+    "color": "#2789c8",
+    "intro": "Piloter, structurer et réussir vos projets.",
+    "services": [
+      {
+        "title": "Cadrage de projet",
+        "apiDomain": "accompagnement",
+        "apiService": "audit-de-transformation",
+        "desc": "Définir un cadre clair, partagé et réaliste pour sécuriser la réussite de votre projet.",
+        "bullets": [
+          "Analyse du besoin et des enjeux",
+          "Définition des objectifs et du périmètre",
+          "Identification des parties prenantes",
+          "Formalisation d’un plan de cadrage",
+          "Restitution et validation partagée"
+        ],
+        "slug": "audit-de-transformation",
+        "originalTitle": "Audit de transformation"
+      },
+      {
+        "title": "Pilotage & suivi",
+        "apiDomain": "accompagnement",
+        "apiService": "amelioration-continue",
+        "desc": "Rendre l’avancement lisible, suivre les actions et faciliter les décisions au fil du projet.",
+        "slug": "amelioration-continue",
+        "originalTitle": "Amélioration continue",
+        "bullets": []
+      },
+      {
+        "title": "Appui méthodologique",
+        "apiDomain": "accompagnement",
+        "apiService": "demarche-de-resolution-de-probleme",
+        "desc": "Choisir et mettre en pratique une démarche adaptée aux enjeux et au contexte du projet.",
+        "slug": "demarche-de-resolution-de-probleme",
+        "originalTitle": "Démarche de résolution de problème",
+        "bullets": []
+      },
+      {
+        "apiDomain": "accompagnement",
+        "apiService": "management-visuel",
+        "slug": "management-visuel",
+        "title": "Management visuel",
+        "originalTitle": "Management visuel",
+        "desc": "Management visuel : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      }
+    ]
+  },
+  {
+    "slug": "analyse-performance",
+    "title": "Analyse & performance",
+    "color": "#e5af16",
+    "intro": "Mesurer, comprendre et améliorer la performance.",
+    "services": [
+      {
+        "apiDomain": "accompagnement",
+        "apiService": "audit-dorganisation",
+        "slug": "audit-dorganisation",
+        "title": "Audit d’organisation",
+        "originalTitle": "Audit d’organisation",
+        "desc": "Audit d’organisation : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      },
+      {
+        "apiDomain": "avant-vente",
+        "apiService": "accompagnement-lors-des-rencontres-commerciales",
+        "slug": "accompagnement-lors-des-rencontres-commerciales",
+        "title": "Accompagnement lors des rencontres commerciales",
+        "originalTitle": "Accompagnement lors des rencontres commerciales",
+        "desc": "Accompagnement lors des rencontres commerciales : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      },
+      {
+        "apiDomain": "avant-vente",
+        "apiService": "reponses-a-appel-doffre",
+        "slug": "reponses-a-appel-doffre",
+        "title": "Réponses à appel d’offre",
+        "originalTitle": "Réponses à appel d’offre",
+        "desc": "Réponses à appel d’offre : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      },
+      {
+        "apiDomain": "avant-vente",
+        "apiService": "conference-dexpert",
+        "slug": "conference-dexpert",
+        "title": "Conférence d’expert",
+        "originalTitle": "Conférence d’expert",
+        "desc": "Conférence d’expert : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      },
+      {
+        "apiDomain": "avant-vente",
+        "apiService": "facilitation-deie-executive-insights-exchange",
+        "slug": "facilitation-deie-executive-insights-exchange",
+        "title": "Facilitation d’EIE (Executive Insights Exchange)",
+        "originalTitle": "Facilitation d’EIE (Executive Insights Exchange)",
+        "desc": "Facilitation d’EIE (Executive Insights Exchange) : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      }
+    ]
+  },
+  {
+    "slug": "solutions-digitales",
+    "title": "Solutions digitales",
+    "color": "#45a75b",
+    "intro": "Concevoir des outils simples et efficaces.",
+    "services": [
+      {
+        "apiDomain": "accompagnement",
+        "apiService": "accompagnement-a-la-mise-en-place-dun-produit",
+        "slug": "accompagnement-a-la-mise-en-place-dun-produit",
+        "title": "Accompagnement à la mise en place d’un produit",
+        "originalTitle": "Accompagnement à la mise en place d’un produit",
+        "desc": "Accompagnement à la mise en place d’un produit : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      },
+      {
+        "apiDomain": "accompagnement",
+        "apiService": "accompagnement-aux-outils",
+        "slug": "accompagnement-aux-outils",
+        "title": "Accompagnement aux outils",
+        "originalTitle": "Accompagnement aux outils",
+        "desc": "Accompagnement aux outils : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      }
+    ]
+  },
+  {
+    "slug": "conduite-du-changement",
+    "title": "Conduite du changement",
+    "color": "#9c62b9",
+    "intro": "Accompagner vos équipes dans les évolutions.",
+    "services": [
+      {
+        "apiDomain": "accompagnement",
+        "apiService": "mise-en-place-dune-equipe",
+        "slug": "mise-en-place-dune-equipe",
+        "title": "Mise en place d’une équipe",
+        "originalTitle": "Mise en place d’une équipe",
+        "desc": "Mise en place d’une équipe : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      },
+      {
+        "apiDomain": "accompagnement",
+        "apiService": "construction-dune-equipe",
+        "slug": "construction-dune-equipe",
+        "title": "Construction d’une équipe",
+        "originalTitle": "Construction d’une équipe",
+        "desc": "Construction d’une équipe : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      },
+      {
+        "apiDomain": "facilitation",
+        "apiService": "conception-et-animation-dateliers",
+        "slug": "conception-et-animation-dateliers",
+        "title": "Conception et animation d’ateliers",
+        "originalTitle": "Conception et animation d’ateliers",
+        "desc": "Conception et animation d’ateliers : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      },
+      {
+        "apiDomain": "facilitation",
+        "apiService": "ateliers-dideation",
+        "slug": "ateliers-dideation",
+        "title": "Ateliers d’idéation",
+        "originalTitle": "Ateliers d’idéation",
+        "desc": "Ateliers d’idéation : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      },
+      {
+        "apiDomain": "facilitation",
+        "apiService": "conception-de-seminaire-intelligence-collective",
+        "slug": "conception-de-seminaire-intelligence-collective",
+        "title": "Conception de séminaire / intelligence collective",
+        "originalTitle": "Conception de séminaire / intelligence collective",
+        "desc": "Conception de séminaire / intelligence collective : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      },
+      {
+        "apiDomain": "facilitation",
+        "apiService": "facilitation-graphique",
+        "slug": "facilitation-graphique",
+        "title": "Facilitation graphique",
+        "originalTitle": "Facilitation graphique",
+        "desc": "Facilitation graphique : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      },
+      {
+        "apiDomain": "facilitation",
+        "apiService": "retrospective",
+        "slug": "retrospective",
+        "title": "Rétrospective",
+        "originalTitle": "Rétrospective",
+        "desc": "Rétrospective : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      },
+      {
+        "apiDomain": "coaching",
+        "apiService": "atelier-codev",
+        "slug": "atelier-codev",
+        "title": "Atelier CoDev",
+        "originalTitle": "Atelier CoDev",
+        "desc": "Atelier CoDev : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      },
+      {
+        "apiDomain": "coaching",
+        "apiService": "accompagnement-professionnel",
+        "slug": "accompagnement-professionnel",
+        "title": "Accompagnement professionnel",
+        "originalTitle": "Accompagnement professionnel",
+        "desc": "Accompagnement professionnel : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      },
+      {
+        "apiDomain": "coaching",
+        "apiService": "coaching-the-coach",
+        "slug": "coaching-the-coach",
+        "title": "Coaching the coach",
+        "originalTitle": "Coaching the coach",
+        "desc": "Coaching the coach : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      }
+    ]
+  },
+  {
+    "slug": "formation-accompagnement",
+    "title": "Formation & accompagnement",
+    "color": "#ec8b26",
+    "intro": "Transmettre, faire monter en compétence et gagner en autonomie.",
+    "services": [
+      {
+        "apiDomain": "formation",
+        "apiService": "formations-et-certifications-agile",
+        "slug": "formations-et-certifications-agile",
+        "title": "Formations et certifications Agile",
+        "originalTitle": "Formations et certifications Agile",
+        "desc": "Formations et certifications Agile : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      },
+      {
+        "apiDomain": "formation",
+        "apiService": "acculturation-dediees-dcs-vpcs",
+        "slug": "acculturation-dediees-dcs-vpcs",
+        "title": "Acculturation dédiées DCS VPCS",
+        "originalTitle": "Acculturation dédiées DCS VPCS",
+        "desc": "Acculturation dédiées DCS VPCS : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      },
+      {
+        "apiDomain": "formation",
+        "apiService": "formations-a-la-carte",
+        "slug": "formations-a-la-carte",
+        "title": "Formations à la carte",
+        "originalTitle": "Formations à la carte",
+        "desc": "Formations à la carte : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      },
+      {
+        "apiDomain": "formation",
+        "apiService": "bootcamp-sensibilisation-agilite",
+        "slug": "bootcamp-sensibilisation-agilite",
+        "title": "Bootcamp sensibilisation Agilité",
+        "originalTitle": "Bootcamp sensibilisation Agilité",
+        "desc": "Bootcamp sensibilisation Agilité : une prestation adaptée à vos enjeux, à vos équipes et à votre contexte.",
+        "bullets": []
+      }
+    ]
+  }
+]
