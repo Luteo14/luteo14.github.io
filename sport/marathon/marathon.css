@@ -4,3 +4,16 @@
 
 /* Chronologie et nutrition V2.0 */
 .chrono-controls{display:flex;gap:14px;flex-wrap:wrap;align-items:end;margin:22px 0}.chrono-controls label{display:grid;gap:7px;color:#f8f7fc;font-weight:600}.chrono-controls input,.chrono-controls button{border:1px solid #53608c;border-radius:12px;background:#1b2652;color:#fff;padding:12px;font:inherit;min-height:46px}.chrono-controls button{cursor:pointer;background:linear-gradient(120deg,#3468f5,#8455d8,#f34d91);border:0}.chrono-summary{background:#1b2652;padding:18px;border-radius:16px;font-weight:700;color:#fff}.chrono-list{display:grid;gap:10px;margin:16px 0 26px}.chrono-row{display:grid;grid-template-columns:80px minmax(0,1fr);gap:14px;padding:14px;border:1px solid #3c4875;background:#19234c;border-radius:14px}.chrono-row>strong{color:#f9b7d0;font-size:1.1rem}.chrono-row b,.chrono-row small{display:block}.chrono-row small{color:#cbd2e5;margin-top:4px;line-height:1.5}.nutrition-plan{margin:24px 0;background:#1b2652;border:1px solid #394778;border-radius:18px;padding:20px;color:#f8f7fc}.nutrition-plan p{line-height:1.65}.nutrition-table-wrap{overflow-x:auto}.nutrition-table{width:100%;border-collapse:collapse;min-width:440px}.nutrition-table th,.nutrition-table td{padding:12px;text-align:left;border-bottom:1px solid #394778}.nutrition-table th{color:#f9b7d0}.nutrition-pack{margin-top:20px}.phase-nav{flex-wrap:wrap}@media(max-width:520px){.chrono-row{grid-template-columns:65px minmax(0,1fr);gap:9px;padding:11px}.nutrition-plan{padding:14px}}
+
+/* Echauffement marathon — section autonome */
+.warmup-steps{list-style:none;padding:0;margin:22px 0;display:grid;gap:12px}
+.warmup-steps li{display:grid;grid-template-columns:76px minmax(0,1fr);gap:16px;align-items:start;background:#1b2652;border:1px solid #ffffff25;border-radius:14px;padding:16px}
+.warmup-steps time{font-weight:800;color:#74c9f8}
+.warmup-steps strong{display:block;color:#fff}
+.warmup-steps p{margin:5px 0 0;color:#c6cce4}
+.warmup-videos{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.warmup-videos h3{flex-basis:100%;margin:0 0 4px}
+.warmup-videos a{display:inline-block;padding:10px 14px;border:1px solid #74c9f8;border-radius:10px;color:#b7e5ff;text-decoration:none;font-weight:650}
+.warmup-videos a:hover,.warmup-videos a:focus-visible{background:#283a76;text-decoration:underline}
+.warmup-note{background:#1b2652;border-left:4px solid #74c9f8;border-radius:9px;padding:16px;color:#e0e4f2;margin-top:22px}
+@media(max-width:480px){.warmup-steps li{grid-template-columns:1fr;gap:5px}}
