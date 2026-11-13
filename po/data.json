@@ -1,0 +1,1942 @@
+{
+  "title": "Parcours PO — Attendus par étape",
+  "subtitle": "Les rôles, leurs actions et les attendus de l’étape",
+  "context": "Un mode d’emploi pour contribuer aux produits numériques de l’ADEME.",
+  "fields": {
+    "objective": "Mon objectif",
+    "actions": "Mes actions clés",
+    "inputs": "Je dois arriver avec…",
+    "outputs": "Je dois repartir avec…",
+    "gate": "Je peux passer à la suite lorsque…",
+    "deliverables": "Livrables"
+  },
+  "stages": [
+    {
+      "title": "Accueil",
+      "objective": "Comprendre le besoin et porter l’initiative.",
+      "milestone": "Besoin et portage clarifiés. Prochaines actions définies.",
+      "meetings": "Entretien d’accueil et point d’orientation si nécessaire.",
+      "roles": [
+        {
+          "id": 1,
+          "name": "Product Owner",
+          "fields": {
+            "objective": "Expliquer le problème métier.",
+            "actions": "Expliquer le problème métier Identifier sponsor et utilisateurs",
+            "inputs": "Besoin et contexte métier Contacts et contraintes connus",
+            "outputs": "Fiche initiative Carte des parties prenantes",
+            "gate": "Problème compris PO et sponsor identifiés",
+            "deliverables": "Fiche initiative Carte des parties prenantes"
+          }
+        },
+        {
+          "id": 2,
+          "name": "Proxy Product Owner - PPO",
+          "fields": {
+            "objective": "Comprendre le besoin et le mandat du PO",
+            "actions": "Comprendre le besoin et le mandat du PO",
+            "inputs": "Demande et contexte métier",
+            "outputs": "Mandat et interlocuteurs clarifiés",
+            "gate": "Délégation explicite",
+            "deliverables": "Mandat et interlocuteurs clarifiés"
+          }
+        },
+        {
+          "id": 3,
+          "name": "Product / Program Manager",
+          "fields": {
+            "objective": "Relier l'initiative à la stratégie.",
+            "actions": "Relier l'initiative à la stratégie Identifier les produits concernés",
+            "inputs": "Besoin et contexte métier Contacts et contraintes connus",
+            "outputs": "Positionnement programme Carte des acteurs",
+            "gate": "Alignement explicite Sponsor identifié",
+            "deliverables": "Positionnement programme Carte des acteurs"
+          }
+        },
+        {
+          "id": 4,
+          "name": "Business Owner / Métier",
+          "fields": {
+            "objective": "Exprimer le problème et l'urgence.",
+            "actions": "Exprimer le problème et l'urgence Désigner les interlocuteurs métier",
+            "inputs": "Besoin et contexte métier Contacts et contraintes connus",
+            "outputs": "Demande métier Sponsor et représentants",
+            "gate": "Besoin explicite Responsable métier identifié",
+            "deliverables": "Demande métier Sponsor et représentants"
+          }
+        },
+        {
+          "id": 5,
+          "name": "Coach / Accompagnateur",
+          "fields": {
+            "objective": "Organiser l’accueil et expliquer le parcours",
+            "actions": "Organiser l’accueil et expliquer le parcours",
+            "inputs": "Demande et contexte métier",
+            "outputs": "Synthèse d’accueil et prochaines actions",
+            "gate": "Acteurs identifiés et qualification planifiée",
+            "deliverables": "Synthèse d’accueil et prochaines actions"
+          }
+        },
+        {
+          "id": 6,
+          "name": "Business Analyst",
+          "fields": {
+            "objective": "Recueillir le besoin initial.",
+            "actions": "Recueillir le besoin initial Cartographier acteurs et processus",
+            "inputs": "Besoin et contexte métier Contacts et contraintes connus",
+            "outputs": "Synthèse du besoin Processus existant",
+            "gate": "Contexte documenté Interlocuteurs identifiés",
+            "deliverables": "Synthèse du besoin Processus existant"
+          }
+        },
+        {
+          "id": 7,
+          "name": "UX/UI Designer",
+          "fields": {
+            "objective": "Repérer les utilisateurs et les irritants",
+            "actions": "Repérer les utilisateurs et les irritants",
+            "inputs": "Demande et contexte métier",
+            "outputs": "Cibles et hypothèses d’usage",
+            "gate": "Cibles explicites",
+            "deliverables": "Cibles et hypothèses d’usage"
+          }
+        },
+        {
+          "id": 8,
+          "name": "Utilisateur clé",
+          "fields": {
+            "objective": "Décrire les pratiques et les irritants",
+            "actions": "Décrire les pratiques et les irritants",
+            "inputs": "Demande et contexte métier",
+            "outputs": "Exemples de situations réelles",
+            "gate": "Pratiques décrites",
+            "deliverables": "Exemples de situations réelles"
+          }
+        },
+        {
+          "id": 9,
+          "name": "Orchestrateur de l’offre de réalisation",
+          "fields": {
+            "objective": "Repérer le besoin de réalisation si sollicité",
+            "actions": "Repérer le besoin de réalisation si sollicité",
+            "inputs": "Demande et contexte métier",
+            "outputs": "Premières pistes de réalisation",
+            "gate": "Besoin compris",
+            "deliverables": "Premières pistes de réalisation"
+          }
+        },
+        {
+          "id": 10,
+          "name": "Équipe de réalisation",
+          "fields": {
+            "objective": "Signaler les contraintes techniques connues si sollicitée",
+            "actions": "Signaler les contraintes techniques connues si sollicitée",
+            "inputs": "Demande et contexte métier",
+            "outputs": "Contraintes initiales",
+            "gate": "Inconnues explicites",
+            "deliverables": "Contraintes initiales"
+          }
+        },
+        {
+          "id": 11,
+          "name": "Testeur / Qualité",
+          "fields": {
+            "objective": "Repérer parcours et risques métier.",
+            "actions": "Repérer parcours et risques métier Identifier acteurs de la recette",
+            "inputs": "Besoin et contexte métier Contacts et contraintes connus",
+            "outputs": "Premiers risques qualité Carte des contributeurs recette",
+            "gate": "Parcours critiques repérés Contacts de recette identifiés",
+            "deliverables": "Premiers risques qualité Carte des contributeurs recette"
+          }
+        },
+        {
+          "id": 12,
+          "name": "Expert numérique",
+          "fields": {
+            "objective": "Orienter vers les expertises pertinentes",
+            "actions": "Orienter vers les expertises pertinentes",
+            "inputs": "Demande et contexte métier",
+            "outputs": "Orientation vers les spécialistes",
+            "gate": "Périmètre d’expertise clarifié",
+            "deliverables": "Orientation vers les spécialistes"
+          }
+        },
+        {
+          "id": 13,
+          "name": "RSSI / Expert cybersécurité",
+          "fields": {
+            "objective": "Repérer actifs et exposition.",
+            "actions": "Repérer actifs et exposition Identifier le besoin d'analyse de risques",
+            "inputs": "Besoin et contexte métier Contacts et contraintes connus",
+            "outputs": "Préqualification sécurité Périmètre des actifs",
+            "gate": "Contacts sécurité identifiés Sensibilité initiale repérée",
+            "deliverables": "Préqualification sécurité Périmètre des actifs"
+          }
+        },
+        {
+          "id": 14,
+          "name": "Expert RGPD / DPO",
+          "fields": {
+            "objective": "Repérer les données personnelles.",
+            "actions": "Repérer les données personnelles Identifier finalités et acteurs",
+            "inputs": "Besoin et contexte métier Contacts et contraintes connus",
+            "outputs": "Préqualification RGPD Carte des acteurs du traitement",
+            "gate": "Traitement potentiel repéré Responsable à identifier explicite",
+            "deliverables": "Préqualification RGPD Carte des acteurs du traitement"
+          }
+        },
+        {
+          "id": 15,
+          "name": "RGAA / Accessibilité",
+          "fields": {
+            "objective": "Repérer les publics et services concernés",
+            "actions": "Repérer les publics et services concernés",
+            "inputs": "Demande et contexte métier",
+            "outputs": "Préqualification accessibilité",
+            "gate": "Périmètre repéré",
+            "deliverables": "Préqualification accessibilité"
+          }
+        },
+        {
+          "id": 16,
+          "name": "Expert Numérique Responsable",
+          "fields": {
+            "objective": "Questionner l'utilité du service.",
+            "actions": "Questionner l'utilité du service Repérer les enjeux environnementaux",
+            "inputs": "Besoin et contexte métier Contacts et contraintes connus",
+            "outputs": "Premiers enjeux NR Questions sur le besoin",
+            "gate": "Utilité discutée Expertise NR sollicitée",
+            "deliverables": "Premiers enjeux NR Questions sur le besoin"
+          }
+        },
+        {
+          "id": 17,
+          "name": "Architecte / Architecture",
+          "fields": {
+            "objective": "Repérer systèmes et interfaces.",
+            "actions": "Repérer systèmes et interfaces Identifier standards et contraintes",
+            "inputs": "Besoin et contexte métier Contacts et contraintes connus",
+            "outputs": "Carte du contexte SI Premières contraintes",
+            "gate": "Périmètre technique repéré Référents SI identifiés",
+            "deliverables": "Carte du contexte SI Premières contraintes"
+          }
+        },
+        {
+          "id": 18,
+          "name": "Infrastructure / Hébergement",
+          "fields": {
+            "objective": "Repérer les besoins d’hébergement",
+            "actions": "Repérer les besoins d’hébergement",
+            "inputs": "Demande et contexte métier",
+            "outputs": "Besoins initiaux d’hébergement",
+            "gate": "Contraintes repérées",
+            "deliverables": "Besoins initiaux d’hébergement"
+          }
+        },
+        {
+          "id": 19,
+          "name": "Expert Data",
+          "fields": {
+            "objective": "Identifier données et propriétaires.",
+            "actions": "Identifier données et propriétaires Repérer sources et usages",
+            "inputs": "Besoin et contexte métier Contacts et contraintes connus",
+            "outputs": "Inventaire des sources Contacts propriétaires",
+            "gate": "Sources connues Responsables identifiés",
+            "deliverables": "Inventaire des sources Contacts propriétaires"
+          }
+        },
+        {
+          "id": 20,
+          "name": "Expert Intelligence Artificielle",
+          "fields": {
+            "objective": "Décrire la tâche à assister.",
+            "actions": "Décrire la tâche à assister Questionner le besoin réel d'IA",
+            "inputs": "Besoin et contexte métier Contacts et contraintes connus",
+            "outputs": "Fiche cas d'usage IA Alternatives sans IA",
+            "gate": "Tâche et utilisateurs définis Bénéfice attendu explicite",
+            "deliverables": "Fiche cas d'usage IA Alternatives sans IA"
+          }
+        },
+        {
+          "id": 21,
+          "name": "Expert Low-Code / No-Code",
+          "fields": {
+            "objective": "Identifier le besoin d'automatisation.",
+            "actions": "Identifier le besoin d'automatisation Repérer plateformes et créateurs",
+            "inputs": "Besoin et contexte métier Contacts et contraintes connus",
+            "outputs": "Fiche besoin LCNC Inventaire des outils",
+            "gate": "Usage clarifié Responsable de l'application identifié",
+            "deliverables": "Fiche besoin LCNC Inventaire des outils"
+          }
+        }
+      ],
+      "id": 1,
+      "pdfPage": 1,
+      "pdfFile": "Parcours_PO_ADEME_attendus_par_etape.pdf"
+    },
+    {
+      "title": "Qualification",
+      "objective": "Évaluer la valeur et l’opportunité.",
+      "milestone": "Décision de poursuivre actée selon la gouvernance.",
+      "meetings": "Atelier de qualification, entretiens utilisateurs, points experts et synthèse.",
+      "roles": [
+        {
+          "id": 1,
+          "name": "Product Owner",
+          "fields": {
+            "objective": "Confirmer les besoins et la valeur.",
+            "actions": "Confirmer les besoins et la valeur Mobiliser les expertises nécessaires",
+            "inputs": "Initiative et acteurs identifiés Fiche initiative",
+            "outputs": "Note de qualification Objectifs et premiers KPI",
+            "gate": "Cible validée Valeur et faisabilité explicites",
+            "deliverables": "Note de qualification Objectifs et premiers KPI"
+          }
+        },
+        {
+          "id": 2,
+          "name": "Proxy Product Owner - PPO",
+          "fields": {
+            "objective": "Détailler besoins et règles métier avec le PO",
+            "actions": "Détailler besoins et règles métier avec le PO",
+            "inputs": "Mandat et interlocuteurs clarifiés",
+            "outputs": "Besoins détaillés",
+            "gate": "Besoin compris",
+            "deliverables": "Besoins détaillés"
+          }
+        },
+        {
+          "id": 3,
+          "name": "Product / Program Manager",
+          "fields": {
+            "objective": "Évaluer valeur et faisabilité globale.",
+            "actions": "Évaluer valeur et faisabilité globale Repérer coûts et dépendances",
+            "inputs": "Initiative et acteurs identifiés Positionnement programme",
+            "outputs": "Note d'opportunité Risques et scénarios",
+            "gate": "Bénéfices étayés Scénarios comparables",
+            "deliverables": "Note d'opportunité Risques et scénarios"
+          }
+        },
+        {
+          "id": 4,
+          "name": "Business Owner / Métier",
+          "fields": {
+            "objective": "Confirmer les bénéfices attendus.",
+            "actions": "Confirmer les bénéfices attendus Évaluer l'impact sur les pratiques",
+            "inputs": "Initiative et acteurs identifiés Demande métier",
+            "outputs": "Objectifs métier Hypothèses de bénéfices",
+            "gate": "Valeur justifiée Utilisateurs représentés",
+            "deliverables": "Objectifs métier Hypothèses de bénéfices"
+          }
+        },
+        {
+          "id": 5,
+          "name": "Coach / Accompagnateur",
+          "fields": {
+            "objective": "Faciliter les ateliers et mobiliser les experts",
+            "actions": "Faciliter les ateliers et mobiliser les experts",
+            "inputs": "Synthèse d’accueil et prochaines actions",
+            "outputs": "Synthèse et questions à instruire",
+            "gate": "Valeur et décision de poursuite explicites",
+            "deliverables": "Synthèse et questions à instruire"
+          }
+        },
+        {
+          "id": 6,
+          "name": "Business Analyst",
+          "fields": {
+            "objective": "Analyser les irritants et l'existant.",
+            "actions": "Analyser les irritants et l'existant Clarifier contraintes et hypothèses",
+            "inputs": "Initiative et acteurs identifiés Synthèse du besoin",
+            "outputs": "Analyse des besoins Écarts et hypothèses",
+            "gate": "Besoins confirmés Zones d'incertitude explicites",
+            "deliverables": "Analyse des besoins Écarts et hypothèses"
+          }
+        },
+        {
+          "id": 7,
+          "name": "UX/UI Designer",
+          "fields": {
+            "objective": "Mener des entretiens et confronter les hypothèses",
+            "actions": "Mener des entretiens et confronter les hypothèses",
+            "inputs": "Cibles et hypothèses d’usage",
+            "outputs": "Synthèse de recherche utilisateurs",
+            "gate": "Besoins étayés par les usages",
+            "deliverables": "Synthèse de recherche utilisateurs"
+          }
+        },
+        {
+          "id": 8,
+          "name": "Utilisateur clé",
+          "fields": {
+            "objective": "Confirmer les besoins avec des cas réels",
+            "actions": "Confirmer les besoins avec des cas réels",
+            "inputs": "Exemples de situations réelles",
+            "outputs": "Besoins et cas d’usage confirmés",
+            "gate": "Cas représentatifs identifiés",
+            "deliverables": "Besoins et cas d’usage confirmés"
+          }
+        },
+        {
+          "id": 9,
+          "name": "Orchestrateur de l’offre de réalisation",
+          "fields": {
+            "objective": "Explorer les offres et capacités adaptées",
+            "actions": "Explorer les offres et capacités adaptées",
+            "inputs": "Premières pistes de réalisation",
+            "outputs": "Scénarios de réalisation",
+            "gate": "Offres comparables",
+            "deliverables": "Scénarios de réalisation"
+          }
+        },
+        {
+          "id": 10,
+          "name": "Équipe de réalisation",
+          "fields": {
+            "objective": "Contribuer à la faisabilité et aux alternatives",
+            "actions": "Contribuer à la faisabilité et aux alternatives",
+            "inputs": "Contraintes initiales",
+            "outputs": "Avis de faisabilité",
+            "gate": "Hypothèses techniques visibles",
+            "deliverables": "Avis de faisabilité"
+          }
+        },
+        {
+          "id": 11,
+          "name": "Testeur / Qualité",
+          "fields": {
+            "objective": "Évaluer testabilité et environnements.",
+            "actions": "Évaluer testabilité et environnements Repérer contraintes de jeux de données",
+            "inputs": "Initiative et acteurs identifiés Premiers risques qualité",
+            "outputs": "Diagnostic de testabilité Contraintes de recette",
+            "gate": "Tests possibles Besoins de données identifiés",
+            "deliverables": "Diagnostic de testabilité Contraintes de recette"
+          }
+        },
+        {
+          "id": 12,
+          "name": "Expert numérique",
+          "fields": {
+            "objective": "Identifier risques et exigences transverses",
+            "actions": "Identifier risques et exigences transverses",
+            "inputs": "Orientation vers les spécialistes",
+            "outputs": "Analyse initiale",
+            "gate": "Risques visibles",
+            "deliverables": "Analyse initiale"
+          }
+        },
+        {
+          "id": 13,
+          "name": "RSSI / Expert cybersécurité",
+          "fields": {
+            "objective": "Qualifier menaces et impacts.",
+            "actions": "Qualifier menaces et impacts Examiner les dépendances fournisseurs",
+            "inputs": "Initiative et acteurs identifiés Préqualification sécurité",
+            "outputs": "Analyse de risques initiale Contraintes de sécurité",
+            "gate": "Risques majeurs identifiés Besoins d'expertise définis",
+            "deliverables": "Analyse de risques initiale Contraintes de sécurité"
+          }
+        },
+        {
+          "id": 14,
+          "name": "Expert RGPD / DPO",
+          "fields": {
+            "objective": "Examiner finalités et proportionnalité.",
+            "actions": "Examiner finalités et proportionnalité Qualifier les risques pour les personnes",
+            "inputs": "Initiative et acteurs identifiés Préqualification RGPD",
+            "outputs": "Analyse RGPD initiale Besoin éventuel d'AIPD",
+            "gate": "Finalités clarifiées Risques et études nécessaires connus",
+            "deliverables": "Analyse RGPD initiale Besoin éventuel d'AIPD"
+          }
+        },
+        {
+          "id": 15,
+          "name": "RGAA / Accessibilité",
+          "fields": {
+            "objective": "Évaluer les enjeux d’accessibilité",
+            "actions": "Évaluer les enjeux d’accessibilité",
+            "inputs": "Préqualification accessibilité",
+            "outputs": "Diagnostic et besoins d’audit",
+            "gate": "Contrôles à prévoir identifiés",
+            "deliverables": "Diagnostic et besoins d’audit"
+          }
+        },
+        {
+          "id": 16,
+          "name": "Expert Numérique Responsable",
+          "fields": {
+            "objective": "Comparer réemploi et nouvelle solution.",
+            "actions": "Comparer réemploi et nouvelle solution Repérer usages et volumes dominants",
+            "inputs": "Initiative et acteurs identifiés Premiers enjeux NR",
+            "outputs": "Diagnostic initial Hypothèses d'impacts",
+            "gate": "Alternatives considérées Impacts à mesurer identifiés",
+            "deliverables": "Diagnostic initial Hypothèses d'impacts"
+          }
+        },
+        {
+          "id": 17,
+          "name": "Architecte / Architecture",
+          "fields": {
+            "objective": "Comparer réemploi et scénarios.",
+            "actions": "Comparer réemploi et scénarios Évaluer intégration et faisabilité",
+            "inputs": "Initiative et acteurs identifiés Carte du contexte SI",
+            "outputs": "Scénarios d'architecture Analyse des dépendances",
+            "gate": "Options comparées Contraintes critiques explicites",
+            "deliverables": "Scénarios d'architecture Analyse des dépendances"
+          }
+        },
+        {
+          "id": 18,
+          "name": "Infrastructure / Hébergement",
+          "fields": {
+            "objective": "Étudier environnements, accès et contraintes",
+            "actions": "Étudier environnements, accès et contraintes",
+            "inputs": "Besoins initiaux d’hébergement",
+            "outputs": "Avis de faisabilité infrastructure",
+            "gate": "Options et coûts identifiés",
+            "deliverables": "Avis de faisabilité infrastructure"
+          }
+        },
+        {
+          "id": 19,
+          "name": "Expert Data",
+          "fields": {
+            "objective": "Évaluer disponibilité et qualité.",
+            "actions": "Évaluer disponibilité et qualité Clarifier droits d'accès et contraintes",
+            "inputs": "Initiative et acteurs identifiés Inventaire des sources",
+            "outputs": "Profil de qualité Analyse de disponibilité",
+            "gate": "Données accessibles à instruire Limites documentées",
+            "deliverables": "Profil de qualité Analyse de disponibilité"
+          }
+        },
+        {
+          "id": 20,
+          "name": "Expert Intelligence Artificielle",
+          "fields": {
+            "objective": "Tester la faisabilité et les données.",
+            "actions": "Tester la faisabilité et les données Identifier erreurs et risques d'usage",
+            "inputs": "Initiative et acteurs identifiés Fiche cas d'usage IA",
+            "outputs": "Étude de faisabilité Prototype exploratoire si utile",
+            "gate": "Limites observées Données et risques examinés",
+            "deliverables": "Étude de faisabilité Prototype exploratoire si utile"
+          }
+        },
+        {
+          "id": 21,
+          "name": "Expert Low-Code / No-Code",
+          "fields": {
+            "objective": "Comparer plateforme et autres options.",
+            "actions": "Comparer plateforme et autres options Évaluer licences, limites et intégrations",
+            "inputs": "Initiative et acteurs identifiés Fiche besoin LCNC",
+            "outputs": "Étude d'adéquation Coût et contraintes",
+            "gate": "Limites connues Plateforme compatible avec le SI",
+            "deliverables": "Étude d'adéquation Coût et contraintes"
+          }
+        }
+      ],
+      "id": 2,
+      "pdfPage": 2,
+      "pdfFile": "Parcours_PO_ADEME_attendus_par_etape.pdf"
+    },
+    {
+      "title": "Cadrage / Exploration",
+      "objective": "Définir la vision et le périmètre.",
+      "milestone": "Cadrage et moyens validés selon la gouvernance.",
+      "meetings": "Ateliers MVP et priorisation, point Orchestrateur, comité de cadrage si nécessaire.",
+      "roles": [
+        {
+          "id": 1,
+          "name": "Product Owner",
+          "fields": {
+            "objective": "Définir le MVP et le périmètre.",
+            "actions": "Définir le MVP et le périmètre Prioriser le backlog et la roadmap",
+            "inputs": "Qualification et enjeux confirmés Note de qualification",
+            "outputs": "Vision produit et MVP Backlog et roadmap initiaux",
+            "gate": "Priorités partagées Contraintes critiques connues",
+            "deliverables": "Vision produit et MVP Backlog et roadmap initiaux"
+          }
+        },
+        {
+          "id": 2,
+          "name": "Proxy Product Owner - PPO",
+          "fields": {
+            "objective": "Structurer le backlog initial et préciser le MVP",
+            "actions": "Structurer le backlog initial et préciser le MVP",
+            "inputs": "Besoins détaillés",
+            "outputs": "Backlog initial",
+            "gate": "Priorités arbitrées par le PO",
+            "deliverables": "Backlog initial"
+          }
+        },
+        {
+          "id": 3,
+          "name": "Product / Program Manager",
+          "fields": {
+            "objective": "Définir objectifs et feuille de route.",
+            "actions": "Définir objectifs et feuille de route Préparer gouvernance et financement",
+            "inputs": "Qualification et enjeux confirmés Note d'opportunité",
+            "outputs": "Dossier de cadrage programme Roadmap et gouvernance",
+            "gate": "Périmètre partagé Arbitrages de ressources tracés",
+            "deliverables": "Dossier de cadrage programme Roadmap et gouvernance"
+          }
+        },
+        {
+          "id": 4,
+          "name": "Business Owner / Métier",
+          "fields": {
+            "objective": "Arbitrer le périmètre avec le PO.",
+            "actions": "Arbitrer le périmètre avec le PO Confirmer les moyens métier",
+            "inputs": "Qualification et enjeux confirmés Objectifs métier",
+            "outputs": "Priorités métier Engagement des contributeurs",
+            "gate": "MVP cohérent Disponibilités confirmées",
+            "deliverables": "Priorités métier Engagement des contributeurs"
+          }
+        },
+        {
+          "id": 5,
+          "name": "Coach / Accompagnateur",
+          "fields": {
+            "objective": "Faciliter le MVP et préparer le passage de relais",
+            "actions": "Faciliter le MVP et préparer le passage de relais",
+            "inputs": "Synthèse et questions à instruire",
+            "outputs": "Plan de passage de relais",
+            "gate": "PO autonome et interlocuteurs mobilisés",
+            "deliverables": "Plan de passage de relais"
+          }
+        },
+        {
+          "id": 6,
+          "name": "Business Analyst",
+          "fields": {
+            "objective": "Décomposer les besoins du MVP.",
+            "actions": "Décomposer les besoins du MVP Définir périmètre et règles majeures",
+            "inputs": "Qualification et enjeux confirmés Analyse des besoins",
+            "outputs": "Exigences initiales Cartographie fonctionnelle",
+            "gate": "Périmètre traçable Règles majeures discutées",
+            "deliverables": "Exigences initiales Cartographie fonctionnelle"
+          }
+        },
+        {
+          "id": 7,
+          "name": "UX/UI Designer",
+          "fields": {
+            "objective": "Définir les parcours prioritaires du MVP",
+            "actions": "Définir les parcours prioritaires du MVP",
+            "inputs": "Synthèse de recherche utilisateurs",
+            "outputs": "Parcours prioritaires",
+            "gate": "Parcours alignés avec le MVP",
+            "deliverables": "Parcours prioritaires"
+          }
+        },
+        {
+          "id": 8,
+          "name": "Utilisateur clé",
+          "fields": {
+            "objective": "Contribuer aux scénarios prioritaires",
+            "actions": "Contribuer aux scénarios prioritaires",
+            "inputs": "Besoins et cas d’usage confirmés",
+            "outputs": "Scénarios métier prioritaires",
+            "gate": "Scénarios compris",
+            "deliverables": "Scénarios métier prioritaires"
+          }
+        },
+        {
+          "id": 9,
+          "name": "Orchestrateur de l’offre de réalisation",
+          "fields": {
+            "objective": "Préparer le dispositif et la mobilisation",
+            "actions": "Préparer le dispositif et la mobilisation",
+            "inputs": "Scénarios de réalisation",
+            "outputs": "Dispositif et estimation de capacité",
+            "gate": "Coûts, délais et contraintes visibles",
+            "deliverables": "Dispositif et estimation de capacité"
+          }
+        },
+        {
+          "id": 10,
+          "name": "Équipe de réalisation",
+          "fields": {
+            "objective": "Estimer le MVP et les dépendances",
+            "actions": "Estimer le MVP et les dépendances",
+            "inputs": "Avis de faisabilité",
+            "outputs": "Estimations et risques techniques",
+            "gate": "Trajectoire réalisable",
+            "deliverables": "Estimations et risques techniques"
+          }
+        },
+        {
+          "id": 11,
+          "name": "Testeur / Qualité",
+          "fields": {
+            "objective": "Définir stratégie et niveaux de tests.",
+            "actions": "Définir stratégie et niveaux de tests Planifier couverture et moyens",
+            "inputs": "Qualification et enjeux confirmés Diagnostic de testabilité",
+            "outputs": "Stratégie de tests Plan de recette",
+            "gate": "Risques couverts Moyens et calendrier partagés",
+            "deliverables": "Stratégie de tests Plan de recette"
+          }
+        },
+        {
+          "id": 12,
+          "name": "Expert numérique",
+          "fields": {
+            "objective": "Consolider les exigences du MVP",
+            "actions": "Consolider les exigences du MVP",
+            "inputs": "Analyse initiale",
+            "outputs": "Exigences consolidées",
+            "gate": "Actions et responsables identifiés",
+            "deliverables": "Exigences consolidées"
+          }
+        },
+        {
+          "id": 13,
+          "name": "RSSI / Expert cybersécurité",
+          "fields": {
+            "objective": "Définir les exigences de sécurité.",
+            "actions": "Définir les exigences de sécurité Prévoir contrôles et traitement des risques",
+            "inputs": "Qualification et enjeux confirmés Analyse de risques initiale",
+            "outputs": "Exigences sécurité Plan de traitement",
+            "gate": "Mesures chiffrées et planifiées Responsables identifiés",
+            "deliverables": "Exigences sécurité Plan de traitement"
+          }
+        },
+        {
+          "id": 14,
+          "name": "Expert RGPD / DPO",
+          "fields": {
+            "objective": "Conseiller base légale et minimisation.",
+            "actions": "Conseiller base légale et minimisation Définir durées, droits et sous-traitance",
+            "inputs": "Qualification et enjeux confirmés Analyse RGPD initiale",
+            "outputs": "Exigences RGPD Contribution au registre",
+            "gate": "Responsabilités définies Choix et actions documentés",
+            "deliverables": "Exigences RGPD Contribution au registre"
+          }
+        },
+        {
+          "id": 15,
+          "name": "RGAA / Accessibilité",
+          "fields": {
+            "objective": "Définir exigences, accompagnement et contrôles",
+            "actions": "Définir exigences, accompagnement et contrôles",
+            "inputs": "Diagnostic et besoins d’audit",
+            "outputs": "Plan de prise en compte",
+            "gate": "Exigences intégrées au backlog",
+            "deliverables": "Plan de prise en compte"
+          }
+        },
+        {
+          "id": 16,
+          "name": "Expert Numérique Responsable",
+          "fields": {
+            "objective": "Définir objectifs de sobriété.",
+            "actions": "Définir objectifs de sobriété Cadrer mesures et périmètre du cycle de vie",
+            "inputs": "Qualification et enjeux confirmés Diagnostic initial",
+            "outputs": "Exigences de sobriété Plan de mesure",
+            "gate": "Objectifs mesurables Responsables désignés",
+            "deliverables": "Exigences de sobriété Plan de mesure"
+          }
+        },
+        {
+          "id": 17,
+          "name": "Architecte / Architecture",
+          "fields": {
+            "objective": "Définir l'architecture cible.",
+            "actions": "Définir l'architecture cible Estimer coûts et exigences techniques",
+            "inputs": "Qualification et enjeux confirmés Scénarios d'architecture",
+            "outputs": "Architecture cible Exigences non fonctionnelles",
+            "gate": "Choix argumentés Trajectoire réalisable",
+            "deliverables": "Architecture cible Exigences non fonctionnelles"
+          }
+        },
+        {
+          "id": 18,
+          "name": "Infrastructure / Hébergement",
+          "fields": {
+            "objective": "Cadrer exploitation et capacité",
+            "actions": "Cadrer exploitation et capacité",
+            "inputs": "Avis de faisabilité infrastructure",
+            "outputs": "Plan d’hébergement et d’exploitation",
+            "gate": "Responsabilités définies",
+            "deliverables": "Plan d’hébergement et d’exploitation"
+          }
+        },
+        {
+          "id": 19,
+          "name": "Expert Data",
+          "fields": {
+            "objective": "Définir indicateurs et responsabilités.",
+            "actions": "Définir indicateurs et responsabilités Cadrer volumes et cycle de vie",
+            "inputs": "Qualification et enjeux confirmés Profil de qualité",
+            "outputs": "Plan de gestion des données Dictionnaire initial",
+            "gate": "Définitions partagées Règles de gestion établies",
+            "deliverables": "Plan de gestion des données Dictionnaire initial"
+          }
+        },
+        {
+          "id": 20,
+          "name": "Expert Intelligence Artificielle",
+          "fields": {
+            "objective": "Fixer seuils de qualité et coûts.",
+            "actions": "Fixer seuils de qualité et coûts Prévoir supervision et solution de repli",
+            "inputs": "Qualification et enjeux confirmés Étude de faisabilité",
+            "outputs": "Protocole d'évaluation Exigences et garde-fous",
+            "gate": "Seuils convenus avec le métier Responsabilités clarifiées",
+            "deliverables": "Protocole d'évaluation Exigences et garde-fous"
+          }
+        },
+        {
+          "id": 21,
+          "name": "Expert Low-Code / No-Code",
+          "fields": {
+            "objective": "Définir gouvernance et périmètre.",
+            "actions": "Définir gouvernance et périmètre Prévoir maintenance et réversibilité",
+            "inputs": "Qualification et enjeux confirmés Étude d'adéquation",
+            "outputs": "Plan de gouvernance LCNC Périmètre et responsabilités",
+            "gate": "Propriétaire et mainteneur nommés Budget et règles clarifiés",
+            "deliverables": "Plan de gouvernance LCNC Périmètre et responsabilités"
+          }
+        }
+      ],
+      "id": 3,
+      "pdfPage": 3,
+      "pdfFile": "Parcours_PO_ADEME_attendus_par_etape.pdf"
+    },
+    {
+      "title": "Conception",
+      "objective": "Préparer un produit utile et réalisable.",
+      "milestone": "Besoins compris, dépendances identifiées et backlog testable.",
+      "meetings": "Ateliers fonctionnels et UX, revues de conception et points experts.",
+      "roles": [
+        {
+          "id": 1,
+          "name": "Product Owner",
+          "fields": {
+            "objective": "Arbitrer les User Stories avec BA / PPO.",
+            "actions": "Arbitrer les User Stories avec BA / PPO Valider parcours et critères d'acceptation",
+            "inputs": "MVP et périmètre cadrés Vision produit et MVP",
+            "outputs": "Backlog prêt à réaliser Critères d'acceptation",
+            "gate": "Stories compréhensibles Besoins prioritaires testables",
+            "deliverables": "Backlog prêt à réaliser Critères d'acceptation"
+          }
+        },
+        {
+          "id": 2,
+          "name": "Proxy Product Owner - PPO",
+          "fields": {
+            "objective": "Rédiger les stories et critères avec BA et PO",
+            "actions": "Rédiger les stories et critères avec BA et PO",
+            "inputs": "Backlog initial",
+            "outputs": "Stories et critères testables",
+            "gate": "Stories prêtes à estimer",
+            "deliverables": "Stories et critères testables"
+          }
+        },
+        {
+          "id": 3,
+          "name": "Product / Program Manager",
+          "fields": {
+            "objective": "Organiser les équipes et interfaces.",
+            "actions": "Organiser les équipes et interfaces Consolider planning et engagements",
+            "inputs": "MVP et périmètre cadrés Dossier de cadrage programme",
+            "outputs": "Plan de mise en œuvre Plan de ressources",
+            "gate": "Responsabilités claires Dépendances planifiées",
+            "deliverables": "Plan de mise en œuvre Plan de ressources"
+          }
+        },
+        {
+          "id": 4,
+          "name": "Business Owner / Métier",
+          "fields": {
+            "objective": "Valider les règles métier majeures.",
+            "actions": "Valider les règles métier majeures Examiner les parcours proposés",
+            "inputs": "MVP et périmètre cadrés Priorités métier",
+            "outputs": "Règles métier validées Avis sur les parcours",
+            "gate": "Règles critiques décidées Impacts organisationnels anticipés",
+            "deliverables": "Règles métier validées Avis sur les parcours"
+          }
+        },
+        {
+          "id": 5,
+          "name": "Coach / Accompagnateur",
+          "fields": {
+            "objective": "Faciliter ponctuellement les blocages de gouvernance",
+            "actions": "Faciliter ponctuellement les blocages de gouvernance",
+            "inputs": "Plan de passage de relais",
+            "outputs": "Clarification des responsabilités si besoin",
+            "gate": "Le coach cesse d’être un passage obligé",
+            "deliverables": "Clarification des responsabilités si besoin"
+          }
+        },
+        {
+          "id": 6,
+          "name": "Business Analyst",
+          "fields": {
+            "objective": "Rédiger stories et règles détaillées.",
+            "actions": "Rédiger stories et règles détaillées Définir exemples et cas limites",
+            "inputs": "MVP et périmètre cadrés Exigences initiales",
+            "outputs": "Spécifications et User Stories Critères d'acceptation",
+            "gate": "Exigences testables PO et équipe comprennent les cas",
+            "deliverables": "Spécifications et User Stories Critères d'acceptation"
+          }
+        },
+        {
+          "id": 7,
+          "name": "UX/UI Designer",
+          "fields": {
+            "objective": "Concevoir et tester les maquettes",
+            "actions": "Concevoir et tester les maquettes",
+            "inputs": "Parcours prioritaires",
+            "outputs": "Maquettes et résultats des tests",
+            "gate": "Parcours compréhensibles et testés",
+            "deliverables": "Maquettes et résultats des tests"
+          }
+        },
+        {
+          "id": 8,
+          "name": "Utilisateur clé",
+          "fields": {
+            "objective": "Tester les prototypes et les règles métier",
+            "actions": "Tester les prototypes et les règles métier",
+            "inputs": "Scénarios métier prioritaires",
+            "outputs": "Retours sur les prototypes",
+            "gate": "Retours tracés",
+            "deliverables": "Retours sur les prototypes"
+          }
+        },
+        {
+          "id": 9,
+          "name": "Orchestrateur de l’offre de réalisation",
+          "fields": {
+            "objective": "Confirmer équipes, compétences et interfaces",
+            "actions": "Confirmer équipes, compétences et interfaces",
+            "inputs": "Dispositif et estimation de capacité",
+            "outputs": "Plan de mobilisation",
+            "gate": "Moyens et responsabilités explicites",
+            "deliverables": "Plan de mobilisation"
+          }
+        },
+        {
+          "id": 10,
+          "name": "Équipe de réalisation",
+          "fields": {
+            "objective": "Concevoir et estimer les stories prioritaires",
+            "actions": "Concevoir et estimer les stories prioritaires",
+            "inputs": "Estimations et risques techniques",
+            "outputs": "Conception et estimations",
+            "gate": "Éléments réalisables et testables",
+            "deliverables": "Conception et estimations"
+          }
+        },
+        {
+          "id": 11,
+          "name": "Testeur / Qualité",
+          "fields": {
+            "objective": "Rédiger scénarios et cas limites.",
+            "actions": "Rédiger scénarios et cas limites Relire les critères avec PO / BA",
+            "inputs": "MVP et périmètre cadrés Stratégie de tests",
+            "outputs": "Cas de tests Matrice exigences / tests",
+            "gate": "Résultats attendus définis Données de test préparées",
+            "deliverables": "Cas de tests Matrice exigences / tests"
+          }
+        },
+        {
+          "id": 12,
+          "name": "Expert numérique",
+          "fields": {
+            "objective": "Relire les choix et leurs impacts",
+            "actions": "Relire les choix et leurs impacts",
+            "inputs": "Exigences consolidées",
+            "outputs": "Avis de conception",
+            "gate": "Choix et réserves tracés",
+            "deliverables": "Avis de conception"
+          }
+        },
+        {
+          "id": 13,
+          "name": "RSSI / Expert cybersécurité",
+          "fields": {
+            "objective": "Revoir architecture et habilitations.",
+            "actions": "Revoir architecture et habilitations Définir tests et journalisation",
+            "inputs": "MVP et périmètre cadrés Exigences sécurité",
+            "outputs": "Avis de conception Plan de vérification sécurité",
+            "gate": "Contrôles intégrés Risques résiduels documentés",
+            "deliverables": "Avis de conception Plan de vérification sécurité"
+          }
+        },
+        {
+          "id": 14,
+          "name": "Expert RGPD / DPO",
+          "fields": {
+            "objective": "Revoir protection dès la conception.",
+            "actions": "Revoir protection dès la conception Préparer information et exercice des droits",
+            "inputs": "MVP et périmètre cadrés Exigences RGPD",
+            "outputs": "Avis de conception AIPD si nécessaire",
+            "gate": "Mesures intégrées Points de conformité à traiter tracés",
+            "deliverables": "Avis de conception AIPD si nécessaire"
+          }
+        },
+        {
+          "id": 15,
+          "name": "RGAA / Accessibilité",
+          "fields": {
+            "objective": "Relire les parcours et composants",
+            "actions": "Relire les parcours et composants",
+            "inputs": "Plan de prise en compte",
+            "outputs": "Avis sur les maquettes",
+            "gate": "Points de conception tracés",
+            "deliverables": "Avis sur les maquettes"
+          }
+        },
+        {
+          "id": 16,
+          "name": "Expert Numérique Responsable",
+          "fields": {
+            "objective": "Revoir parcours, données et architecture.",
+            "actions": "Revoir parcours, données et architecture Proposer critères d'écoconception",
+            "inputs": "MVP et périmètre cadrés Exigences de sobriété",
+            "outputs": "Revue d'écoconception Critères de vérification",
+            "gate": "Choix documentés Exigences intégrées au backlog",
+            "deliverables": "Revue d'écoconception Critères de vérification"
+          }
+        },
+        {
+          "id": 17,
+          "name": "Architecte / Architecture",
+          "fields": {
+            "objective": "Détailler composants et interfaces.",
+            "actions": "Détailler composants et interfaces Revoir sécurité et exploitabilité",
+            "inputs": "MVP et périmètre cadrés Architecture cible",
+            "outputs": "Dossier d'architecture Contrats d'interface",
+            "gate": "Interfaces définies Revues techniques réalisées",
+            "deliverables": "Dossier d'architecture Contrats d'interface"
+          }
+        },
+        {
+          "id": 18,
+          "name": "Infrastructure / Hébergement",
+          "fields": {
+            "objective": "Préparer architecture et environnements",
+            "actions": "Préparer architecture et environnements",
+            "inputs": "Plan d’hébergement et d’exploitation",
+            "outputs": "Environnements et accès prévus",
+            "gate": "Environnements mobilisables",
+            "deliverables": "Environnements et accès prévus"
+          }
+        },
+        {
+          "id": 19,
+          "name": "Expert Data",
+          "fields": {
+            "objective": "Concevoir modèles et flux.",
+            "actions": "Concevoir modèles et flux Définir contrôles et traçabilité",
+            "inputs": "MVP et périmètre cadrés Plan de gestion des données",
+            "outputs": "Modèles et contrats de données Règles de qualité",
+            "gate": "Interfaces documentées Critères de qualité testables",
+            "deliverables": "Modèles et contrats de données Règles de qualité"
+          }
+        },
+        {
+          "id": 20,
+          "name": "Expert Intelligence Artificielle",
+          "fields": {
+            "objective": "Concevoir modèle, corpus et interactions.",
+            "actions": "Concevoir modèle, corpus et interactions Préparer un jeu d'évaluation distinct",
+            "inputs": "MVP et périmètre cadrés Protocole d'évaluation",
+            "outputs": "Architecture IA Jeu de tests et documentation",
+            "gate": "Tests représentatifs Contrôles humains définis",
+            "deliverables": "Architecture IA Jeu de tests et documentation"
+          }
+        },
+        {
+          "id": 21,
+          "name": "Expert Low-Code / No-Code",
+          "fields": {
+            "objective": "Concevoir application et connecteurs.",
+            "actions": "Concevoir application et connecteurs Préparer environnements et droits",
+            "inputs": "MVP et périmètre cadrés Plan de gouvernance LCNC",
+            "outputs": "Modèle de l'application Plan des accès et environnements",
+            "gate": "Droits maîtrisés Intégrations et tests définis",
+            "deliverables": "Modèle de l'application Plan des accès et environnements"
+          }
+        }
+      ],
+      "id": 4,
+      "pdfPage": 4,
+      "pdfFile": "Parcours_PO_ADEME_attendus_par_etape.pdf"
+    },
+    {
+      "title": "Réalisation",
+      "objective": "Maximiser la valeur de chaque incrément.",
+      "milestone": "Fonctionnalités prêtes pour la recette métier.",
+      "meetings": "Kick-off, planification, refinement, démonstrations et rétrospectives selon l’organisation.",
+      "roles": [
+        {
+          "id": 1,
+          "name": "Product Owner",
+          "fields": {
+            "objective": "Clarifier les besoins et arbitrer.",
+            "actions": "Clarifier les besoins et arbitrer Accepter ou refuser les incréments",
+            "inputs": "Backlog et critères de test Backlog prêt à réaliser",
+            "outputs": "Backlog actualisé Décisions d'acceptation",
+            "gate": "Critères fonctionnels satisfaits Incrément prêt à recetter",
+            "deliverables": "Backlog actualisé Décisions d'acceptation"
+          }
+        },
+        {
+          "id": 2,
+          "name": "Proxy Product Owner - PPO",
+          "fields": {
+            "objective": "Clarifier le détail fonctionnel et suivre les anomalies",
+            "actions": "Clarifier le détail fonctionnel et suivre les anomalies",
+            "inputs": "Stories et critères testables",
+            "outputs": "Backlog et anomalies actualisés",
+            "gate": "Questions fonctionnelles traitées",
+            "deliverables": "Backlog et anomalies actualisés"
+          }
+        },
+        {
+          "id": 3,
+          "name": "Product / Program Manager",
+          "fields": {
+            "objective": "Suivre coûts, délais et risques.",
+            "actions": "Suivre coûts, délais et risques Lever les obstacles entre produits",
+            "inputs": "Backlog et critères de test Plan de mise en œuvre",
+            "outputs": "Tableau de bord programme Registre des décisions",
+            "gate": "Écarts maîtrisés Préparation de recette coordonnée",
+            "deliverables": "Tableau de bord programme Registre des décisions"
+          }
+        },
+        {
+          "id": 4,
+          "name": "Business Owner / Métier",
+          "fields": {
+            "objective": "Participer aux démonstrations utiles.",
+            "actions": "Participer aux démonstrations utiles Arbitrer les changements majeurs",
+            "inputs": "Backlog et critères de test Règles métier validées",
+            "outputs": "Retours métier Décisions sur les écarts",
+            "gate": "Écarts discutés avec le PO Besoins critiques couverts",
+            "deliverables": "Retours métier Décisions sur les écarts"
+          }
+        },
+        {
+          "id": 5,
+          "name": "Coach / Accompagnateur",
+          "fields": {
+            "objective": "Intervenir sur les difficultés de fonctionnement si besoin",
+            "actions": "Intervenir sur les difficultés de fonctionnement si besoin",
+            "inputs": "Clarification des responsabilités si besoin",
+            "outputs": "Diagnostic et actions de coaching si besoin",
+            "gate": "PO et équipe portent le pilotage",
+            "deliverables": "Diagnostic et actions de coaching si besoin"
+          }
+        },
+        {
+          "id": 6,
+          "name": "Business Analyst",
+          "fields": {
+            "objective": "Répondre aux questions fonctionnelles.",
+            "actions": "Répondre aux questions fonctionnelles Actualiser les exigences et écarts",
+            "inputs": "Backlog et critères de test Spécifications et User Stories",
+            "outputs": "Documentation à jour Décisions fonctionnelles",
+            "gate": "Écarts documentés Critères reliés à l'incrément",
+            "deliverables": "Documentation à jour Décisions fonctionnelles"
+          }
+        },
+        {
+          "id": 7,
+          "name": "UX/UI Designer",
+          "fields": {
+            "objective": "Vérifier les interfaces et intégrer les retours",
+            "actions": "Vérifier les interfaces et intégrer les retours",
+            "inputs": "Maquettes et résultats des tests",
+            "outputs": "Retours UX et ajustements",
+            "gate": "Écarts UX visibles",
+            "deliverables": "Retours UX et ajustements"
+          }
+        },
+        {
+          "id": 8,
+          "name": "Utilisateur clé",
+          "fields": {
+            "objective": "Donner des retours lors des démonstrations",
+            "actions": "Donner des retours lors des démonstrations",
+            "inputs": "Retours sur les prototypes",
+            "outputs": "Retours sur l’incrément",
+            "gate": "Écarts signalés",
+            "deliverables": "Retours sur l’incrément"
+          }
+        },
+        {
+          "id": 9,
+          "name": "Orchestrateur de l’offre de réalisation",
+          "fields": {
+            "objective": "Suivre la capacité et coordonner les ajustements",
+            "actions": "Suivre la capacité et coordonner les ajustements",
+            "inputs": "Plan de mobilisation",
+            "outputs": "Suivi des capacités et alertes",
+            "gate": "Écarts de capacité traités",
+            "deliverables": "Suivi des capacités et alertes"
+          }
+        },
+        {
+          "id": 10,
+          "name": "Équipe de réalisation",
+          "fields": {
+            "objective": "Développer, tester et démontrer les incréments",
+            "actions": "Développer, tester et démontrer les incréments",
+            "inputs": "Conception et estimations",
+            "outputs": "Incrément testé et documentation",
+            "gate": "Critères de qualité vérifiés",
+            "deliverables": "Incrément testé et documentation"
+          }
+        },
+        {
+          "id": 11,
+          "name": "Testeur / Qualité",
+          "fields": {
+            "objective": "Exécuter tests et non-régression.",
+            "actions": "Exécuter tests et non-régression Qualifier et retester les anomalies",
+            "inputs": "Backlog et critères de test Cas de tests",
+            "outputs": "Rapports de tests Anomalies et preuves",
+            "gate": "Blocages signalés Corrections retestées",
+            "deliverables": "Rapports de tests Anomalies et preuves"
+          }
+        },
+        {
+          "id": 12,
+          "name": "Expert numérique",
+          "fields": {
+            "objective": "Accompagner le traitement des écarts",
+            "actions": "Accompagner le traitement des écarts",
+            "inputs": "Avis de conception",
+            "outputs": "Suivi des écarts",
+            "gate": "Écarts suivis",
+            "deliverables": "Suivi des écarts"
+          }
+        },
+        {
+          "id": 13,
+          "name": "RSSI / Expert cybersécurité",
+          "fields": {
+            "objective": "Accompagner les revues de sécurité.",
+            "actions": "Accompagner les revues de sécurité Suivre vulnérabilités et corrections",
+            "inputs": "Backlog et critères de test Avis de conception",
+            "outputs": "Résultats de contrôles Suivi des vulnérabilités",
+            "gate": "Failles critiques traitées Preuves de correction disponibles",
+            "deliverables": "Résultats de contrôles Suivi des vulnérabilités"
+          }
+        },
+        {
+          "id": 14,
+          "name": "Expert RGPD / DPO",
+          "fields": {
+            "objective": "Vérifier les mesures prévues.",
+            "actions": "Vérifier les mesures prévues Conseiller sur contrats et flux de données",
+            "inputs": "Backlog et critères de test Avis de conception",
+            "outputs": "Suivi des actions RGPD Avis sur les mesures",
+            "gate": "Écarts identifiés Corrections suivies",
+            "deliverables": "Suivi des actions RGPD Avis sur les mesures"
+          }
+        },
+        {
+          "id": 15,
+          "name": "RGAA / Accessibilité",
+          "fields": {
+            "objective": "Contrôler et accompagner les corrections",
+            "actions": "Contrôler et accompagner les corrections",
+            "inputs": "Avis sur les maquettes",
+            "outputs": "Écarts et corrections suivis",
+            "gate": "Corrections vérifiées",
+            "deliverables": "Écarts et corrections suivis"
+          }
+        },
+        {
+          "id": 16,
+          "name": "Expert Numérique Responsable",
+          "fields": {
+            "objective": "Contrôler poids, flux et traitements.",
+            "actions": "Contrôler poids, flux et traitements Accompagner les corrections",
+            "inputs": "Backlog et critères de test Revue d'écoconception",
+            "outputs": "Mesures intermédiaires Actions de réduction",
+            "gate": "Écarts identifiés Corrections priorisées avec le PO",
+            "deliverables": "Mesures intermédiaires Actions de réduction"
+          }
+        },
+        {
+          "id": 17,
+          "name": "Architecte / Architecture",
+          "fields": {
+            "objective": "Accompagner l'équipe de réalisation.",
+            "actions": "Accompagner l'équipe de réalisation Suivre écarts et dette technique",
+            "inputs": "Backlog et critères de test Dossier d'architecture",
+            "outputs": "Décisions d'architecture Suivi de dette",
+            "gate": "Écarts maîtrisés Documentation conforme au réalisé",
+            "deliverables": "Décisions d'architecture Suivi de dette"
+          }
+        },
+        {
+          "id": 18,
+          "name": "Infrastructure / Hébergement",
+          "fields": {
+            "objective": "Configurer les environnements et la supervision",
+            "actions": "Configurer les environnements et la supervision",
+            "inputs": "Environnements et accès prévus",
+            "outputs": "Environnements et supervision",
+            "gate": "Conditions techniques vérifiées",
+            "deliverables": "Environnements et supervision"
+          }
+        },
+        {
+          "id": 19,
+          "name": "Expert Data",
+          "fields": {
+            "objective": "Construire flux et contrôles.",
+            "actions": "Construire flux et contrôles Vérifier transformations et erreurs",
+            "inputs": "Backlog et critères de test Modèles et contrats de données",
+            "outputs": "Flux documentés Résultats des contrôles",
+            "gate": "Transformations vérifiées Erreurs détectées et traitées",
+            "deliverables": "Flux documentés Résultats des contrôles"
+          }
+        },
+        {
+          "id": 20,
+          "name": "Expert Intelligence Artificielle",
+          "fields": {
+            "objective": "Implémenter et comparer les versions.",
+            "actions": "Implémenter et comparer les versions Tester robustesse et erreurs",
+            "inputs": "Backlog et critères de test Architecture IA",
+            "outputs": "Résultats d'évaluation Versions et limites documentées",
+            "gate": "Qualité mesurée Échecs critiques traités",
+            "deliverables": "Résultats d'évaluation Versions et limites documentées"
+          }
+        },
+        {
+          "id": 21,
+          "name": "Expert Low-Code / No-Code",
+          "fields": {
+            "objective": "Construire et versionner la solution.",
+            "actions": "Construire et versionner la solution Tester automatisations et connecteurs",
+            "inputs": "Backlog et critères de test Modèle de l'application",
+            "outputs": "Application versionnée Documentation de configuration",
+            "gate": "Fonctions testées Secrets et accès protégés",
+            "deliverables": "Application versionnée Documentation de configuration"
+          }
+        }
+      ],
+      "id": 5,
+      "pdfPage": 5,
+      "pdfFile": "Parcours_PO_ADEME_attendus_par_etape.pdf"
+    },
+    {
+      "title": "Recette et mise en production",
+      "objective": "Valider la réponse aux besoins.",
+      "milestone": "GO acté et conditions de mise en production réunies.",
+      "meetings": "Recette métier, contrôles experts, revue avant mise en production et GO / NO GO.",
+      "roles": [
+        {
+          "id": 1,
+          "name": "Product Owner",
+          "fields": {
+            "objective": "Organiser la recette métier.",
+            "actions": "Organiser la recette métier Contribuer au GO / NO GO",
+            "inputs": "Incrément et résultats des tests Backlog actualisé",
+            "outputs": "Résultats de recette Avis experts et décision tracée",
+            "gate": "Blocages traités Support et utilisateurs prêts",
+            "deliverables": "Résultats de recette Avis experts et décision tracée"
+          }
+        },
+        {
+          "id": 2,
+          "name": "Proxy Product Owner - PPO",
+          "fields": {
+            "objective": "Coordonner la recette fonctionnelle détaillée",
+            "actions": "Coordonner la recette fonctionnelle détaillée",
+            "inputs": "Backlog et anomalies actualisés",
+            "outputs": "Bilan fonctionnel et anomalies résiduelles",
+            "gate": "Écarts présentés au PO",
+            "deliverables": "Bilan fonctionnel et anomalies résiduelles"
+          }
+        },
+        {
+          "id": 3,
+          "name": "Product / Program Manager",
+          "fields": {
+            "objective": "Coordonner les validations et lancements.",
+            "actions": "Coordonner les validations et lancements Préparer le transfert vers l'exploitation",
+            "inputs": "Incrément et résultats des tests Tableau de bord programme",
+            "outputs": "Bilan de préparation Plan de lancement",
+            "gate": "Avis disponibles Responsables de support mobilisés",
+            "deliverables": "Bilan de préparation Plan de lancement"
+          }
+        },
+        {
+          "id": 4,
+          "name": "Business Owner / Métier",
+          "fields": {
+            "objective": "Mobiliser la recette et les utilisateurs.",
+            "actions": "Mobiliser la recette et les utilisateurs Confirmer la préparation métier",
+            "inputs": "Incrément et résultats des tests Retours métier",
+            "outputs": "Avis de recette métier Plan d'accompagnement",
+            "gate": "Recette métier concluante Adoption préparée",
+            "deliverables": "Avis de recette métier Plan d'accompagnement"
+          }
+        },
+        {
+          "id": 5,
+          "name": "Coach / Accompagnateur",
+          "fields": {
+            "objective": "Clarifier le circuit de décision si nécessaire",
+            "actions": "Clarifier le circuit de décision si nécessaire",
+            "inputs": "Diagnostic et actions de coaching si besoin",
+            "outputs": "Compte rendu de facilitation si besoin",
+            "gate": "Les décideurs disposent des éléments utiles",
+            "deliverables": "Compte rendu de facilitation si besoin"
+          }
+        },
+        {
+          "id": 6,
+          "name": "Business Analyst",
+          "fields": {
+            "objective": "Assister les tests et la recette métier.",
+            "actions": "Assister les tests et la recette métier Analyser les anomalies fonctionnelles",
+            "inputs": "Incrément et résultats des tests Documentation à jour",
+            "outputs": "Traçabilité exigences / tests Analyse des anomalies",
+            "gate": "Besoins critiques vérifiés Anomalies qualifiées",
+            "deliverables": "Traçabilité exigences / tests Analyse des anomalies"
+          }
+        },
+        {
+          "id": 7,
+          "name": "UX/UI Designer",
+          "fields": {
+            "objective": "Tester les parcours critiques avec les utilisateurs",
+            "actions": "Tester les parcours critiques avec les utilisateurs",
+            "inputs": "Retours UX et ajustements",
+            "outputs": "Bilan des tests utilisateurs",
+            "gate": "Parcours critiques évalués",
+            "deliverables": "Bilan des tests utilisateurs"
+          }
+        },
+        {
+          "id": 8,
+          "name": "Utilisateur clé",
+          "fields": {
+            "objective": "Exécuter les scénarios de recette métier",
+            "actions": "Exécuter les scénarios de recette métier",
+            "inputs": "Retours sur l’incrément",
+            "outputs": "Résultats de recette métier",
+            "gate": "Résultats remis au PO",
+            "deliverables": "Résultats de recette métier"
+          }
+        },
+        {
+          "id": 9,
+          "name": "Orchestrateur de l’offre de réalisation",
+          "fields": {
+            "objective": "Coordonner les relais de réalisation et de support",
+            "actions": "Coordonner les relais de réalisation et de support",
+            "inputs": "Suivi des capacités et alertes",
+            "outputs": "Passage de relais organisé",
+            "gate": "Responsables de support identifiés",
+            "deliverables": "Passage de relais organisé"
+          }
+        },
+        {
+          "id": 10,
+          "name": "Équipe de réalisation",
+          "fields": {
+            "objective": "Corriger les blocages et préparer le déploiement",
+            "actions": "Corriger les blocages et préparer le déploiement",
+            "inputs": "Incrément testé et documentation",
+            "outputs": "Version déployable et procédures",
+            "gate": "Déploiement et retour arrière préparés",
+            "deliverables": "Version déployable et procédures"
+          }
+        },
+        {
+          "id": 11,
+          "name": "Testeur / Qualité",
+          "fields": {
+            "objective": "Exécuter la campagne finale.",
+            "actions": "Exécuter la campagne finale Présenter couverture et anomalies restantes",
+            "inputs": "Incrément et résultats des tests Rapports de tests",
+            "outputs": "Bilan de recette Recommandation qualité",
+            "gate": "Tests critiques exécutés Écarts présentés au décideur",
+            "deliverables": "Bilan de recette Recommandation qualité"
+          }
+        },
+        {
+          "id": 12,
+          "name": "Expert numérique",
+          "fields": {
+            "objective": "Fournir les avis et preuves attendus",
+            "actions": "Fournir les avis et preuves attendus",
+            "inputs": "Suivi des écarts",
+            "outputs": "Avis expert documenté",
+            "gate": "Avis transmis au décideur",
+            "deliverables": "Avis expert documenté"
+          }
+        },
+        {
+          "id": 13,
+          "name": "RSSI / Expert cybersécurité",
+          "fields": {
+            "objective": "Émettre un avis de sécurité.",
+            "actions": "Émettre un avis de sécurité Présenter les risques résiduels au décideur",
+            "inputs": "Incrément et résultats des tests Résultats de contrôles",
+            "outputs": "Avis sécurité Dossier de risques résiduels",
+            "gate": "Décideur informé Acceptation des risques tracée",
+            "deliverables": "Avis sécurité Dossier de risques résiduels"
+          }
+        },
+        {
+          "id": 14,
+          "name": "Expert RGPD / DPO",
+          "fields": {
+            "objective": "Émettre un avis et signaler les risques.",
+            "actions": "Émettre un avis et signaler les risques Vérifier information et gestion des droits",
+            "inputs": "Incrément et résultats des tests Suivi des actions RGPD",
+            "outputs": "Avis DPO Documentation de conformité",
+            "gate": "Responsable du traitement informé Actions préalables vérifiées",
+            "deliverables": "Avis DPO Documentation de conformité"
+          }
+        },
+        {
+          "id": 15,
+          "name": "RGAA / Accessibilité",
+          "fields": {
+            "objective": "Produire les résultats d’audit et préparer la déclaration",
+            "actions": "Produire les résultats d’audit et préparer la déclaration",
+            "inputs": "Écarts et corrections suivis",
+            "outputs": "Audit et éléments de déclaration",
+            "gate": "Résultats et réserves présentés",
+            "deliverables": "Audit et éléments de déclaration"
+          }
+        },
+        {
+          "id": 16,
+          "name": "Expert Numérique Responsable",
+          "fields": {
+            "objective": "Vérifier les critères retenus.",
+            "actions": "Vérifier les critères retenus Documenter limites et recommandations",
+            "inputs": "Incrément et résultats des tests Mesures intermédiaires",
+            "outputs": "Bilan d'écoconception Mesures avant lancement",
+            "gate": "Critères vérifiés Limites partagées au GO / NO GO",
+            "deliverables": "Bilan d'écoconception Mesures avant lancement"
+          }
+        },
+        {
+          "id": 17,
+          "name": "Architecte / Architecture",
+          "fields": {
+            "objective": "Vérifier performance et résilience.",
+            "actions": "Vérifier performance et résilience Préparer déploiement et retour arrière",
+            "inputs": "Incrément et résultats des tests Décisions d'architecture",
+            "outputs": "Dossier d'architecture à jour Avis technique de mise en service",
+            "gate": "Tests critiques probants Exploitation et repli préparés",
+            "deliverables": "Dossier d'architecture à jour Avis technique de mise en service"
+          }
+        },
+        {
+          "id": 18,
+          "name": "Infrastructure / Hébergement",
+          "fields": {
+            "objective": "Vérifier déploiement, sauvegarde et reprise",
+            "actions": "Vérifier déploiement, sauvegarde et reprise",
+            "inputs": "Environnements et supervision",
+            "outputs": "Dossier d’exploitation et contrôles",
+            "gate": "Support et reprise préparés",
+            "deliverables": "Dossier d’exploitation et contrôles"
+          }
+        },
+        {
+          "id": 19,
+          "name": "Expert Data",
+          "fields": {
+            "objective": "Vérifier migration et restitution.",
+            "actions": "Vérifier migration et restitution Préparer surveillance et reprise",
+            "inputs": "Incrément et résultats des tests Flux documentés",
+            "outputs": "Bilan de qualité Procédure de reprise des flux",
+            "gate": "Données réconciliées Alertes et responsables prêts",
+            "deliverables": "Bilan de qualité Procédure de reprise des flux"
+          }
+        },
+        {
+          "id": 20,
+          "name": "Expert Intelligence Artificielle",
+          "fields": {
+            "objective": "Vérifier les seuils sur cas réels.",
+            "actions": "Vérifier les seuils sur cas réels Préparer suivi et mécanisme de repli",
+            "inputs": "Incrément et résultats des tests Résultats d'évaluation",
+            "outputs": "Rapport d'évaluation Avis IA pour le lancement",
+            "gate": "Seuils atteints ou écarts arbitrés Supervision opérationnelle",
+            "deliverables": "Rapport d'évaluation Avis IA pour le lancement"
+          }
+        },
+        {
+          "id": 21,
+          "name": "Expert Low-Code / No-Code",
+          "fields": {
+            "objective": "Vérifier droits, limites et reprise.",
+            "actions": "Vérifier droits, limites et reprise Transférer la maintenance au responsable",
+            "inputs": "Incrément et résultats des tests Application versionnée",
+            "outputs": "Bilan de tests Guide d'administration",
+            "gate": "Support prêt Procédure de reprise vérifiée",
+            "deliverables": "Bilan de tests Guide d'administration"
+          }
+        }
+      ],
+      "id": 6,
+      "pdfPage": 6,
+      "pdfFile": "Parcours_PO_ADEME_attendus_par_etape.pdf"
+    },
+    {
+      "title": "Exploitation",
+      "objective": "Mesurer la valeur et faire évoluer le produit.",
+      "milestone": "Décisions d’évolution partagées selon la gouvernance.",
+      "meetings": "Revue produit, suivi des indicateurs, retour d’expérience et priorisation.",
+      "roles": [
+        {
+          "id": 1,
+          "name": "Product Owner",
+          "fields": {
+            "objective": "Mesurer usage et valeur.",
+            "actions": "Mesurer usage et valeur Prioriser la suite avec BO / PM",
+            "inputs": "Produit en service et retours Résultats de recette",
+            "outputs": "Tableau de bord produit Roadmap mise à jour",
+            "gate": "Valeur mesurée Suite du produit arbitrée",
+            "deliverables": "Tableau de bord produit Roadmap mise à jour"
+          }
+        },
+        {
+          "id": 2,
+          "name": "Proxy Product Owner - PPO",
+          "fields": {
+            "objective": "Consolider les retours et préparer les évolutions",
+            "actions": "Consolider les retours et préparer les évolutions",
+            "inputs": "Bilan fonctionnel et anomalies résiduelles",
+            "outputs": "Backlog d’évolution",
+            "gate": "Évolutions prêtes à arbitrer",
+            "deliverables": "Backlog d’évolution"
+          }
+        },
+        {
+          "id": 3,
+          "name": "Product / Program Manager",
+          "fields": {
+            "objective": "Mesurer les bénéfices du programme.",
+            "actions": "Mesurer les bénéfices du programme Arbitrer évolutions et rationalisation",
+            "inputs": "Produit en service et retours Bilan de préparation",
+            "outputs": "Bilan de valeur Roadmap programme actualisée",
+            "gate": "Bénéfices confrontés aux objectifs Décision de poursuite tracée",
+            "deliverables": "Bilan de valeur Roadmap programme actualisée"
+          }
+        },
+        {
+          "id": 4,
+          "name": "Business Owner / Métier",
+          "fields": {
+            "objective": "Mesurer les bénéfices réels.",
+            "actions": "Mesurer les bénéfices réels Décider la suite avec PO / PM",
+            "inputs": "Produit en service et retours Avis de recette métier",
+            "outputs": "Bilan métier Priorités d'évolution",
+            "gate": "Bénéfices évalués Moyens et priorités réexaminés",
+            "deliverables": "Bilan métier Priorités d'évolution"
+          }
+        },
+        {
+          "id": 5,
+          "name": "Coach / Accompagnateur",
+          "fields": {
+            "objective": "Capitaliser et faciliter la rétrospective",
+            "actions": "Capitaliser et faciliter la rétrospective",
+            "inputs": "Compte rendu de facilitation si besoin",
+            "outputs": "Retour d’expérience du parcours",
+            "gate": "Améliorations du parcours attribuées",
+            "deliverables": "Retour d’expérience du parcours"
+          }
+        },
+        {
+          "id": 6,
+          "name": "Business Analyst",
+          "fields": {
+            "objective": "Analyser incidents et retours d'usage.",
+            "actions": "Analyser incidents et retours d'usage Préparer les besoins d'évolution",
+            "inputs": "Produit en service et retours Traçabilité exigences / tests",
+            "outputs": "Analyse des retours Exigences d'évolution",
+            "gate": "Causes métier comprises Évolutions proposées au PO",
+            "deliverables": "Analyse des retours Exigences d'évolution"
+          }
+        },
+        {
+          "id": 7,
+          "name": "UX/UI Designer",
+          "fields": {
+            "objective": "Mesurer les difficultés et proposer des améliorations",
+            "actions": "Mesurer les difficultés et proposer des améliorations",
+            "inputs": "Bilan des tests utilisateurs",
+            "outputs": "Recommandations UX priorisées",
+            "gate": "Retours intégrés aux arbitrages",
+            "deliverables": "Recommandations UX priorisées"
+          }
+        },
+        {
+          "id": 8,
+          "name": "Utilisateur clé",
+          "fields": {
+            "objective": "Remonter usages, incidents et besoins",
+            "actions": "Remonter usages, incidents et besoins",
+            "inputs": "Résultats de recette métier",
+            "outputs": "Retours d’usage",
+            "gate": "Retours qualifiés",
+            "deliverables": "Retours d’usage"
+          }
+        },
+        {
+          "id": 9,
+          "name": "Orchestrateur de l’offre de réalisation",
+          "fields": {
+            "objective": "Évaluer le dispositif et adapter la capacité",
+            "actions": "Évaluer le dispositif et adapter la capacité",
+            "inputs": "Passage de relais organisé",
+            "outputs": "Bilan du dispositif",
+            "gate": "Adaptations arbitrées",
+            "deliverables": "Bilan du dispositif"
+          }
+        },
+        {
+          "id": 10,
+          "name": "Équipe de réalisation",
+          "fields": {
+            "objective": "Maintenir le produit et traiter incidents et dette",
+            "actions": "Maintenir le produit et traiter incidents et dette",
+            "inputs": "Version déployable et procédures",
+            "outputs": "Correctifs et dette actualisée",
+            "gate": "Incidents et maintenance suivis",
+            "deliverables": "Correctifs et dette actualisée"
+          }
+        },
+        {
+          "id": 11,
+          "name": "Testeur / Qualité",
+          "fields": {
+            "objective": "Analyser les défauts de production.",
+            "actions": "Analyser les défauts de production Enrichir les tests de régression",
+            "inputs": "Produit en service et retours Bilan de recette",
+            "outputs": "Bilan qualité Suite de tests actualisée",
+            "gate": "Incidents traduits en tests Couverture maintenue",
+            "deliverables": "Bilan qualité Suite de tests actualisée"
+          }
+        },
+        {
+          "id": 12,
+          "name": "Expert numérique",
+          "fields": {
+            "objective": "Réexaminer les évolutions significatives",
+            "actions": "Réexaminer les évolutions significatives",
+            "inputs": "Avis expert documenté",
+            "outputs": "Exigences actualisées",
+            "gate": "Changements analysés",
+            "deliverables": "Exigences actualisées"
+          }
+        },
+        {
+          "id": 13,
+          "name": "RSSI / Expert cybersécurité",
+          "fields": {
+            "objective": "Suivre menaces, incidents et correctifs.",
+            "actions": "Suivre menaces, incidents et correctifs Réexaminer les risques lors des évolutions",
+            "inputs": "Produit en service et retours Avis sécurité",
+            "outputs": "Bilan sécurité Plan de remédiation actualisé",
+            "gate": "Incidents pris en charge Risques régulièrement réévalués",
+            "deliverables": "Bilan sécurité Plan de remédiation actualisé"
+          }
+        },
+        {
+          "id": 14,
+          "name": "Expert RGPD / DPO",
+          "fields": {
+            "objective": "Suivre droits, durées et incidents.",
+            "actions": "Suivre droits, durées et incidents Réexaminer les changements de traitement",
+            "inputs": "Produit en service et retours Avis DPO",
+            "outputs": "Suivi RGPD Registre et analyses actualisés",
+            "gate": "Demandes et incidents pris en charge Documentation maintenue",
+            "deliverables": "Suivi RGPD Registre et analyses actualisés"
+          }
+        },
+        {
+          "id": 15,
+          "name": "RGAA / Accessibilité",
+          "fields": {
+            "objective": "Suivre les signalements et maintenir l’accessibilité",
+            "actions": "Suivre les signalements et maintenir l’accessibilité",
+            "inputs": "Audit et éléments de déclaration",
+            "outputs": "Suivi d’accessibilité",
+            "gate": "Suivi attribué",
+            "deliverables": "Suivi d’accessibilité"
+          }
+        },
+        {
+          "id": 16,
+          "name": "Expert Numérique Responsable",
+          "fields": {
+            "objective": "Suivre impacts et usages réels.",
+            "actions": "Suivre impacts et usages réels Réduire stockage et fonctions inutiles",
+            "inputs": "Produit en service et retours Bilan d'écoconception",
+            "outputs": "Bilan NR périodique Plan d'amélioration",
+            "gate": "Données de mesure fiables Actions suivies et réévaluées",
+            "deliverables": "Bilan NR périodique Plan d'amélioration"
+          }
+        },
+        {
+          "id": 17,
+          "name": "Architecte / Architecture",
+          "fields": {
+            "objective": "Suivre capacité et obsolescence.",
+            "actions": "Suivre capacité et obsolescence Préparer les évolutions techniques",
+            "inputs": "Produit en service et retours Dossier d'architecture à jour",
+            "outputs": "Bilan d'architecture Trajectoire technique actualisée",
+            "gate": "Dette priorisée Capacité et dépendances surveillées",
+            "deliverables": "Bilan d'architecture Trajectoire technique actualisée"
+          }
+        },
+        {
+          "id": 18,
+          "name": "Infrastructure / Hébergement",
+          "fields": {
+            "objective": "Superviser, sauvegarder et gérer la capacité",
+            "actions": "Superviser, sauvegarder et gérer la capacité",
+            "inputs": "Dossier d’exploitation et contrôles",
+            "outputs": "Suivi de disponibilité et de capacité",
+            "gate": "Alertes et incidents pris en charge",
+            "deliverables": "Suivi de disponibilité et de capacité"
+          }
+        },
+        {
+          "id": 19,
+          "name": "Expert Data",
+          "fields": {
+            "objective": "Suivre fraîcheur et qualité.",
+            "actions": "Suivre fraîcheur et qualité Gérer anomalies et cycle de vie",
+            "inputs": "Produit en service et retours Bilan de qualité",
+            "outputs": "Tableau de bord qualité Journal des anomalies",
+            "gate": "Seuils suivis Actions attribuées aux responsables",
+            "deliverables": "Tableau de bord qualité Journal des anomalies"
+          }
+        },
+        {
+          "id": 20,
+          "name": "Expert Intelligence Artificielle",
+          "fields": {
+            "objective": "Suivre dérive, erreurs et coûts.",
+            "actions": "Suivre dérive, erreurs et coûts Réévaluer après chaque changement",
+            "inputs": "Produit en service et retours Rapport d'évaluation",
+            "outputs": "Tableau de bord IA Rapports de réévaluation",
+            "gate": "Alertes traitées Versions revérifiées",
+            "deliverables": "Tableau de bord IA Rapports de réévaluation"
+          }
+        },
+        {
+          "id": 21,
+          "name": "Expert Low-Code / No-Code",
+          "fields": {
+            "objective": "Suivre usages, coûts et changements.",
+            "actions": "Suivre usages, coûts et changements Contrôler comptes et dépendances",
+            "inputs": "Produit en service et retours Bilan de tests",
+            "outputs": "Bilan d'exploitation LCNC Plan de maintenance",
+            "gate": "Responsabilité maintenue Évolutions de plateforme anticipées",
+            "deliverables": "Bilan d'exploitation LCNC Plan de maintenance"
+          }
+        }
+      ],
+      "id": 7,
+      "pdfPage": 7,
+      "pdfFile": "Parcours_PO_ADEME_attendus_par_etape.pdf"
+    }
+  ],
+  "roles": [
+    {
+      "id": 1,
+      "name": "Product Owner"
+    },
+    {
+      "id": 2,
+      "name": "Proxy Product Owner - PPO"
+    },
+    {
+      "id": 3,
+      "name": "Product / Program Manager"
+    },
+    {
+      "id": 4,
+      "name": "Business Owner / Métier"
+    },
+    {
+      "id": 5,
+      "name": "Coach / Accompagnateur"
+    },
+    {
+      "id": 6,
+      "name": "Business Analyst"
+    },
+    {
+      "id": 7,
+      "name": "UX/UI Designer"
+    },
+    {
+      "id": 8,
+      "name": "Utilisateur clé"
+    },
+    {
+      "id": 9,
+      "name": "Orchestrateur de l’offre de réalisation"
+    },
+    {
+      "id": 10,
+      "name": "Équipe de réalisation"
+    },
+    {
+      "id": 11,
+      "name": "Testeur / Qualité"
+    },
+    {
+      "id": 12,
+      "name": "Expert numérique"
+    },
+    {
+      "id": 13,
+      "name": "RSSI / Expert cybersécurité"
+    },
+    {
+      "id": 14,
+      "name": "Expert RGPD / DPO"
+    },
+    {
+      "id": 15,
+      "name": "RGAA / Accessibilité"
+    },
+    {
+      "id": 16,
+      "name": "Expert Numérique Responsable"
+    },
+    {
+      "id": 17,
+      "name": "Architecte / Architecture"
+    },
+    {
+      "id": 18,
+      "name": "Infrastructure / Hébergement"
+    },
+    {
+      "id": 19,
+      "name": "Expert Data"
+    },
+    {
+      "id": 20,
+      "name": "Expert Intelligence Artificielle"
+    },
+    {
+      "id": 21,
+      "name": "Expert Low-Code / No-Code"
+    }
+  ]
+}
